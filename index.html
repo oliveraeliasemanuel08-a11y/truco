@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TRUCO ARGENTINO — La mesa está servida</title>
+<style>
+:root{--felt:#075b3c;--felt2:#03442f;--gold:#f5c76b;--cream:#fff8e9;--ink:#18231e;--muted:#b9d3c5}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--cream);font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(ellipse at center,#14734d 0,#075238 55%,#022e20 100%);overflow-x:hidden}
+header{display:flex;align-items:center;justify-content:space-between;padding:16px clamp(14px,4vw,48px);border-bottom:1px solid #ffffff22;background:#001d16aa;backdrop-filter:blur(12px)}
+.brand{font-weight:1000;letter-spacing:2px;font-size:clamp(20px,3vw,30px)}.brand span{color:var(--gold)}.sub{font-size:11px;color:var(--muted);letter-spacing:2px}
+main{max-width:1150px;margin:auto;padding:20px 16px 36px}.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;margin-bottom:18px}
+.score{background:#001f17aa;border:1px solid #ffffff26;border-radius:16px;padding:12px 16px;min-width:130px}.score.right{text-align:right}.score small{color:var(--muted);font-weight:700;letter-spacing:1px}.points{font-size:32px;font-weight:900;color:var(--gold);line-height:1.2}.match{font-size:12px;color:var(--muted);text-align:center}.match b{display:block;color:var(--cream);font-size:15px}
+.table{position:relative;border:9px solid #603b20;border-radius:38px;padding:22px 16px 24px;background:radial-gradient(ellipse,#11734d,#075238 68%,#03422e);box-shadow:inset 0 0 0 3px #d3a45c55,0 20px 55px #001a12aa;min-height:470px}
+.table:before{content:"";position:absolute;inset:12px;border:1px solid #ffffff20;border-radius:25px;pointer-events:none}
+.seat{text-align:center;position:relative;z-index:1}.seatname{font-weight:800;letter-spacing:1px}.seatname small{display:block;color:var(--muted);font-weight:500;font-size:11px}
+.hand{display:flex;justify-content:center;gap:clamp(5px,1.6vw,16px);min-height:116px;margin:10px 0}
+.card{width:clamp(68px,10vw,91px);height:clamp(100px,14vw,132px);border-radius:10px;background:var(--cream);color:#202820;border:1px solid #e3d6bd;box-shadow:0 7px 14px #001b1280;display:flex;flex-direction:column;justify-content:space-between;padding:8px;font-family:Georgia,serif;position:relative;transition:.18s;user-select:none}
+.card.red{color:#bd2929}.card .rank{font-size:24px;font-weight:bold;line-height:1}.card .suit{font-size:22px}.card .center{font-size:32px;text-align:center;line-height:1}.card .bottom{transform:rotate(180deg);align-self:flex-end}
+button.card{cursor:pointer}button.card:hover:not(:disabled){transform:translateY(-10px);box-shadow:0 15px 22px #001b1299}button.card:disabled{cursor:default;opacity:.72}
+.back{background:repeating-linear-gradient(45deg,#173f79,#173f79 6px,#e9d7b5 6px,#e9d7b5 8px);border:5px solid #fff8e9}
+.centerplay{display:flex;justify-content:center;align-items:center;gap:18px;min-height:145px;margin:8px 0}.played{display:flex;gap:10px;min-width:100px;justify-content:center}.played .card{width:66px;height:96px;transform:rotate(-3deg)}.played .card:nth-child(2){transform:rotate(4deg)}
+.status{font-size:13px;color:#e4f3e9;text-align:center;max-width:280px;line-height:1.5}.status strong{color:var(--gold)}
+.controls{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin:18px auto 0;position:relative;z-index:2}
+.btn{border:1px solid #ffffff38;border-radius:999px;padding:11px 17px;background:#ffffff12;color:white;font-weight:800;cursor:pointer;transition:.15s}.btn:hover{background:#ffffff25;transform:translateY(-1px)}.btn.gold{background:var(--gold);color:#34230b;border-color:var(--gold)}.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.bottomrow{display:grid;grid-template-columns:1fr auto;gap:12px;margin-top:16px;align-items:start}.log{background:#001f17a8;border:1px solid #ffffff20;border-radius:14px;padding:12px 15px;min-height:75px;font-size:13px;color:#d8e8df}.log b{color:var(--gold)}.rules{color:var(--muted);font-size:12px;max-width:280px;text-align:right;line-height:1.6}
+.overlay{position:fixed;inset:0;background:#00140fdb;display:grid;place-items:center;padding:18px;z-index:10}.modal{width:min(440px,100%);background:#fdf6e8;color:var(--ink);border-radius:22px;padding:25px;box-shadow:0 25px 80px #0009}.modal h2{margin:0 0 8px;font-size:25px}.modal p{color:#52635a;line-height:1.5}.modal .btn{background:#075b3c;color:white;border:0}.modal .btn.gold{background:#dcae4e;color:#30210b}.modalactions{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+footer{text-align:center;color:#a9cabb;font-size:11px;padding:20px}
+@media(max-width:650px){.top{grid-template-columns:1fr 1fr}.match{grid-column:1/-1;grid-row:1}.score{padding:9px 12px}.points{font-size:26px}.table{border-width:6px;border-radius:25px;padding:18px 8px;min-height:430px}.bottomrow{grid-template-columns:1fr}.rules{text-align:center;max-width:none}.card{padding:6px}.card .rank{font-size:20px}.card .suit{font-size:18px}.centerplay{gap:5px}.status{font-size:11px;max-width:130px}}
+</style>
+</head>
+<body>
+<header><div><div class="brand">TRUCO <span>ARGENTINO</span></div><div class="sub">NAIPES • PICARDÍA • AMISTAD</div></div><button class="btn" id="newGame">↻ Nueva partida</button></header>
+<main>
+<div class="top">
+ <div class="score"><small>VOS</small><div class="points" id="youScore">0</div><small id="youZone">MALAS</small></div>
+ <div class="match"><b>MANO A MANO</b><span id="handNo">Partida a 30 puntos</span></div>
+ <div class="score right"><small>IA</small><div class="points" id="cpuScore">0</div><small id="cpuZone">MALAS</small></div>
+</div>
+<section class="table">
+ <div class="seat"><div class="seatname">🤖 EL CONTRARIO <small id="cpuState">Esperando...</small></div><div class="hand" id="cpuHand"></div></div>
+ <div class="centerplay"><div class="played" id="cpuPlayed"></div><div class="status" id="status">¡Bienvenido a la mesa!<br>Repartiendo cartas...</div><div class="played" id="youPlayed"></div></div>
+ <div class="seat"><div class="seatname">🧉 VOS <small id="youState">Elegí una carta para jugar</small></div><div class="hand" id="youHand"></div></div>
+ <div class="controls" id="controls"></div>
+</section>
+<div class="bottomrow"><div class="log" id="log"><b>Partida:</b> ¡Que empiece el juego!</div><div class="rules">Flor no habilitada en esta versión. Envido antes de jugar la primera carta. Truco, Retruco y Vale cuatro durante la mano.</div></div>
+</main><footer>Hecho para disfrutar una buena partida 🇦🇷 · Versión inicial</footer>
+<div class="overlay" id="welcome"><div class="modal"><h2>¡Sentate a la mesa! 🧉</h2><p>Jugá al truco argentino mano a mano contra la computadora. Tenés baraja española de 40 cartas, envido, real envido, falta envido y los cantos de truco.</p><p><b>Objetivo:</b> llegar a 30 puntos. Las primeras 15 son las malas y las últimas 15, las buenas.</p><div class="modalactions"><button class="btn gold" id="start">¡A jugar!</button><button class="btn" id="showHelp">Ver reglas rápidas</button></div></div></div>
+<script>
+const SUITS=['espada','basto','oro','copa'], SYMBOL={espada:'♠',basto:'♣',oro:'♦',copa:'♥'};
+const deck=[];for(const s of SUITS)for(const n of [1,2,3,4,5,6,7,10,11,12])deck.push({n,s});
+const power=c=>{if(c.n===1&&c.s==='espada')return 14;if(c.n===1&&c.s==='basto')return 13;if(c.n===7&&c.s==='espada')return 12;if(c.n===7&&c.s==='oro')return 11;if(c.n===3)return 10;if(c.n===2)return 9;if(c.n===1)return 8;if(c.n===12)return 7;if(c.n===11)return 6;if(c.n===10)return 5;if(c.n===7)return 4;if(c.n===6)return 3;if(c.n===5)return 2;return 1};
+const val=c=>c.n>=10?0:c.n;
+let state={you:0,cpu:0,hand:1,mano:'you',youCards:[],cpuCards:[],trick:0,youWins:0,cpuWins:0,youPlayed:null,cpuPlayed:null,turn:'you',truco:1,trucoCaller:null,trucoPending:false,envidoDone:false,finished:false,log:[]};
+const $=id=>document.getElementById(id);
+function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function cardHTML(c,back=false){if(back)return '<div class="card back"></div>';let red=c.s==='oro'||c.s==='copa',sym=SYMBOL[c.s],name=c.n===10?'Sota':c.n===11?'Caballo':c.n===12?'Rey':c.n;return '<div class="card '+(red?'red':'')+'"><div><div class="rank">'+name+'</div><div class="suit">'+sym+'</div></div><div class="center">'+sym+'</div><div class="bottom"><div class="rank">'+name+'</div><div class="suit">'+sym+'</div></div></div>'}
+function render(){ $('youScore').textContent=state.you;$('cpuScore').textContent=state.cpu;$('youZone').textContent=state.you<15?'MALAS':'BUENAS';$('cpuZone').textContent=state.cpu<15?'MALAS':'BUENAS';$('handNo').textContent='Mano '+state.hand+' · a 30 puntos';
+$('cpuHand').innerHTML=state.cpuCards.map(()=>cardHTML(null,true)).join('');$('youHand').innerHTML=state.youCards.map((c,i)=>'<button class="card '+((c.s==='oro'||c.s==='copa')?'red':'')+'" data-card="'+i+'" '+(state.turn!=='you'||state.finished?'disabled':'')+'><div><div class="rank">'+(c.n>=10?({10:'Sota',11:'Caballo',12:'Rey'}[c.n]):c.n)+'</div><div class="suit">'+SYMBOL[c.s]+'</div></div><div class="center">'+SYMBOL[c.s]+'</div><div class="bottom"><div class="rank">'+c.n+'</div><div class="suit">'+SYMBOL[c.s]+'</div></div></button>').join('');
+$('youPlayed').innerHTML=state.youPlayed?cardHTML(state.youPlayed):'';$('cpuPlayed').innerHTML=state.cpuPlayed?cardHTML(state.cpuPlayed):'';
+$('youState').textContent=state.turn==='you'?'Tu turno: elegí una carta':state.finished?'Mano terminada':'Esperando al contrario';$('cpuState').textContent=state.turn==='cpu'?'Pensando...':'Tiene 3 cartas';
+$('log').innerHTML='<b>Partida:</b> '+(state.log.slice(-3).join(' · ')||'¡Que empiece el juego!');
+renderControls()}
+function btn(label,fn,cls=''){let b=document.createElement('button');b.className='btn '+cls;b.textContent=label;b.onclick=fn;$('controls').appendChild(b)}
+function renderControls(){let c=$('controls');c.innerHTML='';if(state.finished){btn('Siguiente mano',deal,'gold');return}
+if(state.turn==='you'){if(!state.envidoDone&&state.trick===0){btn('Envido',()=>callEnvido('envido'));btn('Real envido',()=>callEnvido('real'));btn('Falta envido',()=>callEnvido('falta'))}
+if(state.truco<4&&!state.trucoPending)btn(state.truco===1?'Truco':state.truco===2?'Retruco':'Vale cuatro',callTruco);
+}}
+function log(t){state.log.push(t);render()}
+function envidoValue(hand){let best=0;for(const s of SUITS){let same=hand.filter(c=>c.s===s);if(same.length>=2){let vals=same.map(c=>val(c)).sort((a,b)=>b-a);best=Math.max(best,20+vals[0]+vals[1])}}if(best===0)best=Math.max(...hand.map(c=>val(c)));return best}
+function callEnvido(kind){if(state.turn!=='you'||state.envidoDone)return;state.envidoDone=true;let amount=kind==='envido'?2:kind==='real'?3:Math.max(1,30-Math.max(state.you,state.cpu));let mine=envidoValue(state.youCards),theirs=envidoValue(state.cpuCards);let cpuAccept=Math.random()<.72;if(!cpuAccept){state.you+=1;log('El contrario no quiso el envido. Ganás 1 punto.');render();return}
+let youWin=mine>theirs||(mine===theirs&&state.mano==='you');let pts=amount+(kind==='real'?1:0);if(youWin)state.you+=pts;else state.cpu+=pts;log('Envido: vos '+mine+' / rival '+theirs+'. '+(youWin?'Ganaste':'Ganó el rival')+' ('+pts+' puntos).');checkMatch();render()}
+function callTruco(){if(state.turn!=='you'||state.trucoPending||state.truco>=4)return;state.trucoPending=true;let accept=Math.random()<.78;if(!accept){state.you+=state.truco;state.finished=true;log('El rival no quiso. Te llevás '+state.truco+' puntos.');checkMatch();render();return}state.truco++;state.trucoCaller='you';state.trucoPending=false;log('¡Quiero! Truco vale '+state.truco+'.');render()}
+function play(i){if(state.turn!=='you'||state.finished)return;let c=state.youCards.splice(i,1)[0];state.youPlayed=c;state.turn='cpu';render();setTimeout(cpuPlay,650)}
+function cpuPlay(){if(state.finished)return;let idx=Math.floor(Math.random()*state.cpuCards.length);if(state.youPlayed){let winning=state.cpuCards.map((c,i)=>({c,i})).filter(x=>power(x.c)>power(state.youPlayed));if(winning.length&&Math.random()<.65)idx=winning.sort((a,b)=>power(a.c)-power(b.c))[0].i}
+state.cpuPlayed=state.cpuCards.splice(idx,1)[0];resolveTrick()}
+function resolveTrick(){let a=power(state.youPlayed),b=power(state.cpuPlayed);if(a>b)state.youWins++;else if(b>a)state.cpuWins++;else{if(state.mano==='you')state.youWins+=.5;else state.cpuWins+=.5}
+state.trick++;$('status').innerHTML=(a>b?'Ganaste esta baza':a<b?'El rival ganó esta baza':'¡Parda!')+'<br><strong>Baza '+state.trick+'/3</strong>';
+if(state.trick===3||state.youWins>=1.5||state.cpuWins>=1.5){let winner=state.youWins>state.cpuWins?'you':state.cpuWins>state.youWins?'cpu':state.mano;let pts=state.truco;state[winner]+=pts;state.finished=true;log((winner==='you'?'Ganaste':'El rival ganó')+' la mano. +'+pts+' puntos.');checkMatch()}else{state.turn='you';state.youPlayed=null;state.cpuPlayed=null;log('Baza '+state.trick+' lista.');}
+render()}
+function checkMatch(){if(state.you>=30||state.cpu>=30){state.finished=true;setTimeout(()=>showModal(state.you>=30?'¡GANASTE LA PARTIDA! 🏆':'Ganó el contrario. ¡La revancha te espera!','Resultado final: '+state.you+' a '+state.cpu+'.',true),250)}}
+function showModal(title,msg,final=false){let o=document.createElement('div');o.className='overlay';o.innerHTML='<div class="modal"><h2>'+title+'</h2><p>'+msg+'</p><div class="modalactions"><button class="btn gold" id="modalOk">'+(final?'Nueva partida':'¡Entendido!')+'</button></div></div>';$('controls').appendChild(o);o.querySelector('button').onclick=()=>{o.remove();if(final)newGame()}}
+function deal(){state.hand++;state.mano=state.mano==='you'?'cpu':'you';let d=shuffle([...deck]);state.youCards=d.slice(0,3);state.cpuCards=d.slice(3,6);state.trick=0;state.youWins=0;state.cpuWins=0;state.youPlayed=null;state.cpuPlayed=null;state.turn=state.mano;state.truco=1;state.trucoCaller=null;state.trucoPending=false;state.envidoDone=false;state.finished=false;$('status').innerHTML=state.mano==='you'?'Sos mano. ¡A jugar!':'El rival es mano.';if(state.turn==='cpu')setTimeout(cpuPlay,700);render()}
+function newGame(){state={you:0,cpu:0,hand:0,mano:'you',youCards:[],cpuCards:[],trick:0,youWins:0,cpuWins:0,youPlayed:null,cpuPlayed:null,turn:'you',truco:1,trucoCaller:null,trucoPending:false,envidoDone:false,finished:false,log:[]};deal()}
+$('youHand').addEventListener('click',e=>{let b=e.target.closest('[data-card]');if(b)play(+b.dataset.card)});$('newGame').onclick=()=>showModal('¿Nueva partida?','Se reiniciará el marcador actual.',false);$('start').onclick=()=>{$('welcome').remove();newGame()};$('showHelp').onclick=()=>showModal('Reglas rápidas','El envido compara tantos: dos cartas del mismo palo suman 20 más sus valores (figuras valen 0). Para ganar una mano necesitás dos bazas. Jerarquía: 1 espada, 1 basto, 7 espada, 7 oro, 3, 2, ases falsos, figuras, 7 falsos, 6, 5, 4.');$('newGame').addEventListener('click',()=>{let b=$('controls');});
+render();
+</script></body></html>
