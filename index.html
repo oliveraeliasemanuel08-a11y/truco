@@ -1,86 +1,2207 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TRUCO ARGENTINO — La mesa está servida</title>
-<style>
-:root{--felt:#075b3c;--felt2:#03442f;--gold:#f5c76b;--cream:#fff8e9;--ink:#18231e;--muted:#b9d3c5}
-*{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--cream);font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(ellipse at center,#14734d 0,#075238 55%,#022e20 100%);overflow-x:hidden}
-header{display:flex;align-items:center;justify-content:space-between;padding:16px clamp(14px,4vw,48px);border-bottom:1px solid #ffffff22;background:#001d16aa;backdrop-filter:blur(12px)}
-.brand{font-weight:1000;letter-spacing:2px;font-size:clamp(20px,3vw,30px)}.brand span{color:var(--gold)}.sub{font-size:11px;color:var(--muted);letter-spacing:2px}
-main{max-width:1150px;margin:auto;padding:20px 16px 36px}.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;margin-bottom:18px}
-.score{background:#001f17aa;border:1px solid #ffffff26;border-radius:16px;padding:12px 16px;min-width:130px}.score.right{text-align:right}.score small{color:var(--muted);font-weight:700;letter-spacing:1px}.points{font-size:32px;font-weight:900;color:var(--gold);line-height:1.2}.match{font-size:12px;color:var(--muted);text-align:center}.match b{display:block;color:var(--cream);font-size:15px}
-.table{position:relative;border:9px solid #603b20;border-radius:38px;padding:22px 16px 24px;background:radial-gradient(ellipse,#11734d,#075238 68%,#03422e);box-shadow:inset 0 0 0 3px #d3a45c55,0 20px 55px #001a12aa;min-height:470px}
-.table:before{content:"";position:absolute;inset:12px;border:1px solid #ffffff20;border-radius:25px;pointer-events:none}
-.seat{text-align:center;position:relative;z-index:1}.seatname{font-weight:800;letter-spacing:1px}.seatname small{display:block;color:var(--muted);font-weight:500;font-size:11px}
-.hand{display:flex;justify-content:center;gap:clamp(5px,1.6vw,16px);min-height:116px;margin:10px 0}
-.card{width:clamp(68px,10vw,91px);height:clamp(100px,14vw,132px);border-radius:10px;background:var(--cream);color:#202820;border:1px solid #e3d6bd;box-shadow:0 7px 14px #001b1280;display:flex;flex-direction:column;justify-content:space-between;padding:8px;font-family:Georgia,serif;position:relative;transition:.18s;user-select:none}
-.card.red{color:#bd2929}.card .rank{font-size:24px;font-weight:bold;line-height:1}.card .suit{font-size:22px}.card .center{font-size:32px;text-align:center;line-height:1}.card .bottom{transform:rotate(180deg);align-self:flex-end}
-button.card{cursor:pointer}button.card:hover:not(:disabled){transform:translateY(-10px);box-shadow:0 15px 22px #001b1299}button.card:disabled{cursor:default;opacity:.72}
-.back{background:repeating-linear-gradient(45deg,#173f79,#173f79 6px,#e9d7b5 6px,#e9d7b5 8px);border:5px solid #fff8e9}
-.centerplay{display:flex;justify-content:center;align-items:center;gap:18px;min-height:145px;margin:8px 0}.played{display:flex;gap:10px;min-width:100px;justify-content:center}.played .card{width:66px;height:96px;transform:rotate(-3deg)}.played .card:nth-child(2){transform:rotate(4deg)}
-.status{font-size:13px;color:#e4f3e9;text-align:center;max-width:280px;line-height:1.5}.status strong{color:var(--gold)}
-.controls{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin:18px auto 0;position:relative;z-index:2}
-.btn{border:1px solid #ffffff38;border-radius:999px;padding:11px 17px;background:#ffffff12;color:white;font-weight:800;cursor:pointer;transition:.15s}.btn:hover{background:#ffffff25;transform:translateY(-1px)}.btn.gold{background:var(--gold);color:#34230b;border-color:var(--gold)}.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
-.bottomrow{display:grid;grid-template-columns:1fr auto;gap:12px;margin-top:16px;align-items:start}.log{background:#001f17a8;border:1px solid #ffffff20;border-radius:14px;padding:12px 15px;min-height:75px;font-size:13px;color:#d8e8df}.log b{color:var(--gold)}.rules{color:var(--muted);font-size:12px;max-width:280px;text-align:right;line-height:1.6}
-.overlay{position:fixed;inset:0;background:#00140fdb;display:grid;place-items:center;padding:18px;z-index:10}.modal{width:min(440px,100%);background:#fdf6e8;color:var(--ink);border-radius:22px;padding:25px;box-shadow:0 25px 80px #0009}.modal h2{margin:0 0 8px;font-size:25px}.modal p{color:#52635a;line-height:1.5}.modal .btn{background:#075b3c;color:white;border:0}.modal .btn.gold{background:#dcae4e;color:#30210b}.modalactions{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-footer{text-align:center;color:#a9cabb;font-size:11px;padding:20px}
-@media(max-width:650px){.top{grid-template-columns:1fr 1fr}.match{grid-column:1/-1;grid-row:1}.score{padding:9px 12px}.points{font-size:26px}.table{border-width:6px;border-radius:25px;padding:18px 8px;min-height:430px}.bottomrow{grid-template-columns:1fr}.rules{text-align:center;max-width:none}.card{padding:6px}.card .rank{font-size:20px}.card .suit{font-size:18px}.centerplay{gap:5px}.status{font-size:11px;max-width:130px}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Truco Argentino 3D — La Mesa Criolla</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Kalam:wght@400;700&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #f5c542;
+      --gold-dark: #9a6b16;
+      --cream: #fbf5e6;
+      --wood-dark: #261307;
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--cream);
+      background: #140a04;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    .font-cinzel { font-family: 'Cinzel', serif; }
+    .font-chalk { font-family: 'Kalam', cursive; }
+
+    /* Guarda Pampa SVG en los laterales como en la referencia */
+    .pampa-border {
+      background-color: #2b1a0e;
+      background-image: url("data:image/svg+xml,%3Csvg width='36' height='36' viewBox='0 0 36 36' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='36' height='36' fill='%2325150a'/%3E%3Cpath d='M18 2L34 18L18 34L2 18Z' fill='none' stroke='%23d8c39e' stroke-width='2.5'/%3E%3Cpath d='M18 9L27 18L18 27L9 18Z' fill='%23d8c39e'/%3E%3Crect x='15' y='15' width='6' height='6' fill='%2325150a'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+
+    /* Fondo de tablones de madera rústica vertical */
+    .rustic-wood-bg {
+      background-color: #4a311e;
+      background-image:
+        linear-gradient(90deg, rgba(15, 7, 2, 0.72) 0%, transparent 4%, transparent 96%, rgba(15, 7, 2, 0.72) 100%),
+        repeating-linear-gradient(90deg,
+          #4d3420 0px, #583c25 38px, #3b2616 40px, #24150b 42px,
+          #533822 44px, #472f1c 84px, #211309 86px
+        ),
+        repeating-linear-gradient(0deg, rgba(0,0,0,0.06) 0px, rgba(0,0,0,0.06) 2px, transparent 2px, transparent 9px);
+      box-shadow: inset 0 0 60px rgba(0,0,0,0.85);
+    }
+
+    /* Botón placa metálica oscura con marco dorado estilo Truco criollo */
+    .criollo-plaque-btn {
+      position: relative;
+      background: linear-gradient(180deg, #1b241d 0%, #0a100c 55%, #141c16 100%);
+      border: 2.5px solid #d4af5a;
+      box-shadow:
+        0 8px 18px rgba(0,0,0,0.75),
+        inset 0 0 0 2px #3b2a10,
+        inset 0 1px 1px rgba(255,255,255,0.22);
+      color: #f6f1e3;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+      transition: transform 0.16s ease, filter 0.16s ease, box-shadow 0.16s ease;
+      clip-path: polygon(12px 0%, calc(100% - 12px) 0%, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0% calc(100% - 12px), 0% 12px);
+    }
+    .criollo-plaque-btn:hover:not(:disabled) {
+      transform: translateY(-2px) scale(1.02);
+      filter: brightness(1.16);
+      box-shadow: 0 12px 24px rgba(245, 197, 66, 0.35);
+    }
+    .criollo-plaque-btn:active:not(:disabled) {
+      transform: translateY(1px) scale(0.99);
+    }
+
+    /* Pizarrón de tiza */
+    .chalkboard {
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.05), transparent 60%),
+        linear-gradient(180deg, #1b2420 0%, #111714 100%);
+      border: 6px solid #4a2611;
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.85), 0 14px 35px rgba(0,0,0,0.75);
+    }
+
+    /* Botones de acción en partida */
+    .btn-gold {
+      background: linear-gradient(135deg, #f7cf52 0%, #c88e14 100%);
+      color: #211302;
+      border: 1.5px solid #ffe68c;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.55);
+      transition: all 0.16s ease;
+    }
+    .btn-gold:hover:not(:disabled) {
+      transform: translateY(-2px);
+      filter: brightness(1.07);
+    }
+    .btn-glass {
+      background: rgba(12, 24, 18, 0.78);
+      border: 1px solid rgba(245, 197, 66, 0.35);
+      backdrop-filter: blur(8px);
+      transition: all 0.16s ease;
+    }
+    .btn-glass:hover:not(:disabled) {
+      background: rgba(24, 46, 35, 0.9);
+      border-color: rgba(245, 197, 66, 0.75);
+      transform: translateY(-2px);
+    }
+
+    .matchstick-line {
+      stroke: #f4f1ea;
+      stroke-width: 3.2;
+      stroke-linecap: round;
+      filter: drop-shadow(0 0 2px rgba(255,255,255,0.35));
+    }
+    .matchstick-head { fill: #e04f3e; }
+
+    @keyframes popCanto {
+      0% { transform: scale(0.55) translateY(12px); opacity: 0; }
+      70% { transform: scale(1.08) translateY(-2px); opacity: 1; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    .canto-toast {
+      animation: popCanto 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+    }
+
+    #threeContainer canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+  </style>
 </head>
-<body>
-<header><div><div class="brand">TRUCO <span>ARGENTINO</span></div><div class="sub">NAIPES • PICARDÍA • AMISTAD</div></div><button class="btn" id="newGame">↻ Nueva partida</button></header>
-<main>
-<div class="top">
- <div class="score"><small>VOS</small><div class="points" id="youScore">0</div><small id="youZone">MALAS</small></div>
- <div class="match"><b>MANO A MANO</b><span id="handNo">Partida a 30 puntos</span></div>
- <div class="score right"><small>IA</small><div class="points" id="cpuScore">0</div><small id="cpuZone">MALAS</small></div>
-</div>
-<section class="table">
- <div class="seat"><div class="seatname">🤖 EL CONTRARIO <small id="cpuState">Esperando...</small></div><div class="hand" id="cpuHand"></div></div>
- <div class="centerplay"><div class="played" id="cpuPlayed"></div><div class="status" id="status">¡Bienvenido a la mesa!<br>Repartiendo cartas...</div><div class="played" id="youPlayed"></div></div>
- <div class="seat"><div class="seatname">🧉 VOS <small id="youState">Elegí una carta para jugar</small></div><div class="hand" id="youHand"></div></div>
- <div class="controls" id="controls"></div>
-</section>
-<div class="bottomrow"><div class="log" id="log"><b>Partida:</b> ¡Que empiece el juego!</div><div class="rules">Flor no habilitada en esta versión. Envido antes de jugar la primera carta. Truco, Retruco y Vale cuatro durante la mano.</div></div>
-</main><footer>Hecho para disfrutar una buena partida 🇦🇷 · Versión inicial</footer>
-<div class="overlay" id="welcome"><div class="modal"><h2>¡Sentate a la mesa! 🧉</h2><p>Jugá al truco argentino mano a mano contra la computadora. Tenés baraja española de 40 cartas, envido, real envido, falta envido y los cantos de truco.</p><p><b>Objetivo:</b> llegar a 30 puntos. Las primeras 15 son las malas y las últimas 15, las buenas.</p><div class="modalactions"><button class="btn gold" id="start">¡A jugar!</button><button class="btn" id="showHelp">Ver reglas rápidas</button></div></div></div>
-<script>
-const SUITS=['espada','basto','oro','copa'], SYMBOL={espada:'♠',basto:'♣',oro:'♦',copa:'♥'};
-const deck=[];for(const s of SUITS)for(const n of [1,2,3,4,5,6,7,10,11,12])deck.push({n,s});
-const power=c=>{if(c.n===1&&c.s==='espada')return 14;if(c.n===1&&c.s==='basto')return 13;if(c.n===7&&c.s==='espada')return 12;if(c.n===7&&c.s==='oro')return 11;if(c.n===3)return 10;if(c.n===2)return 9;if(c.n===1)return 8;if(c.n===12)return 7;if(c.n===11)return 6;if(c.n===10)return 5;if(c.n===7)return 4;if(c.n===6)return 3;if(c.n===5)return 2;return 1};
-const val=c=>c.n>=10?0:c.n;
-let state={you:0,cpu:0,hand:1,mano:'you',youCards:[],cpuCards:[],trick:0,youWins:0,cpuWins:0,youPlayed:null,cpuPlayed:null,turn:'you',truco:1,trucoCaller:null,trucoPending:false,envidoDone:false,finished:false,log:[]};
-const $=id=>document.getElementById(id);
-function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function cardHTML(c,back=false){if(back)return '<div class="card back"></div>';let red=c.s==='oro'||c.s==='copa',sym=SYMBOL[c.s],name=c.n===10?'Sota':c.n===11?'Caballo':c.n===12?'Rey':c.n;return '<div class="card '+(red?'red':'')+'"><div><div class="rank">'+name+'</div><div class="suit">'+sym+'</div></div><div class="center">'+sym+'</div><div class="bottom"><div class="rank">'+name+'</div><div class="suit">'+sym+'</div></div></div>'}
-function render(){ $('youScore').textContent=state.you;$('cpuScore').textContent=state.cpu;$('youZone').textContent=state.you<15?'MALAS':'BUENAS';$('cpuZone').textContent=state.cpu<15?'MALAS':'BUENAS';$('handNo').textContent='Mano '+state.hand+' · a 30 puntos';
-$('cpuHand').innerHTML=state.cpuCards.map(()=>cardHTML(null,true)).join('');$('youHand').innerHTML=state.youCards.map((c,i)=>'<button class="card '+((c.s==='oro'||c.s==='copa')?'red':'')+'" data-card="'+i+'" '+(state.turn!=='you'||state.finished?'disabled':'')+'><div><div class="rank">'+(c.n>=10?({10:'Sota',11:'Caballo',12:'Rey'}[c.n]):c.n)+'</div><div class="suit">'+SYMBOL[c.s]+'</div></div><div class="center">'+SYMBOL[c.s]+'</div><div class="bottom"><div class="rank">'+c.n+'</div><div class="suit">'+SYMBOL[c.s]+'</div></div></button>').join('');
-$('youPlayed').innerHTML=state.youPlayed?cardHTML(state.youPlayed):'';$('cpuPlayed').innerHTML=state.cpuPlayed?cardHTML(state.cpuPlayed):'';
-$('youState').textContent=state.turn==='you'?'Tu turno: elegí una carta':state.finished?'Mano terminada':'Esperando al contrario';$('cpuState').textContent=state.turn==='cpu'?'Pensando...':'Tiene 3 cartas';
-$('log').innerHTML='<b>Partida:</b> '+(state.log.slice(-3).join(' · ')||'¡Que empiece el juego!');
-renderControls()}
-function btn(label,fn,cls=''){let b=document.createElement('button');b.className='btn '+cls;b.textContent=label;b.onclick=fn;$('controls').appendChild(b)}
-function renderControls(){let c=$('controls');c.innerHTML='';if(state.finished){btn('Siguiente mano',deal,'gold');return}
-if(state.turn==='you'){if(!state.envidoDone&&state.trick===0){btn('Envido',()=>callEnvido('envido'));btn('Real envido',()=>callEnvido('real'));btn('Falta envido',()=>callEnvido('falta'))}
-if(state.truco<4&&!state.trucoPending)btn(state.truco===1?'Truco':state.truco===2?'Retruco':'Vale cuatro',callTruco);
-}}
-function log(t){state.log.push(t);render()}
-function envidoValue(hand){let best=0;for(const s of SUITS){let same=hand.filter(c=>c.s===s);if(same.length>=2){let vals=same.map(c=>val(c)).sort((a,b)=>b-a);best=Math.max(best,20+vals[0]+vals[1])}}if(best===0)best=Math.max(...hand.map(c=>val(c)));return best}
-function callEnvido(kind){if(state.turn!=='you'||state.envidoDone)return;state.envidoDone=true;let amount=kind==='envido'?2:kind==='real'?3:Math.max(1,30-Math.max(state.you,state.cpu));let mine=envidoValue(state.youCards),theirs=envidoValue(state.cpuCards);let cpuAccept=Math.random()<.72;if(!cpuAccept){state.you+=1;log('El contrario no quiso el envido. Ganás 1 punto.');render();return}
-let youWin=mine>theirs||(mine===theirs&&state.mano==='you');let pts=amount+(kind==='real'?1:0);if(youWin)state.you+=pts;else state.cpu+=pts;log('Envido: vos '+mine+' / rival '+theirs+'. '+(youWin?'Ganaste':'Ganó el rival')+' ('+pts+' puntos).');checkMatch();render()}
-function callTruco(){if(state.turn!=='you'||state.trucoPending||state.truco>=4)return;state.trucoPending=true;let accept=Math.random()<.78;if(!accept){state.you+=state.truco;state.finished=true;log('El rival no quiso. Te llevás '+state.truco+' puntos.');checkMatch();render();return}state.truco++;state.trucoCaller='you';state.trucoPending=false;log('¡Quiero! Truco vale '+state.truco+'.');render()}
-function play(i){if(state.turn!=='you'||state.finished)return;let c=state.youCards.splice(i,1)[0];state.youPlayed=c;state.turn='cpu';render();setTimeout(cpuPlay,650)}
-function cpuPlay(){if(state.finished)return;let idx=Math.floor(Math.random()*state.cpuCards.length);if(state.youPlayed){let winning=state.cpuCards.map((c,i)=>({c,i})).filter(x=>power(x.c)>power(state.youPlayed));if(winning.length&&Math.random()<.65)idx=winning.sort((a,b)=>power(a.c)-power(b.c))[0].i}
-state.cpuPlayed=state.cpuCards.splice(idx,1)[0];resolveTrick()}
-function resolveTrick(){let a=power(state.youPlayed),b=power(state.cpuPlayed);if(a>b)state.youWins++;else if(b>a)state.cpuWins++;else{if(state.mano==='you')state.youWins+=.5;else state.cpuWins+=.5}
-state.trick++;$('status').innerHTML=(a>b?'Ganaste esta baza':a<b?'El rival ganó esta baza':'¡Parda!')+'<br><strong>Baza '+state.trick+'/3</strong>';
-if(state.trick===3||state.youWins>=1.5||state.cpuWins>=1.5){let winner=state.youWins>state.cpuWins?'you':state.cpuWins>state.youWins?'cpu':state.mano;let pts=state.truco;state[winner]+=pts;state.finished=true;log((winner==='you'?'Ganaste':'El rival ganó')+' la mano. +'+pts+' puntos.');checkMatch()}else{state.turn='you';state.youPlayed=null;state.cpuPlayed=null;log('Baza '+state.trick+' lista.');}
-render()}
-function checkMatch(){if(state.you>=30||state.cpu>=30){state.finished=true;setTimeout(()=>showModal(state.you>=30?'¡GANASTE LA PARTIDA! 🏆':'Ganó el contrario. ¡La revancha te espera!','Resultado final: '+state.you+' a '+state.cpu+'.',true),250)}}
-function showModal(title,msg,final=false){let o=document.createElement('div');o.className='overlay';o.innerHTML='<div class="modal"><h2>'+title+'</h2><p>'+msg+'</p><div class="modalactions"><button class="btn gold" id="modalOk">'+(final?'Nueva partida':'¡Entendido!')+'</button></div></div>';$('controls').appendChild(o);o.querySelector('button').onclick=()=>{o.remove();if(final)newGame()}}
-function deal(){state.hand++;state.mano=state.mano==='you'?'cpu':'you';let d=shuffle([...deck]);state.youCards=d.slice(0,3);state.cpuCards=d.slice(3,6);state.trick=0;state.youWins=0;state.cpuWins=0;state.youPlayed=null;state.cpuPlayed=null;state.turn=state.mano;state.truco=1;state.trucoCaller=null;state.trucoPending=false;state.envidoDone=false;state.finished=false;$('status').innerHTML=state.mano==='you'?'Sos mano. ¡A jugar!':'El rival es mano.';if(state.turn==='cpu')setTimeout(cpuPlay,700);render()}
-function newGame(){state={you:0,cpu:0,hand:0,mano:'you',youCards:[],cpuCards:[],trick:0,youWins:0,cpuWins:0,youPlayed:null,cpuPlayed:null,turn:'you',truco:1,trucoCaller:null,trucoPending:false,envidoDone:false,finished:false,log:[]};deal()}
-$('youHand').addEventListener('click',e=>{let b=e.target.closest('[data-card]');if(b)play(+b.dataset.card)});$('newGame').onclick=()=>{if(confirm('¿Reiniciar la partida y el marcador?'))newGame()};$('start').onclick=()=>{$('welcome').remove();newGame()};$('showHelp').onclick=()=>showModal('Reglas rápidas','El envido compara tantos: dos cartas del mismo palo suman 20 más sus valores (figuras valen 0). Para ganar una mano necesitás dos bazas. Jerarquía: 1 espada, 1 basto, 7 espada, 7 oro, 3, 2, ases falsos, figuras, 7 falsos, 6, 5, 4.');$('newGame').addEventListener('click',()=>{let b=$('controls');});
-render();
-</script></body></html>
+<body class="flex flex-col min-h-screen">
+
+  <!-- ========================================================= -->
+  <!-- VISTA 1: MENÚ PRINCIPAL CRIOLLO (ESTILO REFERENCIA)       -->
+  <!-- ========================================================= -->
+  <section id="viewMenu" class="min-h-screen w-full flex justify-center items-stretch pampa-border">
+    <div class="w-full max-w-lg rustic-wood-bg border-x-4 border-[#d4af5a] flex flex-col justify-between relative overflow-hidden shadow-2xl">
+
+      <!-- Marco dorado interior -->
+      <div class="m-2.5 sm:m-3.5 flex-1 border-2 border-[#d4af5a]/80 rounded-xl flex flex-col justify-between p-4 sm:p-6 relative">
+
+        <!-- EMBLEMA SUPERIOR TRUCO CON BANDERA ARGENTINA Y MATE -->
+        <div class="flex flex-col items-center mt-1 sm:mt-2">
+          <svg viewBox="0 0 380 185" class="w-full max-w-[340px] drop-shadow-[0_12px_18px_rgba(0,0,0,0.85)]">
+            <defs>
+              <linearGradient id="metalText" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="48%" stop-color="#d8dee9"/>
+                <stop offset="52%" stop-color="#8b95a5"/>
+                <stop offset="100%" stop-color="#f1f5f9"/>
+              </linearGradient>
+              <linearGradient id="goldFrame" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fef08a"/>
+                <stop offset="50%" stop-color="#d97706"/>
+                <stop offset="100%" stop-color="#fef08a"/>
+              </linearGradient>
+              <radialGradient id="greenShield" cx="50%" cy="45%" r="55%">
+                <stop offset="0%" stop-color="#15803d"/>
+                <stop offset="100%" stop-color="#052e16"/>
+              </radialGradient>
+            </defs>
+
+            <!-- Cintas celestes y blancas superiores -->
+            <path d="M55 58 C65 25, 125 22, 165 36 L165 54 C125 44, 80 48, 65 72 Z" fill="#38bdf8" stroke="#0f172a" stroke-width="2.5"/>
+            <path d="M62 63 C72 34, 125 32, 165 43 L165 50 C125 41, 80 44, 67 68 Z" fill="#ffffff"/>
+            <path d="M325 58 C315 25, 255 22, 215 36 L215 54 C255 44, 300 48, 315 72 Z" fill="#38bdf8" stroke="#0f172a" stroke-width="2.5"/>
+            <path d="M318 63 C308 34, 255 32, 215 43 L215 50 C255 41, 300 44, 313 68 Z" fill="#ffffff"/>
+
+            <!-- Mate criollo coronando el escudo -->
+            <circle cx="190" cy="34" r="19" fill="#451a03" stroke="url(#goldFrame)" stroke-width="3"/>
+            <ellipse cx="190" cy="24" rx="13" ry="4.5" fill="#15803d" stroke="#fde047" stroke-width="1.5"/>
+            <line x1="196" y1="23" x2="207" y2="8" stroke="#e2e8f0" stroke-width="3.5" stroke-linecap="round"/>
+
+            <!-- Escudo central verde con borde dorado ornamentado -->
+            <path d="M42 74 C42 46, 338 46, 338 74 C338 118, 285 135, 232 135 C212 135, 202 156, 190 156 C178 156, 168 135, 148 135 C95 135, 42 118, 42 74 Z"
+              fill="url(#greenShield)" stroke="url(#goldFrame)" stroke-width="5.5"/>
+
+            <!-- Firuletes dorados inferiores -->
+            <path d="M115 136 C135 154, 165 150, 178 136 M265 136 C245 154, 215 150, 202 136"
+              fill="none" stroke="#fde047" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="190" cy="144" r="4.5" fill="#dc2626" stroke="#fde047" stroke-width="1.5"/>
+
+            <!-- Palabra TRUCO 3D metálica -->
+            <text x="190" y="109" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="64" letter-spacing="2"
+              fill="#090d0b" stroke="#090d0b" stroke-width="10" stroke-linejoin="round">TRUCO</text>
+            <text x="190" y="106" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="64" letter-spacing="2"
+              fill="url(#metalText)" stroke="#78350f" stroke-width="2">TRUCO</text>
+            <text x="190" y="128" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="11" letter-spacing="5"
+              fill="#fde047">EDICIÓN 3D</text>
+          </svg>
+        </div>
+
+        <!-- BOTONERA CENTRAL (SIN BLUETOOTH Y SIN GIRA NACIONAL, CON ANOTADOR) -->
+        <div class="w-full max-w-[290px] mx-auto flex flex-col gap-3.5 my-4 z-10">
+          <button id="btnStartOffline" class="criollo-plaque-btn w-full py-3.5 px-6 font-cinzel font-extrabold text-lg sm:text-xl tracking-wide flex items-center justify-center gap-2.5">
+            <span>Partida Rápida</span>
+          </button>
+
+          <button id="btnOpenOnlineLobby" class="criollo-plaque-btn w-full py-3.5 px-6 font-cinzel font-extrabold text-lg sm:text-xl tracking-wide flex items-center justify-center gap-2.5">
+            <span>Multijugador</span>
+          </button>
+
+          <button id="btnOpenScorer" class="criollo-plaque-btn w-full py-3.5 px-6 font-cinzel font-extrabold text-lg sm:text-xl tracking-wide flex items-center justify-center gap-2.5">
+            <span>Anotador</span>
+          </button>
+        </div>
+
+        <!-- GUARDA PAMPA INFERIOR + ICONOS + PAISANO CON GLOBO DE DIÁLOGO -->
+        <div class="mt-2">
+          <!-- Franja guarda pampa divisoria -->
+          <div class="h-4 w-full pampa-border border-y border-[#d4af5a]/70 mb-3 rounded-sm"></div>
+
+          <!-- Iconos de sonido y reglas -->
+          <div class="flex items-center justify-start gap-3 pl-2 mb-16 sm:mb-14">
+            <button id="btnMenuSound" class="w-10 h-10 rounded-full bg-black/55 border border-[#d4af5a]/70 flex items-center justify-center text-amber-200 hover:scale-105 transition shadow-lg" title="Sonido">
+              <span id="menuSoundIcon" class="text-lg">🔊</span>
+            </button>
+            <button id="btnMenuRules" class="w-10 h-10 rounded-full bg-black/55 border border-[#d4af5a]/70 flex items-center justify-center text-amber-200 font-cinzel font-black text-base hover:scale-105 transition shadow-lg" title="Jerarquía de cartas">
+              ?
+            </button>
+          </div>
+
+          <!-- Globo de diálogo + Paisano criollo con boina y pipa en la esquina inferior derecha -->
+          <div class="absolute bottom-2 right-2 left-3 flex items-end justify-between pointer-events-none">
+            <div class="bg-[#fbf8f1] text-stone-900 px-3.5 py-2 rounded-2xl border-2 border-stone-800 shadow-xl max-w-[195px] sm:max-w-[225px] mb-2 relative">
+              <p class="font-bold text-xs sm:text-sm leading-tight text-center">
+                ¡Mesa 3D lista!<br><span class="text-emerald-800 font-extrabold">¿Jugamos un mano a mano?</span>
+              </p>
+              <!-- Triangulito del globo apuntando al paisano -->
+              <div class="w-3 h-3 bg-[#fbf8f1] border-r-2 border-b-2 border-stone-800 rotate-[-45deg] absolute -right-1.5 bottom-4"></div>
+            </div>
+
+            <!-- Ilustración SVG del Paisano Criollo con pipa -->
+            <svg viewBox="0 0 110 115" class="w-24 h-24 sm:w-28 sm:h-28 shrink-0 drop-shadow-[0_6px_10px_rgba(0,0,0,0.85)]">
+              <!-- Humo de pipa -->
+              <path d="M22 72 C14 62, 24 50, 16 38 C10 28, 22 18, 18 10" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="3.5" stroke-linecap="round"/>
+              <!-- Poncho / camisa -->
+              <path d="M28 112 C32 86, 86 86, 96 112 Z" fill="#7c2d12" stroke="#1c1917" stroke-width="2.5"/>
+              <path d="M50 92 L64 112 L76 92 Z" fill="#fef3c7"/>
+              <!-- Rostro criollo -->
+              <ellipse cx="64" cy="58" rx="24" ry="28" fill="#f5cba7" stroke="#451a03" stroke-width="2.2"/>
+              <!-- Pelo blanco costado -->
+              <path d="M84 44 C94 46, 95 64, 84 68" fill="#f1f5f9" stroke="#475569" stroke-width="1.8"/>
+              <!-- Boina vasca -->
+              <path d="M36 42 C34 22, 86 16, 94 34 C96 42, 74 44, 36 42 Z" fill="#1e293b" stroke="#0f172a" stroke-width="2.2"/>
+              <!-- Cejas blancas pobladas -->
+              <path d="M44 48 Q51 44 56 49" fill="none" stroke="#f8fafc" stroke-width="4" stroke-linecap="round"/>
+              <path d="M62 49 Q68 44 75 48" fill="none" stroke="#f8fafc" stroke-width="4" stroke-linecap="round"/>
+              <!-- Ojos pícaros -->
+              <circle cx="50" cy="54" r="2.3" fill="#1c1917"/>
+              <circle cx="68" cy="54" r="2.3" fill="#1c1917"/>
+              <!-- Nariz criolla -->
+              <path d="M57 54 C52 63, 55 69, 63 67" fill="none" stroke="#9a3412" stroke-width="2.2" stroke-linecap="round"/>
+              <!-- Bigote blanco y pipa -->
+              <path d="M44 73 Q58 68 72 74" fill="none" stroke="#f8fafc" stroke-width="4.5" stroke-linecap="round"/>
+              <path d="M52 76 L28 84" stroke="#451a03" stroke-width="3.5" stroke-linecap="round"/>
+              <path d="M20 75 H31 V85 C31 89, 20 89, 20 85 Z" fill="#78350f" stroke="#1c1917" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- VISTA 2: LOBBY MULTIJUGADOR ONLINE                        -->
+  <!-- ========================================================= -->
+  <section id="viewOnlineLobby" class="hidden min-h-screen w-full pampa-border flex items-center justify-center p-4">
+    <div class="w-full max-w-lg rustic-wood-bg border-4 border-[#d4af5a] rounded-3xl p-6 sm:p-8 shadow-2xl">
+      <div class="flex items-center justify-between mb-5">
+        <button id="btnLobbyBack" class="btn-glass px-3.5 py-2 rounded-xl text-xs font-bold text-amber-200">
+          ← Volver al Menú
+        </button>
+        <span class="text-xs text-emerald-300 font-bold">● Sala Online en Vivo</span>
+      </div>
+
+      <h2 class="font-cinzel text-2xl sm:text-3xl font-black text-amber-100 mb-1">
+        MULTIJUGADOR ONLINE
+      </h2>
+      <p class="text-amber-100/75 text-xs sm:text-sm mb-5">
+        Creá una mesa y compartí el código con tu amigo para jugar mano a mano en la mesa 3D.
+      </p>
+
+      <div class="mb-5">
+        <label class="block text-xs font-bold uppercase tracking-wider text-amber-300 mb-1.5">Tu Apodo en la Mesa</label>
+        <input id="inputPlayerName" type="text" maxlength="16" value="El Gaucho"
+          class="w-full px-4 py-3 rounded-xl bg-black/50 border border-amber-400/40 text-amber-50 font-bold focus:outline-none focus:border-amber-400" />
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+        <div class="p-4 rounded-2xl bg-black/40 border border-amber-400/25 flex flex-col justify-between">
+          <div>
+            <h3 class="font-cinzel font-bold text-amber-300 text-base mb-1">Crear Sala</h3>
+            <p class="text-xs text-stone-300 mb-4">Generá un código de 5 letras y esperá a tu rival.</p>
+          </div>
+          <button id="btnCreateRoom" class="w-full btn-gold py-3 px-4 rounded-xl font-extrabold text-sm">
+            + Crear Sala
+          </button>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-black/40 border border-amber-400/25 flex flex-col justify-between">
+          <div>
+            <h3 class="font-cinzel font-bold text-amber-300 text-base mb-1">Unirse a Sala</h3>
+            <input id="inputRoomCode" type="text" maxlength="6" placeholder="CÓDIGO"
+              class="w-full px-3 py-2 mt-1 mb-3 rounded-lg bg-black/60 border border-amber-400/40 text-center font-mono text-lg tracking-widest uppercase text-amber-300 font-black focus:outline-none focus:border-amber-400" />
+          </div>
+          <button id="btnJoinRoom" class="w-full btn-glass py-3 px-4 rounded-xl font-extrabold text-sm text-amber-100">
+            Entrar →
+          </button>
+        </div>
+      </div>
+
+      <div id="waitingRoomBox" class="hidden p-5 rounded-2xl bg-emerald-950/90 border-2 border-amber-400/50 text-center">
+        <p class="text-xs uppercase tracking-widest text-emerald-300 font-bold mb-1">Código de tu Mesa</p>
+        <div class="flex items-center justify-center gap-3 my-2">
+          <span id="displayRoomCode" class="font-mono text-3xl font-black tracking-[0.25em] text-amber-400 bg-black/60 px-5 py-2 rounded-xl border border-amber-400/30">
+            -----
+          </span>
+          <button id="btnCopyCode" class="btn-glass px-3 py-3 rounded-xl text-xs font-bold text-amber-200">
+            📋 Copiar
+          </button>
+        </div>
+        <p id="waitingStatusText" class="text-sm text-amber-100/90 mt-2 animate-pulse">
+          Esperando que entre tu rival...
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- VISTA 3: JUEGO 3D REAL (THREE.JS + HUD CRIOLLO)           -->
+  <!-- ========================================================= -->
+  <section id="viewGame" class="hidden relative w-full h-screen overflow-hidden bg-[#0a0603]">
+
+    <!-- LIENZO 3D A PANTALLA COMPLETA -->
+    <div id="threeContainer" class="absolute inset-0 w-full h-full z-0"></div>
+
+    <!-- HUD SUPERIOR: MARCADOR CON FÓSFOROS Y CONTROLES DE CÁMARA -->
+    <div class="relative z-20 p-2.5 sm:p-4 pointer-events-none flex flex-col gap-2">
+      <div class="max-w-5xl w-full mx-auto chalkboard rounded-2xl px-3 py-2 sm:px-5 sm:py-2.5 grid grid-cols-3 items-center gap-2 pointer-events-auto">
+        <!-- Vos -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span id="gameMyName" class="font-chalk text-base sm:text-xl font-bold text-amber-300 truncate max-w-[90px] sm:max-w-none">Vos</span>
+              <span id="badgeManoYou" class="hidden text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded bg-amber-400 text-stone-950 font-black uppercase">Mano</span>
+            </div>
+            <div id="gameMyZoneText" class="text-[10px] sm:text-xs font-bold text-stone-300">Malas: 0/15</div>
+          </div>
+          <div id="gameMyMatches" class="hidden sm:flex items-center gap-1 bg-black/40 px-2 py-1 rounded-lg border border-white/10"></div>
+        </div>
+
+        <!-- Centro -->
+        <div class="text-center border-x border-white/15 px-1">
+          <div id="gameHandCounter" class="font-cinzel font-black text-xs sm:text-sm text-amber-100">Mano 1</div>
+          <div id="gameStakeInfo" class="text-[10px] sm:text-xs text-amber-300 font-semibold">Truco: 1 pt • A 30</div>
+        </div>
+
+        <!-- Rival -->
+        <div class="flex items-center justify-end gap-2 sm:gap-3">
+          <div id="gameOppMatches" class="hidden sm:flex items-center gap-1 bg-black/40 px-2 py-1 rounded-lg border border-white/10"></div>
+          <div class="text-right">
+            <div class="flex items-center justify-end gap-1.5">
+              <span id="badgeManoOpp" class="hidden text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded bg-amber-400 text-stone-950 font-black uppercase">Mano</span>
+              <span id="gameOppName" class="font-chalk text-base sm:text-xl font-bold text-emerald-300 truncate max-w-[90px] sm:max-w-none">Rival</span>
+            </div>
+            <div id="gameOppZoneText" class="text-[10px] sm:text-xs font-bold text-stone-300">Malas: 0/15</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra secundaria: Salir, Reset Cámara 3D, Sonido, Estado -->
+      <div class="max-w-5xl w-full mx-auto flex items-center justify-between gap-2 pointer-events-auto">
+        <div class="flex items-center gap-1.5">
+          <button id="btnGameBackMenu" class="btn-glass px-3 py-1.5 rounded-xl text-xs font-bold text-amber-200">
+            ← Menú
+          </button>
+          <button id="btnResetCamera" class="btn-glass px-3 py-1.5 rounded-xl text-xs font-bold text-emerald-200" title="Centrar cámara 3D">
+            🎥 Vista Mesa
+          </button>
+        </div>
+
+        <div id="tableStatusBox" class="px-3.5 py-1.5 rounded-full bg-black/75 border border-amber-400/35 text-xs sm:text-sm font-bold text-amber-100 text-center shadow-lg truncate max-w-[55vw]">
+          ¡La mesa está servida!
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <button id="btnGameRules" class="btn-glass px-2.5 py-1.5 rounded-xl text-xs font-bold text-amber-200">?</button>
+          <button id="btnGameSound" class="btn-glass px-2.5 py-1.5 rounded-xl text-xs font-bold text-amber-200">
+            <span id="gameSoundIcon">🔊</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BURBUJA DE CANTO FLOTANTE EN EL CENTRO -->
+    <div id="cantoBanner" class="hidden absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none">
+      <div class="canto-toast px-7 py-3 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-300 to-amber-500 text-stone-950 font-cinzel font-black text-2xl sm:text-3xl tracking-wider shadow-[0_12px_35px_rgba(0,0,0,0.85)] border-2 border-white">
+        ¡TRUCO!
+      </div>
+    </div>
+
+    <!-- PANEL DE RESPUESTA CUANDO EL RIVAL CANTA (QUIERO / NO QUIERO / SUBIR) -->
+    <div id="pendingResponseBox" class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-[92%] max-w-md p-4 sm:p-5 rounded-3xl bg-[#241206]/95 backdrop-blur-md border-2 border-amber-400 shadow-[0_20px_50px_rgba(0,0,0,0.9)] text-center">
+      <p id="pendingResponseText" class="font-cinzel text-base sm:text-lg font-extrabold text-amber-200 mb-3.5">
+        El rival cantó Truco. ¿Qué hacés?
+      </p>
+      <div id="pendingResponseButtons" class="flex flex-wrap justify-center gap-2.5"></div>
+    </div>
+
+    <!-- HUD INFERIOR: INSTRUCCIÓN + BOTONES DE CANTO -->
+    <div class="absolute bottom-0 inset-x-0 z-20 p-3 sm:p-4 bg-gradient-to-t from-black/90 via-black/55 to-transparent pointer-events-none flex flex-col items-center gap-2">
+      <div class="text-[11px] sm:text-xs font-bold text-amber-200/90 bg-black/60 px-3.5 py-1 rounded-full border border-white/10">
+        <span id="mySeatStatus">Tocá una de tus cartas 3D para tirarla • Arrastrá el fondo para rotar cámara</span>
+      </div>
+      <div id="gameControls" class="flex flex-wrap justify-center gap-2 w-full max-w-2xl pointer-events-auto"></div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- VISTA 4: ANOTADOR TRADICIONAL DE FÓSFOROS                 -->
+  <!-- ========================================================= -->
+  <section id="viewScorer" class="hidden min-h-screen w-full pampa-border flex items-center justify-center p-3 sm:p-6">
+    <div class="w-full max-w-3xl chalkboard rounded-3xl p-4 sm:p-8 relative">
+
+      <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-5 border-b-2 border-white/15">
+        <div class="flex items-center gap-3">
+          <button id="btnScorerBack" class="btn-glass px-3.5 py-2 rounded-xl text-xs font-bold text-amber-200">
+            ← Menú
+          </button>
+          <div>
+            <h2 class="font-chalk text-2xl sm:text-3xl font-bold text-amber-300 leading-none">
+              ANOTADOR DE TRUCO
+            </h2>
+            <p class="text-[11px] text-stone-300 mt-1">Tocá los nombres para editarlos</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <div class="flex rounded-xl bg-black/50 p-1 border border-white/15">
+            <button id="btnTarget15" class="px-3 py-1 rounded-lg text-xs font-bold text-stone-300 transition">A 15</button>
+            <button id="btnTarget30" class="px-3 py-1 rounded-lg text-xs font-bold bg-amber-400 text-stone-950 transition">A 30</button>
+          </div>
+          <button id="btnResetScorer" class="btn-glass px-3.5 py-2 rounded-xl text-xs font-bold text-rose-300 border-rose-400/30">
+            ↻ Reiniciar
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 divide-x-2 divide-white/25">
+        <!-- NOSOTROS -->
+        <div class="pr-3 sm:pr-6 flex flex-col items-center">
+          <input id="scorerNameA" type="text" value="NOSOTROS" maxlength="14"
+            class="font-chalk text-xl sm:text-3xl font-bold text-center text-amber-300 bg-transparent border-b border-dashed border-amber-300/40 focus:border-amber-300 focus:outline-none w-full pb-1 mb-2 uppercase" />
+
+          <div class="flex items-baseline gap-2 mb-3">
+            <span id="scorerPointsA" class="font-chalk text-4xl sm:text-5xl font-bold text-white">0</span>
+            <span id="scorerZoneA" class="text-xs font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Malas</span>
+          </div>
+
+          <div class="flex items-center gap-3 mb-5">
+            <button id="btnSubA" class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 font-black text-xl text-rose-300 active:scale-95 transition">
+              −1
+            </button>
+            <button id="btnAddA" class="w-14 h-11 sm:w-16 sm:h-12 rounded-2xl btn-gold font-black text-xl active:scale-95 transition">
+              +1
+            </button>
+          </div>
+
+          <div class="w-full space-y-3">
+            <div class="bg-black/35 rounded-2xl p-3 border border-white/10">
+              <div class="text-[11px] font-bold uppercase tracking-widest text-stone-400 text-center mb-2">Malas (1 a 15)</div>
+              <div id="matchesMalasA" class="flex flex-col items-center gap-2 min-h-[145px] justify-start"></div>
+            </div>
+            <div id="buenasContainerA" class="bg-black/35 rounded-2xl p-3 border border-amber-400/25">
+              <div class="text-[11px] font-bold uppercase tracking-widest text-amber-300/80 text-center mb-2">Buenas (16 a 30)</div>
+              <div id="matchesBuenasA" class="flex flex-col items-center gap-2 min-h-[145px] justify-start"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ELLOS -->
+        <div class="pl-3 sm:pl-6 flex flex-col items-center">
+          <input id="scorerNameB" type="text" value="ELLOS" maxlength="14"
+            class="font-chalk text-xl sm:text-3xl font-bold text-center text-emerald-300 bg-transparent border-b border-dashed border-emerald-300/40 focus:border-emerald-300 focus:outline-none w-full pb-1 mb-2 uppercase" />
+
+          <div class="flex items-baseline gap-2 mb-3">
+            <span id="scorerPointsB" class="font-chalk text-4xl sm:text-5xl font-bold text-white">0</span>
+            <span id="scorerZoneB" class="text-xs font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Malas</span>
+          </div>
+
+          <div class="flex items-center gap-3 mb-5">
+            <button id="btnSubB" class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 font-black text-xl text-rose-300 active:scale-95 transition">
+              −1
+            </button>
+            <button id="btnAddB" class="w-14 h-11 sm:w-16 sm:h-12 rounded-2xl btn-gold font-black text-xl active:scale-95 transition">
+              +1
+            </button>
+          </div>
+
+          <div class="w-full space-y-3">
+            <div class="bg-black/35 rounded-2xl p-3 border border-white/10">
+              <div class="text-[11px] font-bold uppercase tracking-widest text-stone-400 text-center mb-2">Malas (1 a 15)</div>
+              <div id="matchesMalasB" class="flex flex-col items-center gap-2 min-h-[145px] justify-start"></div>
+            </div>
+            <div id="buenasContainerB" class="bg-black/35 rounded-2xl p-3 border border-amber-400/25">
+              <div class="text-[11px] font-bold uppercase tracking-widest text-amber-300/80 text-center mb-2">Buenas (16 a 30)</div>
+              <div id="matchesBuenasB" class="flex flex-col items-center gap-2 min-h-[145px] justify-start"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5 pt-3 border-t border-white/15">
+        <div id="scorerHistory" class="text-xs font-chalk text-stone-200 bg-black/40 rounded-xl p-3 max-h-20 overflow-y-auto space-y-1">
+          <div class="text-stone-400">Anotador listo. Tocá +1 para sumar fósforos.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL PERSONALIZADO -->
+  <div id="customModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-[#fbf5e6] text-stone-900 rounded-3xl max-w-md w-full p-6 shadow-2xl border-4 border-amber-600/50">
+      <h3 id="modalTitle" class="font-cinzel text-2xl font-black text-stone-900 mb-2">Título</h3>
+      <div id="modalBody" class="text-sm text-stone-700 leading-relaxed mb-6">Contenido</div>
+      <div id="modalActions" class="flex flex-wrap justify-end gap-2.5"></div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- SCRIPTS: THREE.JS 3D + FIREBASE + TRUCO + ANOTADOR        -->
+  <!-- ========================================================= -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    const $ = id => document.getElementById(id);
+
+    // ---------------------------------------------------------
+    // 1. AUDIO SINTETIZADO (WEB AUDIO API)
+    // ---------------------------------------------------------
+    const sfx = {
+      enabled: true,
+      ctx: null,
+      getContext() {
+        if (!this.ctx && typeof window !== 'undefined') {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtx) this.ctx = new AudioCtx();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume().catch(() => {});
+        }
+        return this.ctx;
+      },
+      playTone(freq, type, duration, vol = 0.15, slideFreq = null) {
+        if (!this.enabled) return;
+        const ctx = this.getContext();
+        if (!ctx) return;
+        try {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, ctx.currentTime);
+          if (slideFreq) osc.frequency.exponentialRampToValueAtTime(slideFreq, ctx.currentTime + duration);
+          gain.gain.setValueAtTime(vol, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + duration);
+        } catch (e) {}
+      },
+      playCard() { this.playTone(190, 'triangle', 0.09, 0.18, 65); },
+      playCanto() {
+        this.playTone(440, 'sine', 0.11, 0.16, 660);
+        setTimeout(() => this.playTone(660, 'triangle', 0.16, 0.14), 75);
+      },
+      playChalk() { this.playTone(900, 'sine', 0.05, 0.08, 420); },
+      playWin() {
+        [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => {
+          setTimeout(() => this.playTone(f, 'triangle', 0.22, 0.16), i * 110);
+        });
+      }
+    };
+
+    // ---------------------------------------------------------
+    // 2. GENERADOR DE TEXTURAS HD DE NAIPES ESPAÑOLES (40 CARTAS)
+    //    Para mapear sobre los naipes 3D en Three.js
+    // ---------------------------------------------------------
+    const SUITS = ['espada', 'basto', 'oro', 'copa'];
+    const RANKS = [1, 2, 3, 4, 5, 6, 7, 10, 11, 12];
+    const FULL_DECK = [];
+    for (const s of SUITS) for (const n of RANKS) FULL_DECK.push({ n, s });
+
+    const cardTextureCache = new Map();
+    let backTextureCache = null;
+
+    function drawPipOnCanvas(ctx, suit, cx, cy, size, flip = false) {
+      ctx.save();
+      ctx.translate(cx, cy);
+      if (flip) ctx.rotate(Math.PI);
+      const r = size * 0.45;
+
+      if (suit === 'oro') {
+        const grad = ctx.createRadialGradient(-r * 0.3, -r * 0.3, r * 0.1, 0, 0, r);
+        grad.addColorStop(0, '#fef08a');
+        grad.addColorStop(0.55, '#f59e0b');
+        grad.addColorStop(1, '#92400e');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(0, 0, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.lineWidth = Math.max(1.5, size * 0.06);
+        ctx.strokeStyle = '#78350f';
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(0, 0, r * 0.65, 0, Math.PI * 2);
+        ctx.strokeStyle = '#fef3c7';
+        ctx.stroke();
+      } else if (suit === 'copa') {
+        ctx.fillStyle = '#f59e0b';
+        ctx.strokeStyle = '#78350f';
+        ctx.lineWidth = Math.max(1.5, size * 0.055);
+        // Cáliz
+        ctx.beginPath();
+        ctx.moveTo(-r * 0.75, -r * 0.8);
+        ctx.lineTo(r * 0.75, -r * 0.8);
+        ctx.quadraticCurveTo(r * 0.65, r * 0.15, 0, r * 0.2);
+        ctx.quadraticCurveTo(-r * 0.65, r * 0.15, -r * 0.75, -r * 0.8);
+        ctx.fill();
+        ctx.stroke();
+        // Banda roja
+        ctx.fillStyle = '#dc2626';
+        ctx.fillRect(-r * 0.58, -r * 0.55, r * 1.16, r * 0.28);
+        // Pie
+        ctx.fillStyle = '#d97706';
+        ctx.fillRect(-r * 0.16, r * 0.2, r * 0.32, r * 0.5);
+        ctx.beginPath();
+        ctx.moveTo(-r * 0.6, r * 0.85);
+        ctx.lineTo(r * 0.6, r * 0.85);
+        ctx.lineTo(r * 0.45, r * 0.65);
+        ctx.lineTo(-r * 0.45, r * 0.65);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      } else if (suit === 'espada') {
+        // Hoja
+        ctx.fillStyle = '#cbd5e1';
+        ctx.strokeStyle = '#0f172a';
+        ctx.lineWidth = Math.max(1.5, size * 0.05);
+        ctx.beginPath();
+        ctx.moveTo(0, -r * 0.95);
+        ctx.lineTo(r * 0.24, -r * 0.55);
+        ctx.lineTo(r * 0.18, r * 0.35);
+        ctx.lineTo(-r * 0.18, r * 0.35);
+        ctx.lineTo(-r * 0.24, -r * 0.55);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        // Guarda dorada
+        ctx.fillStyle = '#f59e0b';
+        ctx.beginPath();
+        ctx.roundRect(-r * 0.65, r * 0.32, r * 1.3, r * 0.18, 4);
+        ctx.fill();
+        ctx.stroke();
+        // Empuñadura azul
+        ctx.fillStyle = '#1d4ed8';
+        ctx.fillRect(-r * 0.12, r * 0.5, r * 0.24, r * 0.35);
+        ctx.fillStyle = '#f59e0b';
+        ctx.beginPath();
+        ctx.arc(0, r * 0.88, r * 0.18, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        // Basto nudoso
+        ctx.fillStyle = '#854d0e';
+        ctx.strokeStyle = '#3f1d06';
+        ctx.lineWidth = Math.max(1.5, size * 0.055);
+        ctx.beginPath();
+        ctx.roundRect(-r * 0.24, -r * 0.88, r * 0.48, r * 1.76, r * 0.22);
+        ctx.fill();
+        ctx.stroke();
+        // Brotes verdes
+        ctx.fillStyle = '#16a34a';
+        ctx.beginPath();
+        ctx.ellipse(-r * 0.42, -r * 0.32, r * 0.24, r * 0.12, -0.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(r * 0.42, r * 0.25, r * 0.24, r * 0.12, 0.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    function drawFigureOnCanvas(ctx, n, suit, w, h) {
+      const cx = w / 2;
+      const cy = h / 2;
+      const colors = {
+        oro: ['#dc2626', '#f59e0b', '#1d4ed8'],
+        copa: ['#1d4ed8', '#f59e0b', '#dc2626'],
+        espada: ['#15803d', '#f59e0b', '#b91c1c'],
+        basto: ['#b45309', '#16a34a', '#1e3a8a']
+      }[suit];
+
+      ctx.save();
+      // Túnica real
+      ctx.fillStyle = colors[0];
+      ctx.strokeStyle = '#1c1917';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(cx - 58, cy + 95);
+      ctx.lineTo(cx - 42, cy - 22);
+      ctx.lineTo(cx + 42, cy - 22);
+      ctx.lineTo(cx + 58, cy + 95);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      // Franja central dorada
+      ctx.fillStyle = colors[1];
+      ctx.fillRect(cx - 18, cy - 22, 36, 117);
+
+      // Cabeza
+      ctx.fillStyle = '#fde68a';
+      ctx.beginPath();
+      ctx.arc(cx, cy - 48, 24, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+
+      // Corona o sombrero según figura (10 Sota, 11 Caballo, 12 Rey)
+      if (n === 12) {
+        ctx.fillStyle = '#f59e0b';
+        ctx.beginPath();
+        ctx.moveTo(cx - 24, cy - 68);
+        ctx.lineTo(cx - 18, cy - 92);
+        ctx.lineTo(cx - 6, cy - 78);
+        ctx.lineTo(cx, cy - 96);
+        ctx.lineTo(cx + 6, cy - 78);
+        ctx.lineTo(cx + 18, cy - 92);
+        ctx.lineTo(cx + 24, cy - 68);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      } else if (n === 11) {
+        // Silueta de caballo estilizada abajo
+        ctx.fillStyle = '#f8fafc';
+        ctx.beginPath();
+        ctx.roundRect(cx - 64, cy + 25, 128, 52, 18);
+        ctx.fill();
+        ctx.stroke();
+      } else {
+        // Sombrero de paje (Sota)
+        ctx.fillStyle = colors[2];
+        ctx.beginPath();
+        ctx.ellipse(cx, cy - 70, 30, 10, -0.15, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+      }
+
+      // Emblema del palo en la esquina superior derecha del cuadro
+      drawPipOnCanvas(ctx, suit, cx + 48, cy - 72, 42, false);
+      ctx.restore();
+    }
+
+    function getSpanishCardTexture(card) {
+      const key = `${card.n}_${card.s}`;
+      if (cardTextureCache.has(key)) return cardTextureCache.get(key);
+
+      const canvas = document.createElement('canvas');
+      canvas.width = 256;
+      canvas.height = 384;
+      const ctx = canvas.getContext('2d');
+
+      // Fondo pergamino marfil
+      const bg = ctx.createLinearGradient(0, 0, 256, 384);
+      bg.addColorStop(0, '#fffdf7');
+      bg.addColorStop(1, '#f3e5c3');
+      ctx.fillStyle = bg;
+      ctx.beginPath();
+      ctx.roundRect(0, 0, 256, 384, 22);
+      ctx.fill();
+
+      // Marco interior con pintas españolas reales
+      ctx.strokeStyle = '#92400e';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(16, 16, 224, 352);
+
+      // Cortes de pinta (Oros: 0, Copas: 1, Espadas: 2, Bastos: 3)
+      const notches = { oro: 0, copa: 1, espada: 2, basto: 3 }[card.s];
+      if (notches > 0) {
+        ctx.fillStyle = '#f8eed4';
+        const startX = 128 - (notches * 14) / 2;
+        for (let i = 0; i < notches; i++) {
+          ctx.fillRect(startX + i * 14, 12, 8, 8);
+          ctx.fillRect(startX + i * 14, 364, 8, 8);
+        }
+      }
+
+      // Color del número
+      const numColors = { oro: '#b45309', copa: '#b91c1c', espada: '#1e3a8a', basto: '#14532d' };
+      ctx.fillStyle = numColors[card.s];
+      ctx.font = '900 34px Cinzel, Georgia, serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(String(card.n), 38, 52);
+
+      ctx.save();
+      ctx.translate(218, 332);
+      ctx.rotate(Math.PI);
+      ctx.fillText(String(card.n), 0, 0);
+      ctx.restore();
+
+      // Ilustración central según carta
+      if (card.n === 1) {
+        // As ornamentado con guirnalda
+        ctx.strokeStyle = '#15803d';
+        ctx.lineWidth = 5;
+        ctx.setLineDash([10, 7]);
+        ctx.beginPath();
+        ctx.ellipse(128, 192, 74, 102, 0, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        drawPipOnCanvas(ctx, card.s, 128, 192, 138, false);
+      } else if (card.n >= 10) {
+        drawFigureOnCanvas(ctx, card.n, card.s, 256, 384);
+      } else {
+        // Cartas numéricas 2 al 7
+        const pipSize = card.n <= 3 ? 66 : card.n <= 5 ? 56 : 48;
+        if (card.n === 2) {
+          drawPipOnCanvas(ctx, card.s, 128, 118, pipSize, false);
+          drawPipOnCanvas(ctx, card.s, 128, 266, pipSize, true);
+        } else if (card.n === 3) {
+          drawPipOnCanvas(ctx, card.s, 128, 102, pipSize, false);
+          drawPipOnCanvas(ctx, card.s, 128, 192, pipSize, false);
+          drawPipOnCanvas(ctx, card.s, 128, 282, pipSize, true);
+        } else if (card.n === 4) {
+          drawPipOnCanvas(ctx, card.s, 92, 122, pipSize, false);
+          drawPipOnCanvas(ctx, card.s, 164, 122, pipSize, false);
+          drawPipOnCanvas(ctx, card.s, 92, 262, pipSize, true);
+          drawPipOnCanvas(ctx, card.s, 164, 262, pipSize, true);
+        } else if (card.n === 5) {
+          drawPipOnCanvas(ctx, card.s, 88, 110, pipSize, false);
+          drawPipOnCanvas(ctx, card.s, 168, 110, pipSize, false);
+          drawPipOnCanvas(ctx, card.s, 128, 192, pipSize, false);
+          drawPipOnCanvas(ctx, card.s, 88, 274, pipSize, true);
+          drawPipOnCanvas(ctx, card.s, 168, 274, pipSize, true);
+        } else if (card.n === 6) {
+          [104, 192, 280].forEach((y, row) => {
+            drawPipOnCanvas(ctx, card.s, 92, y, pipSize, row === 2);
+            drawPipOnCanvas(ctx, card.s, 164, y, pipSize, row === 2);
+          });
+        } else if (card.n === 7) {
+          drawPipOnCanvas(ctx, card.s, 90, 98, pipSize, false);
+          drawPipOnCanvas(ctx, card.s, 166, 98, pipSize, false);
+          drawPipOnCanvas(ctx, card.s, 128, 145, pipSize, false);
+          drawPipOnCanvas(ctx, card.s, 90, 192, pipSize, false);
+          drawPipOnCanvas(ctx, card.s, 166, 192, pipSize, false);
+          drawPipOnCanvas(ctx, card.s, 90, 286, pipSize, true);
+          drawPipOnCanvas(ctx, card.s, 166, 286, pipSize, true);
+        }
+      }
+
+      const tex = new THREE.CanvasTexture(canvas);
+      tex.anisotropy = 4;
+      cardTextureCache.set(key, tex);
+      return tex;
+    }
+
+    function getSpanishBackTexture() {
+      if (backTextureCache) return backTextureCache;
+      const canvas = document.createElement('canvas');
+      canvas.width = 256;
+      canvas.height = 384;
+      const ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = '#fbf5e6';
+      ctx.fillRect(0, 0, 256, 384);
+
+      ctx.fillStyle = '#132e57';
+      ctx.fillRect(14, 14, 228, 356);
+
+      // Trama geométrica criolla
+      ctx.strokeStyle = '#b91c1c';
+      ctx.lineWidth = 3;
+      for (let y = 24; y < 360; y += 22) {
+        for (let x = 24; x < 232; x += 22) {
+          ctx.strokeRect(x, y, 14, 14);
+        }
+      }
+
+      ctx.strokeStyle = '#f5c542';
+      ctx.lineWidth = 5;
+      ctx.strokeRect(18, 18, 220, 348);
+
+      // Medallón central
+      ctx.fillStyle = '#7f1d1d';
+      ctx.beginPath();
+      ctx.arc(128, 192, 42, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = '#fde047';
+      ctx.font = '900 28px Cinzel, serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('TA', 128, 202);
+
+      backTextureCache = new THREE.CanvasTexture(canvas);
+      backTextureCache.anisotropy = 4;
+      return backTextureCache;
+    }
+
+    // ---------------------------------------------------------
+    // 3. ESCENA 3D REAL CON THREE.JS (MESA, PAÑO, MAZO Y CARTAS)
+    // ---------------------------------------------------------
+    let scene, camera, renderer, raycaster, pointer;
+    let cardMeshes = []; // { mesh, targetPos, targetRot, targetScale, isMyHand, cardIndex, playable, hovered }
+    let last3DCardSignature = null;
+    let aiRespondingToCall = false;
+    let hoveredCardMesh = null;
+    let threeInitialized = false;
+
+    const DEFAULT_CAM_POS = new THREE.Vector3(0, 7.6, 7.2);
+    const DEFAULT_CAM_LOOK = new THREE.Vector3(0, 0, 0.5);
+    let camSpherical = { radius: 10.4, theta: 0, phi: 0.76 };
+    let isDraggingCam = false;
+    let dragStart = { x: 0, y: 0 };
+    let pointerDownPos = { x: 0, y: 0 };
+
+    function initThreeScene() {
+      if (threeInitialized) return;
+      const container = $('threeContainer');
+
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color('#0c0704');
+      scene.fog = new THREE.FogExp2('#0c0704', 0.032);
+
+      camera = new THREE.PerspectiveCamera(42, container.clientWidth / container.clientHeight, 0.1, 100);
+      updateCameraFromSpherical();
+
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      container.appendChild(renderer.domElement);
+
+      // Iluminación cálida de bodegón argentino
+      const ambient = new THREE.AmbientLight('#ffe8c2', 0.62);
+      scene.add(ambient);
+
+      const spotLight = new THREE.SpotLight('#fff2d6', 1.25);
+      spotLight.position.set(0, 12, 3);
+      spotLight.angle = Math.PI / 3.4;
+      spotLight.penumbra = 0.45;
+      spotLight.castShadow = true;
+      spotLight.shadow.mapSize.width = 1024;
+      spotLight.shadow.mapSize.height = 1024;
+      scene.add(spotLight);
+
+      const rimLight = new THREE.PointLight('#f59e0b', 0.45, 25);
+      rimLight.position.set(-6, 5, -5);
+      scene.add(rimLight);
+
+      // Tablero de madera de la mesa 3D
+      const woodMat = new THREE.MeshStandardMaterial({
+        color: '#42210b',
+        roughness: 0.55,
+        metalness: 0.08
+      });
+      const tableBase = new THREE.Mesh(new THREE.BoxGeometry(11.6, 0.55, 8.6), woodMat);
+      tableBase.position.y = -0.32;
+      tableBase.receiveShadow = true;
+      scene.add(tableBase);
+
+      // Moldura dorada alrededor del paño
+      const goldTrim = new THREE.Mesh(
+        new THREE.BoxGeometry(10.5, 0.08, 7.5),
+        new THREE.MeshStandardMaterial({ color: '#b47b22', roughness: 0.35, metalness: 0.65 })
+      );
+      goldTrim.position.y = -0.03;
+      scene.add(goldTrim);
+
+      // Paño verde 3D
+      const feltMat = new THREE.MeshStandardMaterial({
+        color: '#0b5c3b',
+        roughness: 0.88,
+        metalness: 0.02
+      });
+      const feltMesh = new THREE.Mesh(new THREE.BoxGeometry(10.2, 0.08, 7.2), feltMat);
+      feltMesh.position.y = 0.0;
+      feltMesh.receiveShadow = true;
+      scene.add(feltMesh);
+
+      // Mazo físico de cartas en el costado derecho de la mesa
+      const deckMat = [
+        new THREE.MeshStandardMaterial({ color: '#e5d7b8' }),
+        new THREE.MeshStandardMaterial({ color: '#e5d7b8' }),
+        new THREE.MeshStandardMaterial({ map: getSpanishBackTexture() }),
+        new THREE.MeshStandardMaterial({ color: '#e5d7b8' }),
+        new THREE.MeshStandardMaterial({ color: '#e5d7b8' }),
+        new THREE.MeshStandardMaterial({ color: '#e5d7b8' })
+      ];
+      const deckStack = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.32, 1.72), deckMat);
+      deckStack.position.set(3.8, 0.2, -0.3);
+      deckStack.rotation.y = 0.24;
+      deckStack.castShadow = true;
+      deckStack.receiveShadow = true;
+      scene.add(deckStack);
+
+      // Mate decorativo sobre la mesa 3D
+      const mateGroup = new THREE.Group();
+      const mateBody = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.32, 0.24, 0.55, 18),
+        new THREE.MeshStandardMaterial({ color: '#5c2c0e', roughness: 0.45 })
+      );
+      mateBody.position.y = 0.28;
+      mateBody.castShadow = true;
+      const mateVirola = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.33, 0.33, 0.08, 18),
+        new THREE.MeshStandardMaterial({ color: '#d4af37', metalness: 0.8, roughness: 0.2 })
+      );
+      mateVirola.position.y = 0.54;
+      const bombilla = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.025, 0.025, 0.65, 8),
+        new THREE.MeshStandardMaterial({ color: '#e2e8f0', metalness: 0.9, roughness: 0.15 })
+      );
+      bombilla.position.set(0.12, 0.72, 0);
+      bombilla.rotation.z = -0.38;
+      mateGroup.add(mateBody, mateVirola, bombilla);
+      mateGroup.position.set(-4.0, 0.04, 1.4);
+      scene.add(mateGroup);
+
+      raycaster = new THREE.Raycaster();
+      pointer = new THREE.Vector2();
+
+      // Eventos de mouse y toque para interactuar con cartas 3D y cámara
+      const domEl = renderer.domElement;
+
+      domEl.addEventListener('pointerdown', (e) => {
+        isDraggingCam = true;
+        dragStart = { x: e.clientX, y: e.clientY };
+        pointerDownPos = { x: e.clientX, y: e.clientY };
+      });
+
+      window.addEventListener('pointermove', (e) => {
+        if ($('viewGame').classList.contains('hidden')) return;
+        const rect = domEl.getBoundingClientRect();
+        pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+        if (isDraggingCam) {
+          const dx = e.clientX - dragStart.x;
+          const dy = e.clientY - dragStart.y;
+          dragStart = { x: e.clientX, y: e.clientY };
+          camSpherical.theta = Math.max(-0.65, Math.min(0.65, camSpherical.theta - dx * 0.005));
+          camSpherical.phi = Math.max(0.42, Math.min(1.08, camSpherical.phi - dy * 0.005));
+          updateCameraFromSpherical();
+        }
+      });
+
+      window.addEventListener('pointerup', (e) => {
+        if ($('viewGame').classList.contains('hidden')) return;
+        const moveDist = Math.hypot(e.clientX - pointerDownPos.x, e.clientY - pointerDownPos.y);
+        isDraggingCam = false;
+
+        // Si fue un toque/clic rápido (sin arrastrar cámara), verificar si tocó una carta jugable
+        if (moveDist < 8) {
+          const rect = domEl.getBoundingClientRect();
+          pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+          pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+          raycaster.setFromCamera(pointer, camera);
+          const playableMeshes = cardMeshes.filter(c => c.playable).map(c => c.mesh);
+          const hits = raycaster.intersectObjects(playableMeshes, false);
+          if (hits.length > 0) {
+            const hitObj = cardMeshes.find(c => c.mesh === hits[0].object);
+            if (hitObj) {
+              actionPlayCard(hitObj.cardIndex);
+            }
+          }
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        if (!renderer || $('viewGame').classList.contains('hidden')) return;
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      });
+
+      threeInitialized = true;
+      animateThree();
+    }
+
+    function updateCameraFromSpherical() {
+      if (!camera) return;
+      const r = camSpherical.radius;
+      const sinPhi = Math.sin(camSpherical.phi);
+      camera.position.x = r * sinPhi * Math.sin(camSpherical.theta);
+      camera.position.y = r * Math.cos(camSpherical.phi);
+      camera.position.z = r * sinPhi * Math.cos(camSpherical.theta) + 0.6;
+      camera.lookAt(DEFAULT_CAM_LOOK);
+    }
+
+    function create3DCardMesh(cardData, faceUp = true) {
+      const geo = new THREE.BoxGeometry(1.16, 0.025, 1.74);
+      const sideMat = new THREE.MeshStandardMaterial({ color: '#efe5ce', roughness: 0.5 });
+      const frontMat = new THREE.MeshStandardMaterial({
+        map: faceUp ? getSpanishCardTexture(cardData) : getSpanishBackTexture(),
+        roughness: 0.38
+      });
+      const backMat = new THREE.MeshStandardMaterial({
+        map: getSpanishBackTexture(),
+        roughness: 0.42
+      });
+      // BoxGeometry faces: +x, -x, +y (top), -y (bottom), +z, -z
+      const materials = [sideMat, sideMat, frontMat, backMat, sideMat, sideMat];
+      const mesh = new THREE.Mesh(geo, materials);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      return mesh;
+    }
+
+    function sync3DCardsWithMatchState() {
+      if (!threeInitialized || !matchState) return;
+
+      const me = getMyRoleKey();
+      const myHand = me === 'p1' ? matchState.p1Hand : matchState.p2Hand;
+      const oppHand = me === 'p1' ? matchState.p2Hand : matchState.p1Hand;
+      const myPlayed = me === 'p1' ? matchState.p1Played : matchState.p2Played;
+      const oppPlayed = me === 'p1' ? matchState.p2Played : matchState.p1Played;
+      const canPlay = !matchState.handFinished && !matchState.pendingCall && matchState.turn === me;
+      const signature = JSON.stringify([me, myHand, oppHand.length, myPlayed, oppPlayed]);
+      // El estado de turno no cambia las cartas: actualizarlo sin reconstruir las mallas.
+      if (signature === last3DCardSignature) {
+        cardMeshes.forEach(item => { if (item.isMyHand) item.playable = canPlay; });
+        return;
+      }
+      last3DCardSignature = signature;
+
+      // Limpiar solo cuando cambió realmente la disposición de las cartas.
+      cardMeshes.forEach(item => {
+        scene.remove(item.mesh);
+        if (item.mesh.geometry) item.mesh.geometry.dispose();
+        if (Array.isArray(item.mesh.material)) item.mesh.material.forEach(m => m.dispose());
+        else if (item.mesh.material) item.mesh.material.dispose();
+      });
+      cardMeshes = [];
+      hoveredCardMesh = null;
+
+      // 1. Cartas propias en abanico 3D (abajo)
+      const myCount = myHand.length;
+      myHand.forEach((card, i) => {
+        const offset = i - (myCount - 1) / 2;
+        const mesh = create3DCardMesh(card, true);
+        mesh.position.set(offset * 1.45, 0.95, 3.05 + Math.abs(offset) * 0.08);
+        mesh.rotation.set(0.68, -offset * 0.09, -offset * 0.06);
+        scene.add(mesh);
+
+        cardMeshes.push({
+          mesh,
+          basePos: mesh.position.clone(),
+          baseRot: mesh.rotation.clone(),
+          isMyHand: true,
+          cardIndex: i,
+          playable: canPlay
+        });
+      });
+
+      // 2. Cartas del rival (arriba, boca abajo)
+      const oppCount = oppHand.length;
+      oppHand.forEach((card, i) => {
+        const offset = i - (oppCount - 1) / 2;
+        const mesh = create3DCardMesh(card, false);
+        mesh.position.set(offset * 1.25, 0.72, -2.65);
+        mesh.rotation.set(-0.35, offset * 0.08, 0);
+        scene.add(mesh);
+        cardMeshes.push({ mesh, basePos: mesh.position.clone(), baseRot: mesh.rotation.clone(), playable: false });
+      });
+
+      // 3. Cartas tiradas del rival en el centro-arriba de la mesa
+      oppPlayed.forEach((card, idx) => {
+        const mesh = create3DCardMesh(card, true);
+        mesh.position.set((idx - 1) * 0.85, 0.08 + idx * 0.03, -0.78);
+        mesh.rotation.set(0, (idx - 1) * 0.14 + 0.08, 0);
+        scene.add(mesh);
+        cardMeshes.push({ mesh, basePos: mesh.position.clone(), baseRot: mesh.rotation.clone(), playable: false });
+      });
+
+      // 4. Cartas tiradas mías en el centro-abajo de la mesa
+      myPlayed.forEach((card, idx) => {
+        const mesh = create3DCardMesh(card, true);
+        mesh.position.set((idx - 1) * 0.85, 0.08 + idx * 0.03, 0.78);
+        mesh.rotation.set(0, -(idx - 1) * 0.14 - 0.06, 0);
+        scene.add(mesh);
+        cardMeshes.push({ mesh, basePos: mesh.position.clone(), baseRot: mesh.rotation.clone(), playable: false });
+      });
+    }
+
+    function animateThree() {
+      requestAnimationFrame(animateThree);
+      if (!threeInitialized || $('viewGame').classList.contains('hidden')) return;
+
+      // Detectar hover sobre cartas propias jugables
+      raycaster.setFromCamera(pointer, camera);
+      const playableItems = cardMeshes.filter(c => c.playable);
+      const hits = raycaster.intersectObjects(playableItems.map(c => c.mesh), false);
+      hoveredCardMesh = hits.length > 0 ? hits[0].object : null;
+      renderer.domElement.style.cursor = hoveredCardMesh ? 'pointer' : (isDraggingCam ? 'grabbing' : 'grab');
+
+      // Animación suave de elevación 3D al pasar el cursor
+      cardMeshes.forEach(item => {
+        if (!item.isMyHand) return;
+        const isHovered = item.mesh === hoveredCardMesh;
+        const targetY = item.basePos.y + (isHovered ? 0.42 : 0);
+        const targetZ = item.basePos.z + (isHovered ? -0.25 : 0);
+        const targetScale = isHovered ? 1.09 : 1.0;
+
+        item.mesh.position.y += (targetY - item.mesh.position.y) * 0.18;
+        item.mesh.position.z += (targetZ - item.mesh.position.z) * 0.18;
+        const nextScale = item.mesh.scale.x + (targetScale - item.mesh.scale.x) * 0.18;
+        item.mesh.scale.setScalar(nextScale);
+      });
+
+      const __frameStartedAt = performance.now();
+      renderer.render(scene, camera);
+      const __frameDuration = performance.now() - __frameStartedAt;
+      if (__frameDuration > 80 && (!animateThree.__lastWarn || __frameStartedAt - animateThree.__lastWarn > 2000)) {
+        animateThree.__lastWarn = __frameStartedAt;
+        console.warn(`[TRUCO PERF] renderer.render tardó ${__frameDuration.toFixed(1)} ms; objetos=${scene.children.length}; cartas=${cardMeshes.length}`);
+      }
+    }
+
+    // ---------------------------------------------------------
+    // 4. FÓSFOROS DE TIZA SVG PARA MARCADORES Y ANOTADOR
+    // ---------------------------------------------------------
+    function renderMatchGroupSVG(count, size = 30) {
+      const c = Math.max(0, Math.min(5, count));
+      let lines = '';
+      if (c >= 1) lines += `<line x1="6" y1="6" x2="30" y2="6" class="matchstick-line"/><circle cx="30" cy="6" r="2.2" class="matchstick-head"/>`;
+      if (c >= 2) lines += `<line x1="30" y1="6" x2="30" y2="30" class="matchstick-line"/><circle cx="30" cy="30" r="2.2" class="matchstick-head"/>`;
+      if (c >= 3) lines += `<line x1="30" y1="30" x2="6" y2="30" class="matchstick-line"/><circle cx="6" cy="30" r="2.2" class="matchstick-head"/>`;
+      if (c >= 4) lines += `<line x1="6" y1="30" x2="6" y2="6" class="matchstick-line"/><circle cx="6" cy="6" r="2.2" class="matchstick-head"/>`;
+      if (c >= 5) lines += `<line x1="6" y1="30" x2="30" y2="6" class="matchstick-line"/><circle cx="30" cy="6" r="2.2" class="matchstick-head"/>`;
+      return `<svg width="${size}" height="${size}" viewBox="0 0 36 36" class="shrink-0">
+        <rect x="6" y="6" width="24" height="24" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" stroke-dasharray="2 2"/>
+        ${lines}
+      </svg>`;
+    }
+
+    function renderCompactScoreMatches(containerEl, points) {
+      const halfPoints = points <= 15 ? points : Math.min(15, points - 15);
+      let html = '';
+      for (let g = 0; g < 3; g++) {
+        const groupCount = Math.max(0, Math.min(5, halfPoints - g * 5));
+        html += renderMatchGroupSVG(groupCount, 22);
+      }
+      containerEl.innerHTML = html;
+    }
+
+    // ---------------------------------------------------------
+    // 5. REGLAS Y JERARQUÍA DE TRUCO ARGENTINO
+    // ---------------------------------------------------------
+    function getCardPower(c) {
+      if (c.n === 1 && c.s === 'espada') return 14;
+      if (c.n === 1 && c.s === 'basto') return 13;
+      if (c.n === 7 && c.s === 'espada') return 12;
+      if (c.n === 7 && c.s === 'oro') return 11;
+      if (c.n === 3) return 10;
+      if (c.n === 2) return 9;
+      if (c.n === 1) return 8;
+      if (c.n === 12) return 7;
+      if (c.n === 11) return 6;
+      if (c.n === 10) return 5;
+      if (c.n === 7) return 4;
+      if (c.n === 6) return 3;
+      if (c.n === 5) return 2;
+      return 1;
+    }
+
+    function getEnvidoCardVal(c) { return c.n >= 10 ? 0 : c.n; }
+
+    function calculateEnvido(cards) {
+      let maxPts = 0;
+      for (const suit of SUITS) {
+        const same = cards.filter(c => c.s === suit);
+        if (same.length >= 2) {
+          const vals = same.map(getEnvidoCardVal).sort((a, b) => b - a);
+          maxPts = Math.max(maxPts, 20 + vals[0] + vals[1]);
+        }
+      }
+      if (maxPts === 0 && cards.length > 0) maxPts = Math.max(...cards.map(getEnvidoCardVal));
+      return maxPts;
+    }
+
+    function shuffleDeck(deck) {
+      const arr = [...deck];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // ---------------------------------------------------------
+    // 6. FIREBASE MULTIJUGADOR ONLINE + FALLBACK BROADCAST
+    // ---------------------------------------------------------
+    let db = null, auth = null, firebaseReady = false;
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'truco-argentino-3d';
+
+    async function initFirebaseBackend() {
+      try {
+        if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+          const app = initializeApp(JSON.parse(__firebase_config));
+          auth = getAuth(app);
+          db = getFirestore(app);
+          if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+            await signInWithCustomToken(auth, __initial_auth_token);
+          } else {
+            await signInAnonymously(auth);
+          }
+          firebaseReady = true;
+        }
+      } catch (e) {
+        firebaseReady = false;
+      }
+    }
+    initFirebaseBackend();
+
+    const bc = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('truco_3d_sync') : null;
+
+    let gameMode = 'offline';
+    let onlineRole = null;
+    let onlineRoomCode = null;
+    let unsubscribeRoom = null;
+    let matchState = null;
+    let lastSeenCantoTs = 0;
+
+    function createInitialMatchState(p1Name = 'Vos', p2Name = 'El Paisano (IA)') {
+      return {
+        status: 'playing',
+        p1Name, p2Name,
+        p1Score: 0, p2Score: 0,
+        handNumber: 0,
+        mano: 'p1', turn: 'p1',
+        p1Hand: [], p2Hand: [],
+        p1Played: [], p2Played: [],
+        trickIndex: 0, trickWinners: [],
+        trucoLevel: 1, trucoHolder: null,
+        envidoDone: false, envidoChain: [],
+        pendingCall: null,
+        handFinished: false,
+        lastMessage: '¡La mesa está servida!',
+        lastCanto: null,
+        updatedAt: Date.now()
+      };
+    }
+
+    function dealNewHandState(st) {
+      const deck = shuffleDeck(FULL_DECK);
+      st.handNumber += 1;
+      if (st.handNumber > 1) st.mano = st.mano === 'p1' ? 'p2' : 'p1';
+      st.turn = st.mano;
+      st.p1Hand = deck.slice(0, 3);
+      st.p2Hand = deck.slice(3, 6);
+      st.p1Played = [];
+      st.p2Played = [];
+      st.trickIndex = 0;
+      st.trickWinners = [];
+      st.trucoLevel = 1;
+      st.trucoHolder = null;
+      st.envidoDone = false;
+      st.envidoChain = [];
+      st.pendingCall = null;
+      st.handFinished = false;
+      const manoName = st.mano === 'p1' ? st.p1Name : st.p2Name;
+      st.lastMessage = `Mano ${st.handNumber}: es mano ${manoName}.`;
+      st.updatedAt = Date.now();
+      return st;
+    }
+
+    async function pushOnlineState(newState) {
+      matchState = { ...newState, updatedAt: Date.now() };
+      renderGameUI();
+
+      if (gameMode !== 'online' || !onlineRoomCode) return;
+      if (bc) bc.postMessage({ type: 'ROOM_STATE', code: onlineRoomCode, state: matchState });
+
+      if (firebaseReady && db) {
+        try {
+          const roomRef = doc(db, 'artifacts', appId, 'public', 'data', 'truco_rooms', onlineRoomCode);
+          await setDoc(roomRef, {
+            code: onlineRoomCode,
+            stateJson: JSON.stringify(matchState),
+            updatedAt: Date.now()
+          });
+        } catch (e) {}
+      }
+    }
+
+    function listenOnlineRoom(code) {
+      if (unsubscribeRoom) { unsubscribeRoom(); unsubscribeRoom = null; }
+      if (firebaseReady && db) {
+        const roomRef = doc(db, 'artifacts', appId, 'public', 'data', 'truco_rooms', code);
+        unsubscribeRoom = onSnapshot(roomRef, (snap) => {
+          if (!snap.exists()) return;
+          const data = snap.data();
+          if (data?.stateJson) handleIncomingRoomState(JSON.parse(data.stateJson));
+        }, () => {});
+      }
+    }
+
+    if (bc) {
+      bc.onmessage = (ev) => {
+        const msg = ev.data;
+        if (!msg || msg.code !== onlineRoomCode) return;
+        if (msg.type === 'ROOM_STATE' && msg.state) {
+          handleIncomingRoomState(msg.state);
+        } else if (msg.type === 'JOIN_REQUEST' && onlineRole === 'host' && matchState?.status === 'waiting') {
+          matchState.p2Name = msg.guestName || 'Invitado';
+          matchState.status = 'playing';
+          dealNewHandState(matchState);
+          pushOnlineState(matchState);
+        }
+      };
+    }
+
+    function handleIncomingRoomState(incoming) {
+      if (!incoming) return;
+      const prevMsg = matchState?.lastMessage;
+      matchState = incoming;
+      if (!$('viewOnlineLobby').classList.contains('hidden') && matchState.status === 'playing') {
+        showView('viewGame');
+        initThreeScene();
+        sfx.playCard();
+      }
+      if (matchState.lastCanto && matchState.lastCanto.ts > lastSeenCantoTs) {
+        lastSeenCantoTs = matchState.lastCanto.ts;
+        triggerCantoBanner(matchState.lastCanto.text);
+        sfx.playCanto();
+      } else if (prevMsg !== matchState.lastMessage) {
+        sfx.playCard();
+      }
+      renderGameUI();
+    }
+
+    // ---------------------------------------------------------
+    // 7. ACCIONES DEL JUEGO & IA RÁPIDA
+    // ---------------------------------------------------------
+    function scheduleAIResponse(delay = 60) {
+      const scheduledAt = performance.now();
+      setTimeout(() => {
+        const lateBy = performance.now() - scheduledAt - delay;
+        console.info(`[TRUCO PERF] IA ejecutada ${Math.max(0, lateBy).toFixed(1)} ms tarde del temporizador previsto`);
+        aiRespondToCall();
+      }, delay);
+    }
+
+    function getMyRoleKey() { return gameMode === 'offline' ? 'p1' : (onlineRole === 'host' ? 'p1' : 'p2'); }
+    function getOppRoleKey() { return getMyRoleKey() === 'p1' ? 'p2' : 'p1'; }
+
+    function triggerCantoBanner(text) {
+      const banner = $('cantoBanner');
+      banner.querySelector('div').textContent = text;
+      banner.classList.remove('hidden');
+      clearTimeout(banner._timer);
+      banner._timer = setTimeout(() => banner.classList.add('hidden'), 1600);
+    }
+
+    async function actionCallEnvido(subtype) {
+      const me = getMyRoleKey(), opp = getOppRoleKey();
+      if (!matchState || matchState.handFinished || matchState.pendingCall || matchState.turn !== me || matchState.envidoDone || matchState.trickIndex > 0) return;
+
+      const labels = { envido: '¡ENVIDO!', real: '¡REAL ENVIDO!', falta: '¡FALTA ENVIDO!' };
+      const basePts = { envido: 2, real: 3, falta: 0 };
+
+      const st = structuredClone(matchState);
+      st.envidoChain.push(subtype);
+      const accYes = st.envidoChain.reduce((acc, item) => {
+        if (item === 'falta') return Math.max(1, 30 - Math.max(st.p1Score, st.p2Score));
+        return acc + basePts[item];
+      }, 0);
+      const ptsNo = st.envidoChain.length === 1 ? 1 : accYes - basePts[subtype];
+
+      st.pendingCall = { type: 'envido', subtype, from: me, to: opp, ptsIfNo: Math.max(1, ptsNo), ptsIfYes: accYes };
+      st.lastCanto = { text: labels[subtype], ts: Date.now() };
+      st.lastMessage = `${me === 'p1' ? st.p1Name : st.p2Name} cantó ${labels[subtype]}`;
+
+      lastSeenCantoTs = st.lastCanto.ts;
+      triggerCantoBanner(labels[subtype]);
+      sfx.playCanto();
+      await pushOnlineState(st);
+
+      if (gameMode === 'offline') scheduleAIResponse(60);
+    }
+
+    async function actionCallTruco() {
+      const me = getMyRoleKey(), opp = getOppRoleKey();
+      if (!matchState || matchState.handFinished || matchState.pendingCall || matchState.turn !== me || matchState.trucoLevel >= 4) return;
+      if (matchState.trucoHolder && matchState.trucoHolder !== me) return;
+
+      const nextLevel = matchState.trucoLevel + 1;
+      const labels = { 2: '¡TRUCO!', 3: '¡QUIERO RETRUCO!', 4: '¡QUIERO VALE CUATRO!' };
+
+      const st = structuredClone(matchState);
+      st.pendingCall = { type: 'truco', nextLevel, from: me, to: opp, ptsIfNo: st.trucoLevel, ptsIfYes: nextLevel };
+      st.lastCanto = { text: labels[nextLevel], ts: Date.now() };
+      st.lastMessage = `${me === 'p1' ? st.p1Name : st.p2Name} cantó ${labels[nextLevel]}`;
+
+      lastSeenCantoTs = st.lastCanto.ts;
+      triggerCantoBanner(labels[nextLevel]);
+      sfx.playCanto();
+      await pushOnlineState(st);
+
+      if (gameMode === 'offline') scheduleAIResponse(60);
+    }
+
+    async function actionRespondCall(decision, raiseSubtype = null) {
+      if (!matchState || !matchState.pendingCall) return;
+      const me = getMyRoleKey(), call = matchState.pendingCall;
+      if (call.to !== me) return;
+
+      const st = structuredClone(matchState);
+      const responderName = me === 'p1' ? st.p1Name : st.p2Name;
+
+      if (decision === 'no_quiero') {
+        st.lastCanto = { text: 'NO QUIERO', ts: Date.now() };
+        if (call.type === 'envido') {
+          st[call.from === 'p1' ? 'p1Score' : 'p2Score'] += call.ptsIfNo;
+          st.envidoDone = true;
+          st.pendingCall = null;
+          st.lastMessage = `${responderName} dijo No Quiero (+${call.ptsIfNo} pt).`;
+          checkEndOfMatch(st);
+        } else {
+          st[call.from === 'p1' ? 'p1Score' : 'p2Score'] += call.ptsIfNo;
+          st.pendingCall = null;
+          st.handFinished = true;
+          st.lastMessage = `${responderName} no quiso el truco (+${call.ptsIfNo} pts).`;
+          checkEndOfMatch(st);
+        }
+      } else if (decision === 'quiero') {
+        st.lastCanto = { text: '¡QUIERO!', ts: Date.now() };
+        if (call.type === 'envido') {
+          const e1 = calculateEnvido([...st.p1Hand, ...st.p1Played]);
+          const e2 = calculateEnvido([...st.p2Hand, ...st.p2Played]);
+          const p1Wins = e1 > e2 || (e1 === e2 && st.mano === 'p1');
+          st[p1Wins ? 'p1Score' : 'p2Score'] += call.ptsIfYes;
+          st.envidoDone = true;
+          st.pendingCall = null;
+          st.lastMessage = `¡Quiero! Envido: ${st.p1Name} (${e1}) vs ${st.p2Name} (${e2}). Gana ${p1Wins ? st.p1Name : st.p2Name} (+${call.ptsIfYes} pts).`;
+          checkEndOfMatch(st);
+        } else {
+          st.trucoLevel = call.nextLevel;
+          st.trucoHolder = me;
+          st.pendingCall = null;
+          st.lastMessage = `¡Quiero! El truco vale ${st.trucoLevel} puntos.`;
+        }
+      } else if (decision === 'raise') {
+        if (call.type === 'envido' && raiseSubtype) {
+          const labels = { envido: '¡ENVIDO!', real: '¡REAL ENVIDO!', falta: '¡FALTA ENVIDO!' };
+          const basePts = { envido: 2, real: 3, falta: 0 };
+          st.envidoChain.push(raiseSubtype);
+          const accYes = st.envidoChain.reduce((acc, item) => {
+            if (item === 'falta') return Math.max(1, 30 - Math.max(st.p1Score, st.p2Score));
+            return acc + basePts[item];
+          }, 0);
+          st.pendingCall = { type: 'envido', subtype: raiseSubtype, from: me, to: call.from, ptsIfNo: call.ptsIfYes, ptsIfYes: accYes };
+          st.lastCanto = { text: labels[raiseSubtype], ts: Date.now() };
+          st.lastMessage = `${responderName} redobló con ${labels[raiseSubtype]}`;
+        } else {
+          const nextLvl = call.nextLevel + 1;
+          const labels = { 3: '¡QUIERO RETRUCO!', 4: '¡QUIERO VALE CUATRO!' };
+          st.trucoLevel = call.nextLevel;
+          st.pendingCall = { type: 'truco', nextLevel: nextLvl, from: me, to: call.from, ptsIfNo: call.nextLevel, ptsIfYes: nextLvl };
+          st.lastCanto = { text: labels[nextLvl], ts: Date.now() };
+          st.lastMessage = `${responderName} cantó ${labels[nextLvl]}`;
+        }
+      }
+
+      lastSeenCantoTs = st.lastCanto.ts;
+      triggerCantoBanner(st.lastCanto.text);
+      sfx.playCanto();
+      await pushOnlineState(st);
+
+      if (gameMode === 'offline' && !st.handFinished && st.status === 'playing') {
+        if (st.pendingCall && st.pendingCall.to === 'p2') scheduleAIResponse(60);
+        else if (!st.pendingCall && st.turn === 'p2') setTimeout(() => aiTakeTurn(), 80);
+      }
+    }
+
+    async function actionPlayCard(cardIndex) {
+      const me = getMyRoleKey();
+      if (!matchState || matchState.handFinished || matchState.pendingCall || matchState.turn !== me) return;
+
+      const st = structuredClone(matchState);
+      const handKey = me === 'p1' ? 'p1Hand' : 'p2Hand';
+      const playedKey = me === 'p1' ? 'p1Played' : 'p2Played';
+      if (cardIndex < 0 || cardIndex >= st[handKey].length) return;
+
+      const [chosen] = st[handKey].splice(cardIndex, 1);
+      st[playedKey].push(chosen);
+      sfx.playCard();
+
+      if (st.p1Played.length === st.p2Played.length) {
+        const idx = st.p1Played.length - 1;
+        const p1 = getCardPower(st.p1Played[idx]);
+        const p2 = getCardPower(st.p2Played[idx]);
+        let trickWinner = p1 > p2 ? 'p1' : (p2 > p1 ? 'p2' : 'tie');
+        st.trickWinners.push(trickWinner);
+        st.trickIndex = st.p1Played.length;
+
+        const handResult = evaluateHandWinner(st);
+        if (handResult) {
+          st[handResult === 'p1' ? 'p1Score' : 'p2Score'] += st.trucoLevel;
+          st.handFinished = true;
+          st.lastMessage = `¡${handResult === 'p1' ? st.p1Name : st.p2Name} ganó la mano! (+${st.trucoLevel} pts).`;
+          checkEndOfMatch(st);
+        } else {
+          st.turn = trickWinner === 'tie' ? st.mano : trickWinner;
+          const nextName = st.turn === 'p1' ? st.p1Name : st.p2Name;
+          st.lastMessage = trickWinner === 'tie' ? `¡Baza parda! Juega ${nextName}.` : `Baza para ${nextName}.`;
+        }
+      } else {
+        st.turn = me === 'p1' ? 'p2' : 'p1';
+        st.lastMessage = `Turno de ${st.turn === 'p1' ? st.p1Name : st.p2Name}...`;
+      }
+
+      await pushOnlineState(st);
+      if (gameMode === 'offline' && !st.handFinished && st.status === 'playing' && st.turn === 'p2') {
+        setTimeout(() => aiTakeTurn(), 80);
+      }
+    }
+
+    function evaluateHandWinner(st) {
+      const w = st.trickWinners;
+      if (w.length < 2) return null;
+      if (w.length === 2) {
+        if (w[0] === w[1] && w[0] !== 'tie') return w[0];
+        if (w[0] === 'tie' && w[1] !== 'tie') return w[1];
+        if (w[1] === 'tie' && w[0] !== 'tie') return w[0];
+        return null;
+      }
+      if (w.length === 3) {
+        if (w[2] !== 'tie') return w[2];
+        if (w[0] !== 'tie') return w[0];
+        return st.mano;
+      }
+      return null;
+    }
+
+    function checkEndOfMatch(st) {
+      if (st.p1Score >= 30 || st.p2Score >= 30) {
+        st.status = 'match_over';
+        st.handFinished = true;
+        sfx.playWin();
+      }
+    }
+
+    async function actionFold() {
+      const me = getMyRoleKey(), opp = getOppRoleKey();
+      if (!matchState || matchState.handFinished || matchState.pendingCall) return;
+      const st = structuredClone(matchState);
+      let pts = (st.trickIndex === 0 && !st.envidoDone && st.trucoLevel === 1) ? 2 : st.trucoLevel;
+      st[opp === 'p1' ? 'p1Score' : 'p2Score'] += pts;
+      st.handFinished = true;
+      st.lastMessage = `${me === 'p1' ? st.p1Name : st.p2Name} se fue al mazo (+${pts} pts).`;
+      checkEndOfMatch(st);
+      sfx.playCard();
+      await pushOnlineState(st);
+    }
+
+    async function aiRespondToCall() {
+      if (aiRespondingToCall || gameMode !== 'offline' || !matchState || !matchState.pendingCall || matchState.pendingCall.to !== 'p2') return;
+      aiRespondingToCall = true;
+      try {
+        const call = matchState.pendingCall;
+        const aiAll = [...matchState.p2Hand, ...matchState.p2Played];
+        if (call.type === 'envido') {
+          const aiEnv = calculateEnvido(aiAll);
+          // La IA se anima más a subir el envido, pero evita regalar puntos con cartas flojas.
+          if (call.subtype === 'envido' && aiEnv >= 27 && Math.random() < 0.72) {
+            await actionRespondCall('raise', 'real');
+          } else if (call.subtype !== 'falta' && aiEnv >= 30 && Math.random() < 0.38) {
+            await actionRespondCall('raise', 'falta');
+          } else if (aiEnv >= 24 || (aiEnv >= 21 && Math.random() < 0.62)) {
+            await actionRespondCall('quiero');
+          } else if (aiEnv >= 18 && Math.random() < 0.28) {
+            await actionRespondCall('quiero');
+          } else {
+            await actionRespondCall('no_quiero');
+          }
+        } else {
+          const avg = aiAll.reduce((a, c) => a + getCardPower(c), 0) / Math.max(1, aiAll.length);
+          // Si tiene cartas fuertes, puede retrucar o cantar vale cuatro.
+          const raiseChance = call.nextLevel === 2 ? 0.72 : 0.48;
+          if (avg >= 9.0 && call.nextLevel < 4 && Math.random() < raiseChance) {
+            await actionRespondCall('raise');
+          } else if (avg >= 6.2 || (avg >= 5.0 && Math.random() < 0.55) || Math.random() < 0.12) {
+            await actionRespondCall('quiero');
+          } else {
+            await actionRespondCall('no_quiero');
+          }
+        }
+      } finally {
+        aiRespondingToCall = false;
+      }
+    }
+
+    async function aiTakeTurn() {
+      if (!matchState || matchState.handFinished || matchState.pendingCall || matchState.turn !== 'p2') return;
+      const aiCards = matchState.p2Hand;
+      if (!aiCards.length) return;
+
+      if (matchState.trickIndex === 0 && !matchState.envidoDone) {
+        const env = calculateEnvido([...aiCards, ...matchState.p2Played]);
+        const callChance = env >= 30 ? 0.92 : env >= 27 ? 0.82 : env >= 24 ? 0.58 : env >= 22 ? 0.30 : 0;
+        if (callChance > 0 && Math.random() < callChance) {
+          const st = structuredClone(matchState);
+          const sub = env >= 32 ? 'falta' : env >= 30 ? 'real' : 'envido';
+          const labels = { envido: '¡ENVIDO!', real: '¡REAL ENVIDO!', falta: '¡FALTA ENVIDO!' };
+          const lbl = labels[sub];
+          const ptsIfYes = sub === 'falta' ? Math.max(1, 30 - Math.max(st.p1Score, st.p2Score)) : sub === 'real' ? 3 : 2;
+          st.envidoChain.push(sub);
+          st.pendingCall = { type: 'envido', subtype: sub, from: 'p2', to: 'p1', ptsIfNo: 1, ptsIfYes };
+          st.lastCanto = { text: lbl, ts: Date.now() };
+          st.lastMessage = `${st.p2Name} cantó ${lbl}`;
+          lastSeenCantoTs = st.lastCanto.ts;
+          triggerCantoBanner(lbl);
+          sfx.playCanto();
+          await pushOnlineState(st);
+          return;
+        }
+      }
+
+      const avg = aiCards.reduce((a, c) => a + getCardPower(c), 0) / aiCards.length;
+      const canTruco = matchState.trucoLevel < 4 && (!matchState.trucoHolder || matchState.trucoHolder === 'p2');
+      const trucoChance = avg >= 10.5 ? 0.82 : avg >= 9.0 ? 0.68 : avg >= 7.8 ? 0.43 : avg >= 6.8 ? 0.22 : 0;
+      if (canTruco && trucoChance > 0 && Math.random() < trucoChance) {
+        const st = structuredClone(matchState);
+        const nextLvl = st.trucoLevel + 1;
+        const lbl = nextLvl === 2 ? '¡TRUCO!' : nextLvl === 3 ? '¡RETRUCO!' : '¡VALE CUATRO!';
+        st.pendingCall = { type: 'truco', nextLevel: nextLvl, from: 'p2', to: 'p1', ptsIfNo: st.trucoLevel, ptsIfYes: nextLvl };
+        st.lastCanto = { text: lbl, ts: Date.now() };
+        st.lastMessage = `${st.p2Name} cantó ${lbl}`;
+        lastSeenCantoTs = st.lastCanto.ts;
+        triggerCantoBanner(lbl);
+        sfx.playCanto();
+        await pushOnlineState(st);
+        return;
+      }
+
+      const sorted = aiCards.map((c, idx) => ({ c, idx, pow: getCardPower(c) })).sort((a, b) => a.pow - b.pow);
+      let chosenIdx = sorted[sorted.length - 1].idx;
+      if (matchState.p1Played.length > matchState.p2Played.length) {
+        const oppPow = getCardPower(matchState.p1Played[matchState.p1Played.length - 1]);
+        const winners = sorted.filter(x => x.pow > oppPow);
+        chosenIdx = winners.length ? winners[0].idx : sorted[0].idx;
+      }
+
+      const st = structuredClone(matchState);
+      const [card] = st.p2Hand.splice(chosenIdx, 1);
+      st.p2Played.push(card);
+      sfx.playCard();
+
+      if (st.p1Played.length === st.p2Played.length) {
+        const idx = st.p1Played.length - 1;
+        const p1 = getCardPower(st.p1Played[idx]), p2 = getCardPower(st.p2Played[idx]);
+        let trickWinner = p1 > p2 ? 'p1' : (p2 > p1 ? 'p2' : 'tie');
+        st.trickWinners.push(trickWinner);
+        st.trickIndex = st.p1Played.length;
+
+        const handResult = evaluateHandWinner(st);
+        if (handResult) {
+          st[handResult === 'p1' ? 'p1Score' : 'p2Score'] += st.trucoLevel;
+          st.handFinished = true;
+          st.lastMessage = `¡${handResult === 'p1' ? st.p1Name : st.p2Name} ganó la mano! (+${st.trucoLevel} pts).`;
+          checkEndOfMatch(st);
+        } else {
+          st.turn = trickWinner === 'tie' ? st.mano : trickWinner;
+          st.lastMessage = trickWinner === 'tie' ? `¡Baza parda!` : `Baza para ${st.turn === 'p1' ? st.p1Name : st.p2Name}.`;
+        }
+      } else {
+        st.turn = 'p1';
+        st.lastMessage = `Tu turno, ${st.p1Name}.`;
+      }
+
+      await pushOnlineState(st);
+      if (!st.handFinished && st.status === 'playing' && st.turn === 'p2') setTimeout(() => aiTakeTurn(), 80);
+    }
+
+    // ---------------------------------------------------------
+    // 8. ACTUALIZAR HUD + ESCENA 3D
+    // ---------------------------------------------------------
+    function renderGameUI() {
+      const __renderStartedAt = performance.now();
+      if (!matchState) return;
+      const me = getMyRoleKey(), opp = getOppRoleKey();
+      const myName = me === 'p1' ? matchState.p1Name : matchState.p2Name;
+      const oppName = opp === 'p1' ? matchState.p1Name : matchState.p2Name;
+      const myScore = me === 'p1' ? matchState.p1Score : matchState.p2Score;
+      const oppScore = opp === 'p1' ? matchState.p1Score : matchState.p2Score;
+
+      $('gameMyName').textContent = myName;
+      $('gameOppName').textContent = oppName;
+      $('gameMyZoneText').textContent = myScore <= 15 ? `Malas: ${myScore}/15` : `Buenas: ${myScore - 15}/15 (${myScore})`;
+      $('gameOppZoneText').textContent = oppScore <= 15 ? `Malas: ${oppScore}/15` : `Buenas: ${oppScore - 15}/15 (${oppScore})`;
+
+      renderCompactScoreMatches($('gameMyMatches'), myScore);
+      renderCompactScoreMatches($('gameOppMatches'), oppScore);
+
+      $('badgeManoYou').classList.toggle('hidden', matchState.mano !== me);
+      $('badgeManoOpp').classList.toggle('hidden', matchState.mano !== opp);
+
+      $('gameHandCounter').textContent = `Mano ${matchState.handNumber}`;
+      $('gameStakeInfo').textContent = `Truco: ${matchState.trucoLevel} pt${matchState.trucoLevel > 1 ? 's' : ''} • A 30`;
+      $('tableStatusBox').textContent = matchState.lastMessage;
+
+      const canPlay = !matchState.handFinished && !matchState.pendingCall && matchState.turn === me;
+      $('mySeatStatus').textContent = matchState.handFinished
+        ? 'Mano terminada'
+        : canPlay
+          ? 'Tu turno: tocá una carta 3D para jugarla o cantá'
+          : 'Esperando jugada del rival...';
+
+      // Sincronizar mallas 3D
+      sync3DCardsWithMatchState();
+
+      // Panel respuesta pendiente
+      const respBox = $('pendingResponseBox');
+      const respBtns = $('pendingResponseButtons');
+      if (matchState.pendingCall && matchState.pendingCall.to === me && !matchState.handFinished) {
+        const call = matchState.pendingCall;
+        respBox.classList.remove('hidden');
+        respBtns.innerHTML = '';
+        const callTitle = call.type === 'envido'
+          ? (call.subtype === 'envido' ? 'Envido' : call.subtype === 'real' ? 'Real Envido' : 'Falta Envido')
+          : (call.nextLevel === 2 ? 'Truco' : call.nextLevel === 3 ? 'Retruco' : 'Vale Cuatro');
+        $('pendingResponseText').textContent = `${oppName} cantó ${callTitle}. ¿Qué respondés?`;
+
+        const bQuiero = document.createElement('button');
+        bQuiero.className = 'btn-gold px-4 py-2 rounded-xl text-xs font-black';
+        bQuiero.textContent = '✓ ¡Quiero!';
+        bQuiero.onclick = () => actionRespondCall('quiero');
+        respBtns.appendChild(bQuiero);
+
+        const bNo = document.createElement('button');
+        bNo.className = 'btn-glass px-4 py-2 rounded-xl text-xs font-extrabold text-rose-300';
+        bNo.textContent = '✕ No quiero';
+        bNo.onclick = () => actionRespondCall('no_quiero');
+        respBtns.appendChild(bNo);
+
+        if (call.type === 'envido') {
+          if (call.subtype === 'envido' && !matchState.envidoChain.includes('real')) {
+            const b = document.createElement('button');
+            b.className = 'btn-glass px-3 py-2 rounded-xl text-xs font-bold text-amber-200';
+            b.textContent = 'Envido';
+            b.onclick = () => actionRespondCall('raise', 'envido');
+            respBtns.appendChild(b);
+          }
+          if (!matchState.envidoChain.includes('real') && call.subtype !== 'falta') {
+            const b = document.createElement('button');
+            b.className = 'btn-glass px-3 py-2 rounded-xl text-xs font-bold text-amber-200';
+            b.textContent = 'Real Envido';
+            b.onclick = () => actionRespondCall('raise', 'real');
+            respBtns.appendChild(b);
+          }
+          if (call.subtype !== 'falta') {
+            const b = document.createElement('button');
+            b.className = 'btn-glass px-3 py-2 rounded-xl text-xs font-bold text-amber-200';
+            b.textContent = 'Falta Envido';
+            b.onclick = () => actionRespondCall('raise', 'falta');
+            respBtns.appendChild(b);
+          }
+        } else if (call.type === 'truco' && call.nextLevel < 4) {
+          const b = document.createElement('button');
+          b.className = 'btn-glass px-3.5 py-2 rounded-xl text-xs font-bold text-amber-200';
+          b.textContent = call.nextLevel === 2 ? '¡Quiero Retruco!' : '¡Vale Cuatro!';
+          b.onclick = () => actionRespondCall('raise');
+          respBtns.appendChild(b);
+        }
+      } else {
+        respBox.classList.add('hidden');
+      }
+
+      // Botonera inferior
+      const controls = $('gameControls');
+      controls.innerHTML = '';
+
+      if (matchState.status === 'match_over') {
+        const bRematch = document.createElement('button');
+        bRematch.className = 'btn-gold px-6 py-3 rounded-2xl text-sm font-black';
+        bRematch.textContent = myScore >= 30 ? '🏆 ¡Ganaste! Jugar Revancha' : '↻ Jugar Revancha';
+        bRematch.onclick = async () => {
+          const fresh = createInitialMatchState(matchState.p1Name, matchState.p2Name);
+          dealNewHandState(fresh);
+          await pushOnlineState(fresh);
+          if (gameMode === 'offline' && fresh.turn === 'p2') setTimeout(() => aiTakeTurn(), 80);
+        };
+        controls.appendChild(bRematch);
+        return;
+      }
+
+      if (matchState.handFinished) {
+        const bNext = document.createElement('button');
+        bNext.className = 'btn-gold px-6 py-3 rounded-2xl text-sm font-black';
+        bNext.textContent = 'Siguiente Mano →';
+        bNext.onclick = async () => {
+          const st = structuredClone(matchState);
+          dealNewHandState(st);
+          await pushOnlineState(st);
+          if (gameMode === 'offline' && st.turn === 'p2') setTimeout(() => aiTakeTurn(), 80);
+        };
+        controls.appendChild(bNext);
+        return;
+      }
+
+      if (canPlay) {
+        if (!matchState.envidoDone && matchState.trickIndex === 0) {
+          [{ id: 'envido', l: 'Envido' }, { id: 'real', l: 'Real Envido' }, { id: 'falta', l: 'Falta Envido' }].forEach(it => {
+            const b = document.createElement('button');
+            b.className = 'btn-glass px-3.5 py-2 rounded-xl text-xs font-extrabold text-emerald-200';
+            b.textContent = it.l;
+            b.onclick = () => actionCallEnvido(it.id);
+            controls.appendChild(b);
+          });
+        }
+        const canTruco = matchState.trucoLevel < 4 && (!matchState.trucoHolder || matchState.trucoHolder === me);
+        if (canTruco) {
+          const bT = document.createElement('button');
+          bT.className = 'btn-gold px-4 py-2 rounded-xl text-xs font-black';
+          bT.textContent = { 1: 'Truco', 2: 'Retruco', 3: 'Vale Cuatro' }[matchState.trucoLevel];
+          bT.onclick = actionCallTruco;
+          controls.appendChild(bT);
+        }
+        const bFold = document.createElement('button');
+        bFold.className = 'btn-glass px-3.5 py-2 rounded-xl text-xs font-bold text-rose-300';
+        bFold.textContent = 'Al mazo';
+        bFold.onclick = actionFold;
+        controls.appendChild(bFold);
+      }
+      const __renderDuration = performance.now() - __renderStartedAt;
+      if (__renderDuration > 80) console.warn(`[TRUCO PERF] renderGameUI tardó ${__renderDuration.toFixed(1)} ms`);
+    }
+
+    // ---------------------------------------------------------
+    // 9. ANOTADOR TRADICIONAL DE FÓSFOROS
+    // ---------------------------------------------------------
+    const scorer = { target: 30, ptsA: 0, ptsB: 0, history: [] };
+
+    function renderScorerHalf(containerEl, pointsInHalf) {
+      let html = '';
+      for (let g = 0; g < 3; g++) {
+        const count = Math.max(0, Math.min(5, pointsInHalf - g * 5));
+        html += `<div class="flex items-center justify-center gap-2">
+          ${renderMatchGroupSVG(count, 36)}
+          <span class="font-chalk text-xs text-stone-400 w-4">${count > 0 ? count : ''}</span>
+        </div>`;
+      }
+      containerEl.innerHTML = html;
+    }
+
+    function updateScorerUI() {
+      const nameA = $('scorerNameA').value.trim() || 'NOSOTROS';
+      const nameB = $('scorerNameB').value.trim() || 'ELLOS';
+      $('scorerPointsA').textContent = scorer.ptsA;
+      $('scorerPointsB').textContent = scorer.ptsB;
+      $('scorerZoneA').textContent = scorer.ptsA <= 15 ? 'Malas' : 'Buenas';
+      $('scorerZoneB').textContent = scorer.ptsB <= 15 ? 'Malas' : 'Buenas';
+
+      renderScorerHalf($('matchesMalasA'), Math.min(15, scorer.ptsA));
+      renderScorerHalf($('matchesBuenasA'), Math.max(0, scorer.ptsA - 15));
+      renderScorerHalf($('matchesMalasB'), Math.min(15, scorer.ptsB));
+      renderScorerHalf($('matchesBuenasB'), Math.max(0, scorer.ptsB - 15));
+
+      $('buenasContainerA').classList.toggle('hidden', scorer.target === 15);
+      $('buenasContainerB').classList.toggle('hidden', scorer.target === 15);
+
+      const histEl = $('scorerHistory');
+      histEl.innerHTML = scorer.history.length
+        ? scorer.history.slice(-5).reverse().map(i => `<div>• ${i}</div>`).join('')
+        : `<div class="text-stone-400">Anotador listo. Tocá +1 para sumar fósforos.</div>`;
+
+      if (scorer.ptsA >= scorer.target || scorer.ptsB >= scorer.target) {
+        const winner = scorer.ptsA >= scorer.target ? nameA : nameB;
+        sfx.playWin();
+        openModal(
+          `🏆 ¡GANÓ ${winner.toUpperCase()}!`,
+          `Resultado final: <strong>${nameA} ${scorer.ptsA}</strong> — <strong>${nameB} ${scorer.ptsB}</strong>.`,
+          [
+            { label: 'Nueva Partida (0 a 0)', gold: true, action: () => { scorer.ptsA = 0; scorer.ptsB = 0; scorer.history = []; updateScorerUI(); } },
+            { label: 'Seguir viendo', gold: false, action: () => {} }
+          ]
+        );
+      }
+    }
+
+    function changeScorerPoints(team, delta) {
+      const nameA = $('scorerNameA').value.trim() || 'NOSOTROS';
+      const nameB = $('scorerNameB').value.trim() || 'ELLOS';
+      if (team === 'A') {
+        const next = Math.max(0, Math.min(scorer.target, scorer.ptsA + delta));
+        if (next === scorer.ptsA) return;
+        scorer.ptsA = next;
+        scorer.history.push(`${nameA}: ${delta > 0 ? '+1' : '-1'} (${scorer.ptsA})`);
+      } else {
+        const next = Math.max(0, Math.min(scorer.target, scorer.ptsB + delta));
+        if (next === scorer.ptsB) return;
+        scorer.ptsB = next;
+        scorer.history.push(`${nameB}: ${delta > 0 ? '+1' : '-1'} (${scorer.ptsB})`);
+      }
+      sfx.playChalk();
+      updateScorerUI();
+    }
+
+    // ---------------------------------------------------------
+    // 10. NAVEGACIÓN Y EVENTOS
+    // ---------------------------------------------------------
+    function showView(viewId) {
+      ['viewMenu', 'viewOnlineLobby', 'viewGame', 'viewScorer'].forEach(id => {
+        $(id).classList.toggle('hidden', id !== viewId);
+      });
+    }
+
+    function openModal(title, htmlBody, buttons = [{ label: 'Entendido', gold: true, action: () => {} }]) {
+      $('modalTitle').textContent = title;
+      $('modalBody').innerHTML = htmlBody;
+      const actionsEl = $('modalActions');
+      actionsEl.innerHTML = '';
+      buttons.forEach(b => {
+        const btn = document.createElement('button');
+        btn.className = b.gold ? 'btn-gold px-5 py-2.5 rounded-xl text-xs font-black' : 'px-4 py-2.5 rounded-xl text-xs font-bold bg-stone-200 text-stone-800';
+        btn.textContent = b.label;
+        btn.onclick = () => { $('customModal').classList.add('hidden'); if (b.action) b.action(); };
+        actionsEl.appendChild(btn);
+      });
+      $('customModal').classList.remove('hidden');
+    }
+
+    function toggleSoundAll() {
+      sfx.enabled = !sfx.enabled;
+      const ic = sfx.enabled ? '🔊' : '🔇';
+      $('menuSoundIcon').textContent = ic;
+      $('gameSoundIcon').textContent = ic;
+      if (sfx.enabled) sfx.playChalk();
+    }
+    $('btnMenuSound').onclick = toggleSoundAll;
+    $('btnGameSound').onclick = toggleSoundAll;
+
+    function goToMainMenu() {
+      if (unsubscribeRoom) { unsubscribeRoom(); unsubscribeRoom = null; }
+      onlineRoomCode = null;
+      onlineRole = null;
+      $('waitingRoomBox').classList.add('hidden');
+      showView('viewMenu');
+    }
+    $('btnLobbyBack').onclick = goToMainMenu;
+    $('btnGameBackMenu').onclick = goToMainMenu;
+    $('btnScorerBack').onclick = goToMainMenu;
+
+    // Partida Rápida (Offline 3D vs IA)
+    $('btnStartOffline').onclick = () => {
+      gameMode = 'offline';
+      onlineRole = 'host';
+      onlineRoomCode = null;
+      matchState = createInitialMatchState('Vos', 'El Paisano (IA)');
+      dealNewHandState(matchState);
+      showView('viewGame');
+      initThreeScene();
+      if (renderer) renderer.setSize($('threeContainer').clientWidth, $('threeContainer').clientHeight);
+      sfx.playCard();
+      renderGameUI();
+      if (matchState.turn === 'p2') setTimeout(() => aiTakeTurn(), 80);
+    };
+
+    // Multijugador Online
+    $('btnOpenOnlineLobby').onclick = () => { sfx.playChalk(); showView('viewOnlineLobby'); };
+
+    $('btnCreateRoom').onclick = async () => {
+      const name = $('inputPlayerName').value.trim() || 'Jugador 1';
+      gameMode = 'online';
+      onlineRole = 'host';
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      let code = '';
+      for (let i = 0; i < 5; i++) code += chars[Math.floor(Math.random() * chars.length)];
+      onlineRoomCode = code;
+
+      matchState = createInitialMatchState(name, 'Invitado');
+      matchState.status = 'waiting';
+      $('displayRoomCode').textContent = code;
+      $('waitingRoomBox').classList.remove('hidden');
+      sfx.playCanto();
+
+      listenOnlineRoom(code);
+      await pushOnlineState(matchState);
+    };
+
+    $('btnJoinRoom').onclick = async () => {
+      const name = $('inputPlayerName').value.trim() || 'Jugador 2';
+      const code = $('inputRoomCode').value.trim().toUpperCase();
+      if (code.length < 4) {
+        openModal('Código inválido', 'Ingresá el código de 5 letras de la sala.');
+        return;
+      }
+      gameMode = 'online';
+      onlineRole = 'guest';
+      onlineRoomCode = code;
+      listenOnlineRoom(code);
+
+      if (firebaseReady && db) {
+        try {
+          const roomRef = doc(db, 'artifacts', appId, 'public', 'data', 'truco_rooms', code);
+          const snap = await getDoc(roomRef);
+          if (snap.exists() && snap.data().stateJson) {
+            const st = JSON.parse(snap.data().stateJson);
+            st.p2Name = name;
+            st.status = 'playing';
+            dealNewHandState(st);
+            await pushOnlineState(st);
+            showView('viewGame');
+            initThreeScene();
+            return;
+          }
+        } catch (e) {}
+      }
+      if (bc) bc.postMessage({ type: 'JOIN_REQUEST', code, guestName: name });
+      $('waitingRoomBox').classList.remove('hidden');
+      $('displayRoomCode').textContent = code;
+    };
+
+    $('btnCopyCode').onclick = () => {
+      const temp = document.createElement('textarea');
+      temp.value = $('displayRoomCode').textContent.trim();
+      document.body.appendChild(temp);
+      temp.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(temp);
+      $('btnCopyCode').textContent = '✓ Copiado';
+      sfx.playChalk();
+      setTimeout(() => { $('btnCopyCode').textContent = '📋 Copiar'; }, 1600);
+    };
+
+    $('btnResetCamera').onclick = () => {
+      camSpherical = { radius: 10.4, theta: 0, phi: 0.76 };
+      updateCameraFromSpherical();
+      sfx.playChalk();
+    };
+
+    function showRulesModal() {
+      openModal(
+        'Jerarquía de Naipes Españoles',
+        `<div class="space-y-1.5 text-xs sm:text-sm">
+          <p><strong>1.</strong> 1 de Espada • <strong>2.</strong> 1 de Basto</p>
+          <p><strong>3.</strong> 7 de Espada • <strong>4.</strong> 7 de Oro</p>
+          <p><strong>5.</strong> Todos los 3 • <strong>6.</strong> Todos los 2</p>
+          <p><strong>7.</strong> 1 de Oro y 1 de Copa (Anchos falsos)</p>
+          <p><strong>8.</strong> Figuras: 12 (Rey), 11 (Caballo), 10 (Sota)</p>
+          <p><strong>9.</strong> 7 de Basto y 7 de Copa • <strong>10.</strong> 6, 5 y 4</p>
+        </div>`
+      );
+    }
+    $('btnMenuRules').onclick = showRulesModal;
+    $('btnGameRules').onclick = showRulesModal;
+
+    // Anotador
+    $('btnOpenScorer').onclick = () => { sfx.playChalk(); showView('viewScorer'); updateScorerUI(); };
+    $('btnAddA').onclick = () => changeScorerPoints('A', 1);
+    $('btnSubA').onclick = () => changeScorerPoints('A', -1);
+    $('btnAddB').onclick = () => changeScorerPoints('B', 1);
+    $('btnSubB').onclick = () => changeScorerPoints('B', -1);
+
+    $('btnTarget15').onclick = () => {
+      scorer.target = 15;
+      scorer.ptsA = Math.min(15, scorer.ptsA);
+      scorer.ptsB = Math.min(15, scorer.ptsB);
+      $('btnTarget15').className = 'px-3 py-1 rounded-lg text-xs font-bold bg-amber-400 text-stone-950 transition';
+      $('btnTarget30').className = 'px-3 py-1 rounded-lg text-xs font-bold text-stone-300 transition';
+      sfx.playChalk();
+      updateScorerUI();
+    };
+
+    $('btnTarget30').onclick = () => {
+      scorer.target = 30;
+      $('btnTarget30').className = 'px-3 py-1 rounded-lg text-xs font-bold bg-amber-400 text-stone-950 transition';
+      $('btnTarget15').className = 'px-3 py-1 rounded-lg text-xs font-bold text-stone-300 transition';
+      sfx.playChalk();
+      updateScorerUI();
+    };
+
+    $('btnResetScorer').onclick = () => {
+      openModal(
+        '¿Reiniciar el anotador?',
+        'Se borrarán todos los fósforos de Nosotros y Ellos.',
+        [
+          { label: 'Cancelar', gold: false, action: () => {} },
+          { label: 'Sí, reiniciar', gold: true, action: () => { scorer.ptsA = 0; scorer.ptsB = 0; scorer.history = []; sfx.playChalk(); updateScorerUI(); } }
+        ]
+      );
+    };
+
+    showView('viewMenu');
+  </script>
+</body>
+</html>
