@@ -144,7 +144,7 @@
     }
     .scorer-badge-wrap { display: flex; justify-content: center; margin: -4px 0 8px; }
     .scorer-badge {
-      width: 84px; height: 84px; border-radius: 50%;
+      min-width: 150px; height: 64px; padding: 0 22px; border-radius: 999px;
       background: radial-gradient(circle at 35% 30%, #fff2b5, #e0a52e 55%, #8a5a10);
       border: 4px solid #5b3519;
       box-shadow: 0 8px 18px rgba(0,0,0,0.6), inset 0 0 0 3px rgba(255,243,192,0.25);
@@ -152,7 +152,7 @@
       color: #2a1607; font-family: Georgia, serif;
     }
     .scorer-badge-lbl { font-size: 11px; font-weight: 900; letter-spacing: 2px; line-height: 1; }
-    #scorerTargetBadge { font-size: 34px; font-weight: 900; line-height: 1.05; }
+    #scorerTargetBadge { font-size: 30px; font-weight: 900; line-height: 1; letter-spacing: 1px; }
     .scorer-cols { display: grid; grid-template-columns: 1fr 2px 1fr; gap: 10px; align-items: start; }
     .scorer-divider { background: linear-gradient(transparent, rgba(224,178,95,0.6), transparent); min-height: 320px; }
     .scorer-team { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 0; }
@@ -497,9 +497,9 @@
         </div>
 
         <div class="scorer-badge-wrap">
-          <div class="scorer-badge" title="Puntos para ganar">
-            <span class="scorer-badge-lbl">A</span>
-            <span id="scorerTargetBadge">30</span>
+          <div class="scorer-badge" title="Puntaje de cada equipo y objetivo">
+            <span id="scorerTargetLbl" class="scorer-badge-lbl">A 30</span>
+            <span id="scorerTargetBadge">0 · 0</span>
           </div>
         </div>
 
@@ -1997,7 +1997,7 @@
       const nameB = $('scorerNameB').value.trim() || 'ELLOS';
       $('scorerPointsA').textContent = scorer.ptsA;
       $('scorerPointsB').textContent = scorer.ptsB;
-      const badge = $('scorerTargetBadge'); if (badge) badge.textContent = scorer.target;
+      const badge = $('scorerTargetBadge'); if (badge) badge.textContent = scorer.ptsA + ' · ' + scorer.ptsB; const badgeLbl = $('scorerTargetLbl'); if (badgeLbl) badgeLbl.textContent = 'A ' + scorer.target;
       $('scorerZoneA').textContent = scorer.ptsA <= 15 ? 'Malas' : 'Buenas';
       $('scorerZoneB').textContent = scorer.ptsB <= 15 ? 'Malas' : 'Buenas';
 
