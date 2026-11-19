@@ -1652,6 +1652,9 @@
           myPrivateHand = data.cards;
           if (!$('viewGame').classList.contains('hidden')) renderGameUI();
         }
+      }, (err) => {
+        console.error('[TRUCO] No se pudo leer tu mano privada:', err);
+        const st = $('mySeatStatus'); if (st) st.textContent = 'No se pudieron cargar tus cartas (' + (err.code || err.message) + '). Revisá las reglas de Firestore.';
       });
 
       // 2. Escuchar estado público de la mesa
@@ -1669,6 +1672,26 @@
 
         const prevMsg = matchState?.lastMessage;
         matchState = incoming;
+
+        // Fallback: si mi mano local no coincide con la cantidad de cartas de la mesa, la releo de Firestore
+        if (matchState.status === 'playing' && onlineRoomCode && firebaseReady && db) {
+          const myRoleNow = getMyRoleKey();
+          const expected = myRoleNow === 'p1' ? matchState.p1HandCount : matchState.p2HandCount;
+          if (typeof expected === 'number' && expected > 0 && (!Array.isArray(myPrivateHand) || myPrivateHand.length !== expected)) {
+            try {
+              const hs = await getDoc(getPrivateHandDocRef(onlineRoomCode, myRoleNow));
+              if (hs.exists() && Array.isArray(hs.data().cards)) {
+                myPrivateHand = hs.data().cards;
+                if (!$('viewGame').classList.contains('hidden')) renderGameUI();
+              } else {
+                console.warn('[TRUCO] No existe el documento de mano para', myRoleNow);
+              }
+            } catch (err) {
+              console.error('[TRUCO] Error al releer tu mano:', err);
+              const st = $('mySeatStatus'); if (st) st.textContent = 'No se pudieron cargar tus cartas (' + (err.code || err.message) + '). Revisá las reglas de Firestore.';
+            }
+          }
+        }
 
         // Si ambos están listos y soy el anfitrión, inicio la partida automáticamente
         if (matchState.status === 'waiting' && matchState.p2Uid && matchState.p1Ready && matchState.p2Ready && onlineRole === 'host') {
