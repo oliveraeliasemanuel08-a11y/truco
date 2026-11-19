@@ -129,6 +129,63 @@
       height: 100%;
       touch-action: none;
     }
+
+    /* ---------- ANOTADOR TIPO TABLERO DE MADERA ---------- */
+    .scorer-frame {
+      background: repeating-linear-gradient(90deg, #7a4a25 0 26px, #5e3819 26px 52px, #4a2a12 52px 56px);
+      border-radius: 28px;
+      padding: 14px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.85), inset 0 0 0 2px rgba(224,178,95,0.5), inset 0 0 0 4px #2a1607;
+    }
+    .scorer-felt {
+      background: radial-gradient(ellipse at 50% 30%, #1f7a50 0%, #0f5336 60%, #083a24 100%);
+      border-radius: 18px;
+      box-shadow: inset 0 0 0 2px rgba(224,178,95,0.35), inset 0 0 50px rgba(0,0,0,0.7);
+    }
+    .scorer-badge-wrap { display: flex; justify-content: center; margin: -4px 0 8px; }
+    .scorer-badge {
+      width: 84px; height: 84px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #fff2b5, #e0a52e 55%, #8a5a10);
+      border: 4px solid #5b3519;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.6), inset 0 0 0 3px rgba(255,243,192,0.25);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: #2a1607; font-family: Georgia, serif;
+    }
+    .scorer-badge-lbl { font-size: 11px; font-weight: 900; letter-spacing: 2px; line-height: 1; }
+    #scorerTargetBadge { font-size: 34px; font-weight: 900; line-height: 1.05; }
+    .scorer-cols { display: grid; grid-template-columns: 1fr 2px 1fr; gap: 10px; align-items: start; }
+    .scorer-divider { background: linear-gradient(transparent, rgba(224,178,95,0.6), transparent); min-height: 320px; }
+    .scorer-team { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 0; }
+    .team-name {
+      width: 100%; text-align: center; font-family: 'Kalam', cursive; font-weight: 700;
+      font-size: clamp(18px, 3.4vw, 28px); padding: 6px 8px; border-radius: 10px;
+      border: 2px solid #e0b25f; background: #2a1607; color: #f5c542;
+      text-transform: uppercase; outline: none; letter-spacing: 1px;
+    }
+    .team-b .team-name { background: #8b1e1e; color: #fbf5e6; border-color: #f3c2a0; }
+    .team-zone { display: flex; align-items: baseline; gap: 8px; justify-content: center; }
+    .team-pts { font-family: 'Cinzel', serif; font-size: clamp(30px, 6vw, 46px); font-weight: 900; color: #fff; text-shadow: 0 2px 0 rgba(0,0,0,0.5); }
+    .team-tag { font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #f5c542; }
+    .team-b .team-tag { color: #ff8a7a; }
+    .tally-wrap { display: flex; gap: 8px; justify-content: center; width: 100%; }
+    .tally-col {
+      flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 4px;
+      background: rgba(0,0,0,0.25); border: 1px dashed rgba(255,255,255,0.22); border-radius: 12px; padding: 6px 4px;
+    }
+    .tally-lbl { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #d8e8df; opacity: 0.85; font-weight: 800; }
+    .tally-stack { display: flex; flex-direction: column; gap: 4px; align-items: center; min-height: 150px; justify-content: flex-start; }
+    .tally-stack svg { width: 46px; height: 46px; }
+    .team-btns { display: flex; gap: 10px; }
+    .scorer-btn { width: 60px; height: 46px; border-radius: 14px; font-weight: 900; font-size: 18px; border: 2px solid rgba(0,0,0,0.5); box-shadow: 0 4px 0 rgba(0,0,0,0.5); transition: transform 0.08s, box-shadow 0.08s; }
+    .scorer-btn.minus { background: #f3e6c8; color: #8b1e1e; }
+    .scorer-btn.plus { background: linear-gradient(#ffd98a, #d4962f); color: #3b2608; }
+    .scorer-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.5); }
+    @media (max-width: 520px) {
+      .scorer-cols { grid-template-columns: 1fr 1fr; }
+      .scorer-divider { display: none; }
+      .tally-stack { min-height: 120px; }
+      .tally-stack svg { width: 38px; height: 38px; }
+    }
   </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -425,100 +482,61 @@
   <!-- VISTA 4: ANOTADOR TRADICIONAL DE FÓSFOROS                 -->
   <!-- ========================================================= -->
   <section id="viewScorer" class="hidden min-h-screen w-full pampa-border flex items-center justify-center p-3 sm:p-6">
-    <div class="w-full max-w-3xl chalkboard rounded-3xl p-4 sm:p-8 relative">
+    <div class="w-full max-w-3xl scorer-frame relative">
+      <div class="scorer-felt p-3 sm:p-6">
 
-      <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-5 border-b-2 border-white/15">
-        <div class="flex items-center gap-3">
-          <button id="btnScorerBack" class="btn-glass px-3.5 py-2 rounded-xl text-xs font-bold text-amber-200">
-            ← Menú
-          </button>
-          <div>
-            <h2 class="font-chalk text-2xl sm:text-3xl font-bold text-amber-300 leading-none">
-              ANOTADOR DE TRUCO
-            </h2>
-            <p class="text-[11px] text-stone-300 mt-1">Tocá los nombres para editarlos</p>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-2">
-          <div class="flex rounded-xl bg-black/50 p-1 border border-white/15">
-            <button id="btnTarget15" class="px-3 py-1 rounded-lg text-xs font-bold text-stone-300 transition">A 15</button>
-            <button id="btnTarget30" class="px-3 py-1 rounded-lg text-xs font-bold bg-amber-400 text-stone-950 transition">A 30</button>
-          </div>
-          <button id="btnResetScorer" class="btn-glass px-3.5 py-2 rounded-xl text-xs font-bold text-rose-300 border-rose-400/30">
-            ↻ Reiniciar
-          </button>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-2 divide-x-2 divide-white/25">
-        <!-- NOSOTROS -->
-        <div class="pr-3 sm:pr-6 flex flex-col items-center">
-          <input id="scorerNameA" type="text" value="NOSOTROS" maxlength="14"
-            class="font-chalk text-xl sm:text-3xl font-bold text-center text-amber-300 bg-transparent border-b border-dashed border-amber-300/40 focus:border-amber-300 focus:outline-none w-full pb-1 mb-2 uppercase" />
-
-          <div class="flex items-baseline gap-2 mb-3">
-            <span id="scorerPointsA" class="font-chalk text-4xl sm:text-5xl font-bold text-white">0</span>
-            <span id="scorerZoneA" class="text-xs font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Malas</span>
-          </div>
-
-          <div class="flex items-center gap-3 mb-5">
-            <button id="btnSubA" class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 font-black text-xl text-rose-300 active:scale-95 transition">
-              −1
-            </button>
-            <button id="btnAddA" class="w-14 h-11 sm:w-16 sm:h-12 rounded-2xl btn-gold font-black text-xl active:scale-95 transition">
-              +1
-            </button>
-          </div>
-
-          <div class="w-full space-y-3">
-            <div class="bg-black/35 rounded-2xl p-3 border border-white/10">
-              <div class="text-[11px] font-bold uppercase tracking-widest text-stone-400 text-center mb-2">Malas (1 a 15)</div>
-              <div id="matchesMalasA" class="flex flex-col items-center gap-2 min-h-[145px] justify-start"></div>
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+          <button id="btnScorerBack" class="btn-glass px-3.5 py-2 rounded-xl text-xs font-bold text-amber-200">← Menú</button>
+          <div class="flex items-center gap-2">
+            <div class="flex rounded-xl bg-black/50 p-1 border border-white/15">
+              <button id="btnTarget15" class="px-3 py-1 rounded-lg text-xs font-bold text-stone-300 transition">A 15</button>
+              <button id="btnTarget30" class="px-3 py-1 rounded-lg text-xs font-bold bg-amber-400 text-stone-950 transition">A 30</button>
             </div>
-            <div id="buenasContainerA" class="bg-black/35 rounded-2xl p-3 border border-amber-400/25">
-              <div class="text-[11px] font-bold uppercase tracking-widest text-amber-300/80 text-center mb-2">Buenas (16 a 30)</div>
-              <div id="matchesBuenasA" class="flex flex-col items-center gap-2 min-h-[145px] justify-start"></div>
-            </div>
+            <button id="btnResetScorer" class="btn-glass px-3 py-2 rounded-xl text-xs font-bold text-rose-300">↻ Reiniciar</button>
           </div>
         </div>
 
-        <!-- ELLOS -->
-        <div class="pl-3 sm:pl-6 flex flex-col items-center">
-          <input id="scorerNameB" type="text" value="ELLOS" maxlength="14"
-            class="font-chalk text-xl sm:text-3xl font-bold text-center text-emerald-300 bg-transparent border-b border-dashed border-emerald-300/40 focus:border-emerald-300 focus:outline-none w-full pb-1 mb-2 uppercase" />
-
-          <div class="flex items-baseline gap-2 mb-3">
-            <span id="scorerPointsB" class="font-chalk text-4xl sm:text-5xl font-bold text-white">0</span>
-            <span id="scorerZoneB" class="text-xs font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Malas</span>
-          </div>
-
-          <div class="flex items-center gap-3 mb-5">
-            <button id="btnSubB" class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 font-black text-xl text-rose-300 active:scale-95 transition">
-              −1
-            </button>
-            <button id="btnAddB" class="w-14 h-11 sm:w-16 sm:h-12 rounded-2xl btn-gold font-black text-xl active:scale-95 transition">
-              +1
-            </button>
-          </div>
-
-          <div class="w-full space-y-3">
-            <div class="bg-black/35 rounded-2xl p-3 border border-white/10">
-              <div class="text-[11px] font-bold uppercase tracking-widest text-stone-400 text-center mb-2">Malas (1 a 15)</div>
-              <div id="matchesMalasB" class="flex flex-col items-center gap-2 min-h-[145px] justify-start"></div>
-            </div>
-            <div id="buenasContainerB" class="bg-black/35 rounded-2xl p-3 border border-amber-400/25">
-              <div class="text-[11px] font-bold uppercase tracking-widest text-amber-300/80 text-center mb-2">Buenas (16 a 30)</div>
-              <div id="matchesBuenasB" class="flex flex-col items-center gap-2 min-h-[145px] justify-start"></div>
-            </div>
+        <div class="scorer-badge-wrap">
+          <div class="scorer-badge" title="Puntos para ganar">
+            <span class="scorer-badge-lbl">A</span>
+            <span id="scorerTargetBadge">30</span>
           </div>
         </div>
-      </div>
 
-      <div class="mt-5 pt-3 border-t border-white/15">
-        <div id="scorerHistory" class="text-xs font-chalk text-stone-200 bg-black/40 rounded-xl p-3 max-h-20 overflow-y-auto space-y-1">
-          <div class="text-stone-400">Anotador listo. Tocá +1 para sumar fósforos.</div>
+        <div class="scorer-cols">
+        <section class="scorer-team team-a">
+          <input id="scorerNameA" type="text" value="NOSOTROS" maxlength="14" class="team-name" />
+          <div class="team-zone"><span id="scorerPointsA" class="team-pts">0</span><span id="scorerZoneA" class="team-tag">Malas</span></div>
+          <div class="tally-wrap">
+            <div class="tally-col"><div class="tally-lbl">Malas</div><div id="matchesMalasA" class="tally-stack"></div></div>
+            <div id="buenasContainerA" class="tally-col"><div class="tally-lbl">Buenas</div><div id="matchesBuenasA" class="tally-stack"></div></div>
+          </div>
+          <div class="team-btns">
+            <button id="btnSubA" class="scorer-btn minus" aria-label="Restar">−1</button>
+            <button id="btnAddA" class="scorer-btn plus" aria-label="Sumar">+1</button>
+          </div>
+        </section>
+          <div class="scorer-divider"></div>
+        <section class="scorer-team team-b">
+          <input id="scorerNameB" type="text" value="ELLOS" maxlength="14" class="team-name" />
+          <div class="team-zone"><span id="scorerPointsB" class="team-pts">0</span><span id="scorerZoneB" class="team-tag">Malas</span></div>
+          <div class="tally-wrap">
+            <div class="tally-col"><div class="tally-lbl">Malas</div><div id="matchesMalasB" class="tally-stack"></div></div>
+            <div id="buenasContainerB" class="tally-col"><div class="tally-lbl">Buenas</div><div id="matchesBuenasB" class="tally-stack"></div></div>
+          </div>
+          <div class="team-btns">
+            <button id="btnSubB" class="scorer-btn minus" aria-label="Restar">−1</button>
+            <button id="btnAddB" class="scorer-btn plus" aria-label="Sumar">+1</button>
+          </div>
+        </section>
         </div>
+
+        <div class="mt-4 pt-3 border-t border-white/15">
+          <div id="scorerHistory" class="text-xs font-chalk text-stone-200 bg-black/40 rounded-xl p-3 max-h-20 overflow-y-auto space-y-1">
+            <div class="text-stone-400">Anotador listo. Tocá +1 para sumar fósforos.</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1310,6 +1328,7 @@
     // 6. FIREBASE MULTIJUGADOR ONLINE + FALLBACK BROADCAST
     // ---------------------------------------------------------
     let db = null, auth = null, firebaseReady = false;
+    let firebaseInitError = 'Firebase no está configurado para este sitio.';
     const appId = typeof __app_id !== 'undefined' ? __app_id : 'truco-argentino-3d';
 
     async function initFirebaseBackend() {
@@ -1324,9 +1343,14 @@
             await signInAnonymously(auth);
           }
           firebaseReady = true;
+          firebaseInitError = '';
+        } else {
+          firebaseInitError = 'Falta configurar Firebase. El modo online no está disponible todavía.';
         }
       } catch (e) {
         firebaseReady = false;
+        firebaseInitError = e?.message || 'No se pudo conectar con Firebase.';
+        console.error('[TRUCO] Error al iniciar Firebase:', e);
       }
     }
     initFirebaseBackend();
@@ -1398,7 +1422,10 @@
             stateJson: JSON.stringify(matchState),
             updatedAt: Date.now()
           });
-        } catch (e) {}
+        } catch (e) {
+          console.error('[TRUCO] No se pudo guardar la sala:', e);
+          openModal('Error de conexión', 'No se pudo guardar la partida online. Revisá la configuración y las reglas de Firebase.');
+        }
       }
     }
 
@@ -1410,7 +1437,10 @@
           if (!snap.exists()) return;
           const data = snap.data();
           if (data?.stateJson) handleIncomingRoomState(JSON.parse(data.stateJson));
-        }, () => {});
+        }, (error) => {
+          console.error('[TRUCO] Error escuchando la sala:', error);
+          openModal('Conexión interrumpida', 'Se perdió la conexión con la sala. Revisá tu Internet y los permisos de Firestore.');
+        });
       }
     }
 
@@ -1599,7 +1629,7 @@
       const st = structuredClone(matchState);
       const handKey = me === 'p1' ? 'p1Hand' : 'p2Hand';
       const playedKey = me === 'p1' ? 'p1Played' : 'p2Played';
-      if (cardIndex < 0 || cardIndex >= st[handKey].length) return;
+      if (!Array.isArray(st[handKey]) || !Array.isArray(st[playedKey]) || !Number.isInteger(cardIndex) || cardIndex < 0 || cardIndex >= st[handKey].length) return;
 
       const [chosen] = st[handKey].splice(cardIndex, 1);
       st[playedKey].push(chosen);
@@ -1895,6 +1925,7 @@
         bRematch.className = 'btn-gold px-6 py-3 rounded-2xl text-sm font-black';
         bRematch.textContent = myScore >= 30 ? '🏆 ¡Ganaste! Jugar Revancha' : '↻ Jugar Revancha';
         bRematch.onclick = async () => {
+          if (matchState?.status !== 'match_over') return;
           const fresh = createInitialMatchState(matchState.p1Name, matchState.p2Name);
           dealNewHandState(fresh);
           await pushOnlineState(fresh);
@@ -1909,6 +1940,7 @@
         bNext.className = 'btn-gold px-6 py-3 rounded-2xl text-sm font-black';
         bNext.textContent = 'Siguiente Mano →';
         bNext.onclick = async () => {
+          if (!matchState?.handFinished || matchState.status === 'match_over') return;
           const st = structuredClone(matchState);
           dealNewHandState(st);
           await pushOnlineState(st);
@@ -1949,16 +1981,13 @@
     // ---------------------------------------------------------
     // 9. ANOTADOR TRADICIONAL DE FÓSFOROS
     // ---------------------------------------------------------
-    const scorer = { target: 30, ptsA: 0, ptsB: 0, history: [] };
+    const scorer = { target: 30, ptsA: 0, ptsB: 0, history: [], gameOverShown: false };
 
     function renderScorerHalf(containerEl, pointsInHalf) {
       let html = '';
       for (let g = 0; g < 3; g++) {
         const count = Math.max(0, Math.min(5, pointsInHalf - g * 5));
-        html += `<div class="flex items-center justify-center gap-2">
-          ${renderMatchGroupSVG(count, 36)}
-          <span class="font-chalk text-xs text-stone-400 w-4">${count > 0 ? count : ''}</span>
-        </div>`;
+        html += renderMatchGroupSVG(count, 46);
       }
       containerEl.innerHTML = html;
     }
@@ -1968,6 +1997,7 @@
       const nameB = $('scorerNameB').value.trim() || 'ELLOS';
       $('scorerPointsA').textContent = scorer.ptsA;
       $('scorerPointsB').textContent = scorer.ptsB;
+      const badge = $('scorerTargetBadge'); if (badge) badge.textContent = scorer.target;
       $('scorerZoneA').textContent = scorer.ptsA <= 15 ? 'Malas' : 'Buenas';
       $('scorerZoneB').textContent = scorer.ptsB <= 15 ? 'Malas' : 'Buenas';
 
@@ -1984,14 +2014,15 @@
         ? scorer.history.slice(-5).reverse().map(i => `<div>• ${i}</div>`).join('')
         : `<div class="text-stone-400">Anotador listo. Tocá +1 para sumar fósforos.</div>`;
 
-      if (scorer.ptsA >= scorer.target || scorer.ptsB >= scorer.target) {
+      if ((scorer.ptsA >= scorer.target || scorer.ptsB >= scorer.target) && !scorer.gameOverShown) {
+        scorer.gameOverShown = true;
         const winner = scorer.ptsA >= scorer.target ? nameA : nameB;
         sfx.playWin();
         openModal(
           `🏆 ¡GANÓ ${winner.toUpperCase()}!`,
           `Resultado final: <strong>${nameA} ${scorer.ptsA}</strong> — <strong>${nameB} ${scorer.ptsB}</strong>.`,
           [
-            { label: 'Nueva Partida (0 a 0)', gold: true, action: () => { scorer.ptsA = 0; scorer.ptsB = 0; scorer.history = []; updateScorerUI(); } },
+            { label: 'Nueva Partida (0 a 0)', gold: true, action: () => { scorer.ptsA = 0; scorer.ptsB = 0; scorer.history = []; scorer.gameOverShown = false; updateScorerUI(); } },
             { label: 'Seguir viendo', gold: false, action: () => {} }
           ]
         );
@@ -2080,6 +2111,10 @@
     $('btnOpenOnlineLobby').onclick = () => { sfx.playChalk(); showView('viewOnlineLobby'); };
 
     $('btnCreateRoom').onclick = async () => {
+      if (!firebaseReady || !db || !auth?.currentUser) {
+        openModal('Multijugador no configurado', `${firebaseInitError || 'Firebase no está disponible.'}<br><br>El modo online necesita Firebase Authentication (inicio anónimo activado) y Cloud Firestore configurados. BroadcastChannel solo conecta pestañas del mismo navegador; no sirve para jugar por Internet.`);
+        return;
+      }
       const name = $('inputPlayerName').value.trim() || 'Jugador 1';
       gameMode = 'online';
       onlineRole = 'host';
@@ -2101,8 +2136,12 @@
     $('btnJoinRoom').onclick = async () => {
       const name = $('inputPlayerName').value.trim() || 'Jugador 2';
       const code = $('inputRoomCode').value.trim().toUpperCase();
-      if (code.length < 4) {
-        openModal('Código inválido', 'Ingresá el código de 5 letras de la sala.');
+      if (!/^[A-Z0-9]{5}$/.test(code)) {
+        openModal('Código inválido', 'Ingresá un código válido de exactamente 5 caracteres.');
+        return;
+      }
+      if (!firebaseReady || !db || !auth?.currentUser) {
+        openModal('Multijugador no configurado', `${firebaseInitError || 'Firebase no está disponible.'}<br><br>El modo online necesita Firebase Authentication (inicio anónimo activado) y Cloud Firestore configurados. BroadcastChannel solo conecta pestañas del mismo navegador; no sirve para jugar por Internet.`);
         return;
       }
       gameMode = 'online';
@@ -2110,25 +2149,28 @@
       onlineRoomCode = code;
       listenOnlineRoom(code);
 
-      if (firebaseReady && db) {
-        try {
-          const roomRef = doc(db, 'artifacts', appId, 'public', 'data', 'truco_rooms', code);
-          const snap = await getDoc(roomRef);
-          if (snap.exists() && snap.data().stateJson) {
-            const st = JSON.parse(snap.data().stateJson);
-            st.p2Name = name;
-            st.status = 'playing';
-            dealNewHandState(st);
-            await pushOnlineState(st);
-            showView('viewGame');
-            initThreeScene();
-            return;
-          }
-        } catch (e) {}
+      try {
+        const roomRef = doc(db, 'artifacts', appId, 'public', 'data', 'truco_rooms', code);
+        const snap = await getDoc(roomRef);
+        if (!snap.exists() || !snap.data().stateJson) {
+          openModal('Sala no encontrada', 'No existe una sala con ese código. Revisá los 5 caracteres o pedile al anfitrión que cree una nueva.');
+          return;
+        }
+        const st = JSON.parse(snap.data().stateJson);
+        if (st.status !== 'waiting' || st.p2Name !== 'Invitado') {
+          openModal('Sala ocupada', 'Esta sala ya comenzó o tiene dos jugadores. Pedile al anfitrión que cree otra sala.');
+          return;
+        }
+        st.p2Name = name;
+        st.status = 'playing';
+        dealNewHandState(st);
+        await pushOnlineState(st);
+        showView('viewGame');
+        initThreeScene();
+      } catch (e) {
+        console.error('[TRUCO] Error al entrar a la sala:', e);
+        openModal('No se pudo entrar', 'No se pudo conectar con esa sala. Revisá Internet y las reglas de Firestore.');
       }
-      if (bc) bc.postMessage({ type: 'JOIN_REQUEST', code, guestName: name });
-      $('waitingRoomBox').classList.remove('hidden');
-      $('displayRoomCode').textContent = code;
     };
 
     $('btnCopyCode').onclick = () => {
@@ -2174,6 +2216,7 @@
 
     $('btnTarget15').onclick = () => {
       scorer.target = 15;
+      scorer.gameOverShown = scorer.ptsA >= 15 || scorer.ptsB >= 15;
       scorer.ptsA = Math.min(15, scorer.ptsA);
       scorer.ptsB = Math.min(15, scorer.ptsB);
       $('btnTarget15').className = 'px-3 py-1 rounded-lg text-xs font-bold bg-amber-400 text-stone-950 transition';
@@ -2184,6 +2227,7 @@
 
     $('btnTarget30').onclick = () => {
       scorer.target = 30;
+      scorer.gameOverShown = scorer.ptsA >= 30 || scorer.ptsB >= 30;
       $('btnTarget30').className = 'px-3 py-1 rounded-lg text-xs font-bold bg-amber-400 text-stone-950 transition';
       $('btnTarget15').className = 'px-3 py-1 rounded-lg text-xs font-bold text-stone-300 transition';
       sfx.playChalk();
@@ -2196,7 +2240,7 @@
         'Se borrarán todos los fósforos de Nosotros y Ellos.',
         [
           { label: 'Cancelar', gold: false, action: () => {} },
-          { label: 'Sí, reiniciar', gold: true, action: () => { scorer.ptsA = 0; scorer.ptsB = 0; scorer.history = []; sfx.playChalk(); updateScorerUI(); } }
+          { label: 'Sí, reiniciar', gold: true, action: () => { scorer.ptsA = 0; scorer.ptsB = 0; scorer.history = []; scorer.gameOverShown = false; sfx.playChalk(); updateScorerUI(); } }
         ]
       );
     };
