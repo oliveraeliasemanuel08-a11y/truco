@@ -30,7 +30,7 @@
     .font-cinzel { font-family: 'Cinzel', serif; }
     .font-chalk { font-family: 'Kalam', cursive; }
 
-    /* Guarda Pampa SVG en los laterales como en la referencia */
+    /* Guarda Pampa SVG en los laterales */
     .pampa-border {
       background-color: #2b1a0e;
       background-image: url("data:image/svg+xml,%3Csvg width='36' height='36' viewBox='0 0 36 36' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='36' height='36' fill='%2325150a'/%3E%3Cpath d='M18 2L34 18L18 34L2 18Z' fill='none' stroke='%23d8c39e' stroke-width='2.5'/%3E%3Cpath d='M18 9L27 18L18 27L9 18Z' fill='%23d8c39e'/%3E%3Crect x='15' y='15' width='6' height='6' fill='%2325150a'/%3E%3C/svg%3E");
@@ -39,15 +39,15 @@
 
     /* Fondo de tablones de madera rústica vertical */
     .rustic-wood-bg {
-      background-color: #4a311e;
+      background-color: #6b4423;
       background-image:
-        linear-gradient(90deg, rgba(15, 7, 2, 0.72) 0%, transparent 4%, transparent 96%, rgba(15, 7, 2, 0.72) 100%),
+        linear-gradient(90deg, rgba(15, 7, 2, 0.65) 0%, transparent 4%, transparent 96%, rgba(15, 7, 2, 0.65) 100%),
         repeating-linear-gradient(90deg,
-          #4d3420 0px, #583c25 38px, #3b2616 40px, #24150b 42px,
-          #533822 44px, #472f1c 84px, #211309 86px
+          #754c29 0px, #85572f 36px, #4e3118 38px, #2b190b 40px,
+          #7c512c 42px, #684222 80px, #29170a 82px
         ),
-        repeating-linear-gradient(0deg, rgba(0,0,0,0.06) 0px, rgba(0,0,0,0.06) 2px, transparent 2px, transparent 9px);
-      box-shadow: inset 0 0 60px rgba(0,0,0,0.85);
+        repeating-linear-gradient(0deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 8px);
+      box-shadow: inset 0 0 55px rgba(0,0,0,0.8);
     }
 
     /* Botón placa metálica oscura con marco dorado estilo Truco criollo */
@@ -106,13 +106,26 @@
       transform: translateY(-2px);
     }
 
-    .matchstick-line {
-      stroke: #f4f1ea;
-      stroke-width: 3.2;
+    /* Fósforos realistas de madera y cabeza roja (como la captura) */
+    .match-wood {
+      stroke: #f3d285;
+      stroke-width: 4.2;
       stroke-linecap: round;
-      filter: drop-shadow(0 0 2px rgba(255,255,255,0.35));
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.75));
     }
-    .matchstick-head { fill: #e04f3e; }
+    .match-tip {
+      fill: #dc2626;
+      stroke: #7f1d1d;
+      stroke-width: 0.8;
+    }
+
+    /* Cartel estilo pergamino del anotador */
+    .parchment-banner {
+      background: linear-gradient(180deg, #e5cf94 0%, #cbb06a 100%);
+      border: 2px solid #785a22;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.55), inset 0 0 12px rgba(120, 90, 34, 0.35);
+      color: #1c1306;
+    }
 
     @keyframes popCanto {
       0% { transform: scale(0.55) translateY(12px); opacity: 0; }
@@ -123,83 +136,33 @@
       animation: popCanto 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
     }
 
+    @keyframes floatArrow {
+      0%, 100% { transform: translateY(0px); opacity: 0.75; }
+      50% { transform: translateY(-6px); opacity: 1; }
+    }
+    .drag-hint-anim {
+      animation: floatArrow 1.5s ease-in-out infinite;
+    }
+
     #threeContainer canvas {
       display: block;
       width: 100%;
       height: 100%;
       touch-action: none;
     }
-
-    /* ---------- ANOTADOR TIPO TABLERO DE MADERA ---------- */
-    .scorer-frame {
-      background: repeating-linear-gradient(90deg, #7a4a25 0 26px, #5e3819 26px 52px, #4a2a12 52px 56px);
-      border-radius: 28px;
-      padding: 14px;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.85), inset 0 0 0 2px rgba(224,178,95,0.5), inset 0 0 0 4px #2a1607;
-    }
-    .scorer-felt {
-      background: radial-gradient(ellipse at 50% 30%, #1f7a50 0%, #0f5336 60%, #083a24 100%);
-      border-radius: 18px;
-      box-shadow: inset 0 0 0 2px rgba(224,178,95,0.35), inset 0 0 50px rgba(0,0,0,0.7);
-    }
-    .scorer-badge-wrap { display: flex; justify-content: center; margin: -4px 0 8px; }
-    .scorer-badge {
-      min-width: 150px; height: 64px; padding: 0 22px; border-radius: 999px;
-      background: radial-gradient(circle at 35% 30%, #fff2b5, #e0a52e 55%, #8a5a10);
-      border: 4px solid #5b3519;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.6), inset 0 0 0 3px rgba(255,243,192,0.25);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      color: #2a1607; font-family: Georgia, serif;
-    }
-    .scorer-badge-lbl { font-size: 11px; font-weight: 900; letter-spacing: 2px; line-height: 1; }
-    #scorerTargetBadge { font-size: 30px; font-weight: 900; line-height: 1; letter-spacing: 1px; }
-    .scorer-cols { display: grid; grid-template-columns: 1fr 2px 1fr; gap: 10px; align-items: start; }
-    .scorer-divider { background: linear-gradient(transparent, rgba(224,178,95,0.6), transparent); min-height: 320px; }
-    .scorer-team { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 0; }
-    .team-name {
-      width: 100%; text-align: center; font-family: 'Kalam', cursive; font-weight: 700;
-      font-size: clamp(18px, 3.4vw, 28px); padding: 6px 8px; border-radius: 10px;
-      border: 2px solid #e0b25f; background: #2a1607; color: #f5c542;
-      text-transform: uppercase; outline: none; letter-spacing: 1px;
-    }
-    .team-b .team-name { background: #8b1e1e; color: #fbf5e6; border-color: #f3c2a0; }
-    .team-zone { display: flex; align-items: baseline; gap: 8px; justify-content: center; }
-    .team-pts { font-family: 'Cinzel', serif; font-size: clamp(30px, 6vw, 46px); font-weight: 900; color: #fff; text-shadow: 0 2px 0 rgba(0,0,0,0.5); }
-    .team-tag { font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #f5c542; }
-    .team-b .team-tag { color: #ff8a7a; }
-    .tally-wrap { display: flex; gap: 8px; justify-content: center; width: 100%; }
-    .tally-col {
-      flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 4px;
-      background: rgba(0,0,0,0.25); border: 1px dashed rgba(255,255,255,0.22); border-radius: 12px; padding: 6px 4px;
-    }
-    .tally-lbl { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #d8e8df; opacity: 0.85; font-weight: 800; }
-    .tally-stack { display: flex; flex-direction: column; gap: 4px; align-items: center; min-height: 150px; justify-content: flex-start; }
-    .tally-stack svg { width: 46px; height: 46px; }
-    .team-btns { display: flex; gap: 10px; }
-    .scorer-btn { width: 60px; height: 46px; border-radius: 14px; font-weight: 900; font-size: 18px; border: 2px solid rgba(0,0,0,0.5); box-shadow: 0 4px 0 rgba(0,0,0,0.5); transition: transform 0.08s, box-shadow 0.08s; }
-    .scorer-btn.minus { background: #f3e6c8; color: #8b1e1e; }
-    .scorer-btn.plus { background: linear-gradient(#ffd98a, #d4962f); color: #3b2608; }
-    .scorer-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.5); }
-    @media (max-width: 520px) {
-      .scorer-cols { grid-template-columns: 1fr 1fr; }
-      .scorer-divider { display: none; }
-      .tally-stack { min-height: 120px; }
-      .tally-stack svg { width: 38px; height: 38px; }
-    }
   </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
   <!-- ========================================================= -->
-  <!-- VISTA 1: MENÚ PRINCIPAL CRIOLLO (ESTILO REFERENCIA)       -->
+  <!-- VISTA 1: MENÚ PRINCIPAL CRIOLLO                           -->
   <!-- ========================================================= -->
   <section id="viewMenu" class="min-h-screen w-full flex justify-center items-stretch pampa-border">
     <div class="w-full max-w-lg rustic-wood-bg border-x-4 border-[#d4af5a] flex flex-col justify-between relative overflow-hidden shadow-2xl">
 
-      <!-- Marco dorado interior -->
       <div class="m-2.5 sm:m-3.5 flex-1 border-2 border-[#d4af5a]/80 rounded-xl flex flex-col justify-between p-4 sm:p-6 relative">
 
-        <!-- EMBLEMA SUPERIOR TRUCO CON BANDERA ARGENTINA Y MATE -->
+        <!-- EMBLEMA SUPERIOR TRUCO -->
         <div class="flex flex-col items-center mt-1 sm:mt-2">
           <svg viewBox="0 0 380 185" class="w-full max-w-[340px] drop-shadow-[0_12px_18px_rgba(0,0,0,0.85)]">
             <defs>
@@ -220,27 +183,22 @@
               </radialGradient>
             </defs>
 
-            <!-- Cintas celestes y blancas superiores -->
             <path d="M55 58 C65 25, 125 22, 165 36 L165 54 C125 44, 80 48, 65 72 Z" fill="#38bdf8" stroke="#0f172a" stroke-width="2.5"/>
             <path d="M62 63 C72 34, 125 32, 165 43 L165 50 C125 41, 80 44, 67 68 Z" fill="#ffffff"/>
             <path d="M325 58 C315 25, 255 22, 215 36 L215 54 C255 44, 300 48, 315 72 Z" fill="#38bdf8" stroke="#0f172a" stroke-width="2.5"/>
             <path d="M318 63 C308 34, 255 32, 215 43 L215 50 C255 41, 300 44, 313 68 Z" fill="#ffffff"/>
 
-            <!-- Mate criollo coronando el escudo -->
             <circle cx="190" cy="34" r="19" fill="#451a03" stroke="url(#goldFrame)" stroke-width="3"/>
             <ellipse cx="190" cy="24" rx="13" ry="4.5" fill="#15803d" stroke="#fde047" stroke-width="1.5"/>
             <line x1="196" y1="23" x2="207" y2="8" stroke="#e2e8f0" stroke-width="3.5" stroke-linecap="round"/>
 
-            <!-- Escudo central verde con borde dorado ornamentado -->
             <path d="M42 74 C42 46, 338 46, 338 74 C338 118, 285 135, 232 135 C212 135, 202 156, 190 156 C178 156, 168 135, 148 135 C95 135, 42 118, 42 74 Z"
               fill="url(#greenShield)" stroke="url(#goldFrame)" stroke-width="5.5"/>
 
-            <!-- Firuletes dorados inferiores -->
             <path d="M115 136 C135 154, 165 150, 178 136 M265 136 C245 154, 215 150, 202 136"
               fill="none" stroke="#fde047" stroke-width="3" stroke-linecap="round"/>
             <circle cx="190" cy="144" r="4.5" fill="#dc2626" stroke="#fde047" stroke-width="1.5"/>
 
-            <!-- Palabra TRUCO 3D metálica -->
             <text x="190" y="109" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="64" letter-spacing="2"
               fill="#090d0b" stroke="#090d0b" stroke-width="10" stroke-linejoin="round">TRUCO</text>
             <text x="190" y="106" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="64" letter-spacing="2"
@@ -250,7 +208,7 @@
           </svg>
         </div>
 
-        <!-- BOTONERA CENTRAL (SIN BLUETOOTH Y SIN GIRA NACIONAL, CON ANOTADOR) -->
+        <!-- BOTONERA CENTRAL -->
         <div class="w-full max-w-[290px] mx-auto flex flex-col gap-3.5 my-4 z-10">
           <button id="btnStartOffline" class="criollo-plaque-btn w-full py-3.5 px-6 font-cinzel font-extrabold text-lg sm:text-xl tracking-wide flex items-center justify-center gap-2.5">
             <span>Partida Rápida</span>
@@ -265,12 +223,10 @@
           </button>
         </div>
 
-        <!-- GUARDA PAMPA INFERIOR + ICONOS + PAISANO CON GLOBO DE DIÁLOGO -->
+        <!-- GUARDA PAMPA INFERIOR + ICONOS + PAISANO -->
         <div class="mt-2">
-          <!-- Franja guarda pampa divisoria -->
           <div class="h-4 w-full pampa-border border-y border-[#d4af5a]/70 mb-3 rounded-sm"></div>
 
-          <!-- Iconos de sonido y reglas -->
           <div class="flex items-center justify-start gap-3 pl-2 mb-16 sm:mb-14">
             <button id="btnMenuSound" class="w-10 h-10 rounded-full bg-black/55 border border-[#d4af5a]/70 flex items-center justify-center text-amber-200 hover:scale-105 transition shadow-lg" title="Sonido">
               <span id="menuSoundIcon" class="text-lg">🔊</span>
@@ -280,38 +236,26 @@
             </button>
           </div>
 
-          <!-- Globo de diálogo + Paisano criollo con boina y pipa en la esquina inferior derecha -->
           <div class="absolute bottom-2 right-2 left-3 flex items-end justify-between pointer-events-none">
             <div class="bg-[#fbf8f1] text-stone-900 px-3.5 py-2 rounded-2xl border-2 border-stone-800 shadow-xl max-w-[195px] sm:max-w-[225px] mb-2 relative">
               <p class="font-bold text-xs sm:text-sm leading-tight text-center">
                 ¡Mesa 3D lista!<br><span class="text-emerald-800 font-extrabold">¿Jugamos un mano a mano?</span>
               </p>
-              <!-- Triangulito del globo apuntando al paisano -->
               <div class="w-3 h-3 bg-[#fbf8f1] border-r-2 border-b-2 border-stone-800 rotate-[-45deg] absolute -right-1.5 bottom-4"></div>
             </div>
 
-            <!-- Ilustración SVG del Paisano Criollo con pipa -->
             <svg viewBox="0 0 110 115" class="w-24 h-24 sm:w-28 sm:h-28 shrink-0 drop-shadow-[0_6px_10px_rgba(0,0,0,0.85)]">
-              <!-- Humo de pipa -->
               <path d="M22 72 C14 62, 24 50, 16 38 C10 28, 22 18, 18 10" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="3.5" stroke-linecap="round"/>
-              <!-- Poncho / camisa -->
               <path d="M28 112 C32 86, 86 86, 96 112 Z" fill="#7c2d12" stroke="#1c1917" stroke-width="2.5"/>
               <path d="M50 92 L64 112 L76 92 Z" fill="#fef3c7"/>
-              <!-- Rostro criollo -->
               <ellipse cx="64" cy="58" rx="24" ry="28" fill="#f5cba7" stroke="#451a03" stroke-width="2.2"/>
-              <!-- Pelo blanco costado -->
               <path d="M84 44 C94 46, 95 64, 84 68" fill="#f1f5f9" stroke="#475569" stroke-width="1.8"/>
-              <!-- Boina vasca -->
               <path d="M36 42 C34 22, 86 16, 94 34 C96 42, 74 44, 36 42 Z" fill="#1e293b" stroke="#0f172a" stroke-width="2.2"/>
-              <!-- Cejas blancas pobladas -->
               <path d="M44 48 Q51 44 56 49" fill="none" stroke="#f8fafc" stroke-width="4" stroke-linecap="round"/>
               <path d="M62 49 Q68 44 75 48" fill="none" stroke="#f8fafc" stroke-width="4" stroke-linecap="round"/>
-              <!-- Ojos pícaros -->
               <circle cx="50" cy="54" r="2.3" fill="#1c1917"/>
               <circle cx="68" cy="54" r="2.3" fill="#1c1917"/>
-              <!-- Nariz criolla -->
               <path d="M57 54 C52 63, 55 69, 63 67" fill="none" stroke="#9a3412" stroke-width="2.2" stroke-linecap="round"/>
-              <!-- Bigote blanco y pipa -->
               <path d="M44 73 Q58 68 72 74" fill="none" stroke="#f8fafc" stroke-width="4.5" stroke-linecap="round"/>
               <path d="M52 76 L28 84" stroke="#451a03" stroke-width="3.5" stroke-linecap="round"/>
               <path d="M20 75 H31 V85 C31 89, 20 89, 20 85 Z" fill="#78350f" stroke="#1c1917" stroke-width="2"/>
@@ -324,66 +268,127 @@
   </section>
 
   <!-- ========================================================= -->
-  <!-- VISTA 2: LOBBY MULTIJUGADOR ONLINE                        -->
+  <!-- VISTA 2: LOBBY MULTIJUGADOR ONLINE + SALA DE ESPERA LISTO -->
   <!-- ========================================================= -->
   <section id="viewOnlineLobby" class="hidden min-h-screen w-full pampa-border flex items-center justify-center p-4">
     <div class="w-full max-w-lg rustic-wood-bg border-4 border-[#d4af5a] rounded-3xl p-6 sm:p-8 shadow-2xl">
-      <div class="flex items-center justify-between mb-5">
+      <div class="flex items-center justify-between gap-2 mb-5">
         <button id="btnLobbyBack" class="btn-glass px-3.5 py-2 rounded-xl text-xs font-bold text-amber-200">
           ← Volver al Menú
         </button>
-        <span class="text-xs text-emerald-300 font-bold">● Sala Online en Vivo</span>
+        <div class="flex items-center gap-2">
+          <span id="firebaseStatusBadge" class="text-xs font-bold px-2.5 py-1 rounded-full bg-black/50 border border-amber-400/30 text-amber-300">
+            ⏳ Conectando Firebase...
+          </span>
+          <button id="btnConfigFirebase" class="btn-glass px-2.5 py-1.5 rounded-xl text-xs font-bold text-amber-200" title="Configurar Firebase">
+            ⚙️
+          </button>
+        </div>
       </div>
 
       <h2 class="font-cinzel text-2xl sm:text-3xl font-black text-amber-100 mb-1">
         MULTIJUGADOR ONLINE
       </h2>
-      <p class="text-amber-100/75 text-xs sm:text-sm mb-5">
-        Creá una mesa y compartí el código con tu amigo para jugar mano a mano en la mesa 3D.
+      <p class="text-amber-100/80 text-xs sm:text-sm mb-5">
+        Creá una sala, compartí el código y presionen <strong>LISTO</strong> ambos jugadores para repartir.
       </p>
 
-      <div class="mb-5">
-        <label class="block text-xs font-bold uppercase tracking-wider text-amber-300 mb-1.5">Tu Apodo en la Mesa</label>
-        <input id="inputPlayerName" type="text" maxlength="16" value="El Gaucho"
-          class="w-full px-4 py-3 rounded-xl bg-black/50 border border-amber-400/40 text-amber-50 font-bold focus:outline-none focus:border-amber-400" />
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
-        <div class="p-4 rounded-2xl bg-black/40 border border-amber-400/25 flex flex-col justify-between">
-          <div>
-            <h3 class="font-cinzel font-bold text-amber-300 text-base mb-1">Crear Sala</h3>
-            <p class="text-xs text-stone-300 mb-4">Generá un código de 5 letras y esperá a tu rival.</p>
-          </div>
-          <button id="btnCreateRoom" class="w-full btn-gold py-3 px-4 rounded-xl font-extrabold text-sm">
-            + Crear Sala
-          </button>
+      <!-- BANNER DE RECONEXIÓN SI HABÍA PARTIDA ACTIVA -->
+      <div id="reconnectBanner" class="hidden mb-5 p-4 rounded-2xl bg-amber-950/90 border-2 border-amber-400 flex items-center justify-between gap-3">
+        <div>
+          <div class="text-xs font-black uppercase text-amber-300">Partida anterior detectada</div>
+          <div id="reconnectBannerText" class="text-xs text-amber-100">Sala -----</div>
         </div>
-
-        <div class="p-4 rounded-2xl bg-black/40 border border-amber-400/25 flex flex-col justify-between">
-          <div>
-            <h3 class="font-cinzel font-bold text-amber-300 text-base mb-1">Unirse a Sala</h3>
-            <input id="inputRoomCode" type="text" maxlength="6" placeholder="CÓDIGO"
-              class="w-full px-3 py-2 mt-1 mb-3 rounded-lg bg-black/60 border border-amber-400/40 text-center font-mono text-lg tracking-widest uppercase text-amber-300 font-black focus:outline-none focus:border-amber-400" />
-          </div>
-          <button id="btnJoinRoom" class="w-full btn-glass py-3 px-4 rounded-xl font-extrabold text-sm text-amber-100">
-            Entrar →
+        <div class="flex gap-2">
+          <button id="btnReconnectRoom" class="btn-gold px-3.5 py-2 rounded-xl text-xs font-black">
+            Reconectar
+          </button>
+          <button id="btnDiscardReconnect" class="btn-glass px-2.5 py-2 rounded-xl text-xs font-bold text-rose-300">
+            ✕
           </button>
         </div>
       </div>
 
-      <div id="waitingRoomBox" class="hidden p-5 rounded-2xl bg-emerald-950/90 border-2 border-amber-400/50 text-center">
-        <p class="text-xs uppercase tracking-widest text-emerald-300 font-bold mb-1">Código de tu Mesa</p>
-        <div class="flex items-center justify-center gap-3 my-2">
-          <span id="displayRoomCode" class="font-mono text-3xl font-black tracking-[0.25em] text-amber-400 bg-black/60 px-5 py-2 rounded-xl border border-amber-400/30">
-            -----
-          </span>
-          <button id="btnCopyCode" class="btn-glass px-3 py-3 rounded-xl text-xs font-bold text-amber-200">
-            📋 Copiar
-          </button>
+      <div id="lobbyCreateJoinSection">
+        <div class="mb-5">
+          <label class="block text-xs font-bold uppercase tracking-wider text-amber-300 mb-1.5">Tu Apodo en la Mesa</label>
+          <input id="inputPlayerName" type="text" maxlength="16" value="El Gaucho"
+            class="w-full px-4 py-3 rounded-xl bg-black/50 border border-amber-400/40 text-amber-50 font-bold focus:outline-none focus:border-amber-400" />
         </div>
-        <p id="waitingStatusText" class="text-sm text-amber-100/90 mt-2 animate-pulse">
-          Esperando que entre tu rival...
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-4 rounded-2xl bg-black/45 border border-amber-400/25 flex flex-col justify-between">
+            <div>
+              <h3 class="font-cinzel font-bold text-amber-300 text-base mb-1">Crear Sala</h3>
+              <p class="text-xs text-stone-300 mb-4">Generá un código único de 5 letras y esperá a tu rival.</p>
+            </div>
+            <button id="btnCreateRoom" class="w-full btn-gold py-3 px-4 rounded-xl font-extrabold text-sm">
+              + Crear Sala
+            </button>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-black/45 border border-amber-400/25 flex flex-col justify-between">
+            <div>
+              <h3 class="font-cinzel font-bold text-amber-300 text-base mb-1">Unirse a Sala</h3>
+              <input id="inputRoomCode" type="text" maxlength="5" placeholder="CÓDIGO"
+                class="w-full px-3 py-2 mt-1 mb-3 rounded-lg bg-black/60 border border-amber-400/40 text-center font-mono text-lg tracking-widest uppercase text-amber-300 font-black focus:outline-none focus:border-amber-400" />
+            </div>
+            <button id="btnJoinRoom" class="w-full btn-glass py-3 px-4 rounded-xl font-extrabold text-sm text-amber-100">
+              Entrar →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SALA DE ESPERA CON BOTÓN LISTO PARA AMBOS -->
+      <div id="waitingRoomBox" class="hidden p-5 rounded-2xl bg-[#11261b]/95 border-2 border-amber-400/60 shadow-xl">
+        <div class="text-center mb-4">
+          <p class="text-xs uppercase tracking-widest text-emerald-300 font-bold mb-1">Código de tu Mesa (Máx. 2 Jugadores)</p>
+          <div class="flex items-center justify-center gap-3 my-2">
+            <span id="displayRoomCode" class="font-mono text-3xl font-black tracking-[0.25em] text-amber-400 bg-black/65 px-5 py-2 rounded-xl border border-amber-400/35">
+              -----
+            </span>
+            <button id="btnCopyCode" class="btn-glass px-3 py-3 rounded-xl text-xs font-bold text-amber-200">
+              📋 Copiar
+            </button>
+          </div>
+        </div>
+
+        <!-- Estado de los 2 asientos -->
+        <div class="space-y-2.5 mb-5">
+          <div class="flex items-center justify-between px-4 py-3 rounded-xl bg-black/45 border border-white/10">
+            <div>
+              <div class="text-[10px] uppercase tracking-wider text-amber-300 font-bold">Anfitrión (Mano 1)</div>
+              <div id="lobbyP1Name" class="font-bold text-sm text-white">Esperando...</div>
+            </div>
+            <span id="lobbyP1ReadyBadge" class="px-3 py-1 rounded-full text-xs font-black bg-stone-700 text-stone-300">
+              No listo
+            </span>
+          </div>
+
+          <div class="flex items-center justify-between px-4 py-3 rounded-xl bg-black/45 border border-white/10">
+            <div>
+              <div class="text-[10px] uppercase tracking-wider text-emerald-300 font-bold">Invitado</div>
+              <div id="lobbyP2Name" class="font-bold text-sm text-stone-400">Esperando rival...</div>
+            </div>
+            <span id="lobbyP2ReadyBadge" class="px-3 py-1 rounded-full text-xs font-black bg-stone-800 text-stone-500">
+              Vacío
+            </span>
+          </div>
+        </div>
+
+        <p id="waitingStatusText" class="text-xs text-center text-amber-100/90 mb-4">
+          Compartí el código con tu amigo para que entre a la sala.
         </p>
+
+        <div class="flex gap-2.5">
+          <button id="btnLeaveRoomLobby" class="btn-glass px-4 py-3 rounded-xl text-xs font-bold text-rose-300">
+            Salir de sala
+          </button>
+          <button id="btnToggleReady" class="flex-1 btn-gold py-3 px-5 rounded-xl font-cinzel font-black text-base tracking-wide">
+            ✓ ¡ESTOY LISTO!
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -393,10 +398,9 @@
   <!-- ========================================================= -->
   <section id="viewGame" class="hidden relative w-full h-screen overflow-hidden bg-[#0a0603]">
 
-    <!-- LIENZO 3D A PANTALLA COMPLETA -->
     <div id="threeContainer" class="absolute inset-0 w-full h-full z-0"></div>
 
-    <!-- HUD SUPERIOR: MARCADOR CON FÓSFOROS Y CONTROLES DE CÁMARA -->
+    <!-- HUD SUPERIOR -->
     <div class="relative z-20 p-2.5 sm:p-4 pointer-events-none flex flex-col gap-2">
       <div class="max-w-5xl w-full mx-auto chalkboard rounded-2xl px-3 py-2 sm:px-5 sm:py-2.5 grid grid-cols-3 items-center gap-2 pointer-events-auto">
         <!-- Vos -->
@@ -422,6 +426,7 @@
           <div id="gameOppMatches" class="hidden sm:flex items-center gap-1 bg-black/40 px-2 py-1 rounded-lg border border-white/10"></div>
           <div class="text-right">
             <div class="flex items-center justify-end gap-1.5">
+              <span id="oppConnectionDot" class="hidden w-2 h-2 rounded-full bg-emerald-400" title="Estado de conexión del rival"></span>
               <span id="badgeManoOpp" class="hidden text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded bg-amber-400 text-stone-950 font-black uppercase">Mano</span>
               <span id="gameOppName" class="font-chalk text-base sm:text-xl font-bold text-emerald-300 truncate max-w-[90px] sm:max-w-none">Rival</span>
             </div>
@@ -430,14 +435,14 @@
         </div>
       </div>
 
-      <!-- Barra secundaria: Salir, Reset Cámara 3D, Sonido, Estado -->
+      <!-- Barra secundaria -->
       <div class="max-w-5xl w-full mx-auto flex items-center justify-between gap-2 pointer-events-auto">
         <div class="flex items-center gap-1.5">
           <button id="btnGameBackMenu" class="btn-glass px-3 py-1.5 rounded-xl text-xs font-bold text-amber-200">
-            ← Menú
+            ← Salir
           </button>
           <button id="btnResetCamera" class="btn-glass px-3 py-1.5 rounded-xl text-xs font-bold text-emerald-200" title="Centrar cámara 3D">
-            🎥 Vista Mesa
+            🎥 Mesa
           </button>
         </div>
 
@@ -454,14 +459,14 @@
       </div>
     </div>
 
-    <!-- BURBUJA DE CANTO FLOTANTE EN EL CENTRO -->
+    <!-- BURBUJA DE CANTO -->
     <div id="cantoBanner" class="hidden absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none">
       <div class="canto-toast px-7 py-3 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-300 to-amber-500 text-stone-950 font-cinzel font-black text-2xl sm:text-3xl tracking-wider shadow-[0_12px_35px_rgba(0,0,0,0.85)] border-2 border-white">
         ¡TRUCO!
       </div>
     </div>
 
-    <!-- PANEL DE RESPUESTA CUANDO EL RIVAL CANTA (QUIERO / NO QUIERO / SUBIR) -->
+    <!-- PANEL RESPUESTA PENDIENTE -->
     <div id="pendingResponseBox" class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-[92%] max-w-md p-4 sm:p-5 rounded-3xl bg-[#241206]/95 backdrop-blur-md border-2 border-amber-400 shadow-[0_20px_50px_rgba(0,0,0,0.9)] text-center">
       <p id="pendingResponseText" class="font-cinzel text-base sm:text-lg font-extrabold text-amber-200 mb-3.5">
         El rival cantó Truco. ¿Qué hacés?
@@ -469,7 +474,7 @@
       <div id="pendingResponseButtons" class="flex flex-wrap justify-center gap-2.5"></div>
     </div>
 
-    <!-- HUD INFERIOR: INSTRUCCIÓN + BOTONES DE CANTO -->
+    <!-- HUD INFERIOR -->
     <div class="absolute bottom-0 inset-x-0 z-20 p-3 sm:p-4 bg-gradient-to-t from-black/90 via-black/55 to-transparent pointer-events-none flex flex-col items-center gap-2">
       <div class="text-[11px] sm:text-xs font-bold text-amber-200/90 bg-black/60 px-3.5 py-1 rounded-full border border-white/10">
         <span id="mySeatStatus">Tocá una de tus cartas 3D para tirarla • Arrastrá el fondo para rotar cámara</span>
@@ -479,69 +484,122 @@
   </section>
 
   <!-- ========================================================= -->
-  <!-- VISTA 4: ANOTADOR TRADICIONAL DE FÓSFOROS                 -->
+  <!-- VISTA 4: ANOTADOR TRADICIONAL DE MADERA Y FÓSFOROS        -->
+  <!--          (DISEÑO IDÉNTICO A LA CAPTURA CON ARRASTRE)      -->
   <!-- ========================================================= -->
-  <section id="viewScorer" class="hidden min-h-screen w-full pampa-border flex items-center justify-center p-3 sm:p-6">
-    <div class="w-full max-w-3xl scorer-frame relative">
-      <div class="scorer-felt p-3 sm:p-6">
+  <section id="viewScorer" class="hidden min-h-screen w-full pampa-border flex justify-center items-stretch">
+    <div id="scorerBoardArea" class="w-full max-w-md rustic-wood-bg border-x-4 border-[#d4af5a] flex flex-col justify-between p-3 sm:p-4 relative shadow-2xl overflow-hidden">
 
-        <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
-          <button id="btnScorerBack" class="btn-glass px-3.5 py-2 rounded-xl text-xs font-bold text-amber-200">← Menú</button>
-          <div class="flex items-center gap-2">
-            <div class="flex rounded-xl bg-black/50 p-1 border border-white/15">
-              <button id="btnTarget15" class="px-3 py-1 rounded-lg text-xs font-bold text-stone-300 transition">A 15</button>
-              <button id="btnTarget30" class="px-3 py-1 rounded-lg text-xs font-bold bg-amber-400 text-stone-950 transition">A 30</button>
-            </div>
-            <button id="btnResetScorer" class="btn-glass px-3 py-2 rounded-xl text-xs font-bold text-rose-300">↻ Reiniciar</button>
-          </div>
+      <!-- BARRA SUPERIOR: VOLVER | REGLAS | ESCUDO BANDERA ARGENTINA CON PUNTAJE OBJETIVO | REINICIAR | CONFIG -->
+      <div class="flex items-center justify-between pt-1 pb-2 relative z-10">
+        <div class="flex items-center gap-2">
+          <button id="btnScorerBack" class="w-9 h-9 rounded-full bg-black/45 border border-[#d4af5a]/70 flex items-center justify-center text-amber-200 hover:scale-105 transition shadow" title="Volver al Menú">
+            ←
+          </button>
+          <button id="btnScorerRules" class="w-9 h-9 rounded-full bg-black/45 border border-[#d4af5a]/70 flex items-center justify-center text-amber-200 font-cinzel font-black text-sm hover:scale-105 transition shadow" title="Reglas del Truco">
+            📜
+          </button>
         </div>
 
-        <div class="scorer-badge-wrap">
-          <div class="scorer-badge" title="Puntaje de cada equipo y objetivo">
-            <span id="scorerTargetLbl" class="scorer-badge-lbl">A 30</span>
-            <span id="scorerTargetBadge">0 · 0</span>
-          </div>
-        </div>
+        <!-- ESCUDO CENTRAL CON CINTA ARGENTINA Y PUNTAJE OBJETIVO (15 / 24 / 30) -->
+        <button id="btnCycleTarget" class="relative flex flex-col items-center group active:scale-95 transition" title="Tocá para cambiar puntaje objetivo (15, 24 o 30)">
+          <svg viewBox="0 0 180 76" class="w-36 sm:w-40 drop-shadow-[0_5px_8px_rgba(0,0,0,0.85)]">
+            <!-- Cinta celeste y blanca -->
+            <path d="M12 50 C45 36, 135 36, 168 50 L152 58 C125 48, 55 48, 28 58 Z" fill="#38bdf8" stroke="#0f172a" stroke-width="1.5"/>
+            <path d="M22 52 C52 40, 128 40, 158 52 L148 56 C122 46, 58 46, 32 56 Z" fill="#ffffff"/>
+            <!-- Laureles dorados -->
+            <path d="M62 62 C48 48, 50 24, 68 14" fill="none" stroke="#eab308" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="4 3"/>
+            <path d="M118 62 C132 48, 130 24, 112 14" fill="none" stroke="#eab308" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="4 3"/>
+            <!-- Coronita superior -->
+            <path d="M82 10 L85 4 L90 9 L95 4 L98 10 Z" fill="#facc15" stroke="#78350f" stroke-width="1"/>
+            <!-- Medallón dorado -->
+            <circle cx="90" cy="36" r="24" fill="#fef08a" stroke="#b45309" stroke-width="3.5"/>
+            <circle cx="90" cy="36" r="20" fill="none" stroke="#ca8a04" stroke-width="1.2"/>
+            <text id="scorerTargetSvgText" x="90" y="45" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="25" fill="#1c1917">30</text>
+          </svg>
+          <span class="text-[9px] font-bold uppercase tracking-widest text-amber-200/80 -mt-1">Tocá p/ cambiar</span>
+        </button>
 
-        <div class="scorer-cols">
-        <section class="scorer-team team-a">
-          <input id="scorerNameA" type="text" value="NOSOTROS" maxlength="14" class="team-name" />
-          <div class="team-zone"><span id="scorerPointsA" class="team-pts">0</span><span id="scorerZoneA" class="team-tag">Malas</span></div>
-          <div class="tally-wrap">
-            <div class="tally-col"><div class="tally-lbl">Malas</div><div id="matchesMalasA" class="tally-stack"></div></div>
-            <div id="buenasContainerA" class="tally-col"><div class="tally-lbl">Buenas</div><div id="matchesBuenasA" class="tally-stack"></div></div>
-          </div>
-          <div class="team-btns">
-            <button id="btnSubA" class="scorer-btn minus" aria-label="Restar">−1</button>
-            <button id="btnAddA" class="scorer-btn plus" aria-label="Sumar">+1</button>
-          </div>
-        </section>
-          <div class="scorer-divider"></div>
-        <section class="scorer-team team-b">
-          <input id="scorerNameB" type="text" value="ELLOS" maxlength="14" class="team-name" />
-          <div class="team-zone"><span id="scorerPointsB" class="team-pts">0</span><span id="scorerZoneB" class="team-tag">Malas</span></div>
-          <div class="tally-wrap">
-            <div class="tally-col"><div class="tally-lbl">Malas</div><div id="matchesMalasB" class="tally-stack"></div></div>
-            <div id="buenasContainerB" class="tally-col"><div class="tally-lbl">Buenas</div><div id="matchesBuenasB" class="tally-stack"></div></div>
-          </div>
-          <div class="team-btns">
-            <button id="btnSubB" class="scorer-btn minus" aria-label="Restar">−1</button>
-            <button id="btnAddB" class="scorer-btn plus" aria-label="Sumar">+1</button>
-          </div>
-        </section>
+        <div class="flex items-center gap-2">
+          <button id="btnResetScorer" class="w-9 h-9 rounded-full bg-black/45 border border-[#d4af5a]/70 flex items-center justify-center text-amber-200 hover:scale-105 transition shadow" title="Reiniciar anotador">
+            ↻
+          </button>
+          <button id="btnScorerSound" class="w-9 h-9 rounded-full bg-black/45 border border-[#d4af5a]/70 flex items-center justify-center text-amber-200 hover:scale-105 transition shadow" title="Sonido">
+            <span id="scorerSoundIcon" class="text-sm">🔊</span>
+          </button>
         </div>
-
-        <div class="mt-4 pt-3 border-t border-white/15">
-          <div id="scorerHistory" class="text-xs font-chalk text-stone-200 bg-black/40 rounded-xl p-3 max-h-20 overflow-y-auto space-y-1">
-            <div class="text-stone-400">Anotador listo. Tocá +1 para sumar fósforos.</div>
-          </div>
-        </div>
-
       </div>
+
+      <!-- CARTELES DE EQUIPO (PERGAMINO) + PLACAS VERDE (BUENAS) / ROJA (MALAS) -->
+      <div class="grid grid-cols-2 gap-2.5 my-1 z-10">
+        <!-- COLUMNA IZQUIERDA: NOSOTROS -->
+        <div id="scorerColA" class="flex flex-col gap-1.5">
+          <div class="parchment-banner rounded-md px-2 py-1.5 relative">
+            <input id="scorerNameA" type="text" value="NOSOTROS" maxlength="12"
+              class="w-full bg-transparent text-center font-cinzel font-black text-base sm:text-lg tracking-wider text-stone-900 uppercase focus:outline-none" />
+          </div>
+          <!-- Placa Verde / Roja dinámica -->
+          <div id="scorerBannerA" class="rounded-md py-1.5 px-2 bg-[#b91c1c] border-2 border-black/40 shadow-md flex items-center justify-center gap-2 transition-colors">
+            <span id="scorerPointsA" class="font-cinzel font-black text-xl sm:text-2xl text-stone-950">0</span>
+            <span id="scorerZoneA" class="font-cinzel font-black text-sm sm:text-base tracking-wide text-stone-950 uppercase">MALAS</span>
+          </div>
+        </div>
+
+        <!-- COLUMNA DERECHA: ELLOS -->
+        <div id="scorerColB" class="flex flex-col gap-1.5">
+          <div class="parchment-banner rounded-md px-2 py-1.5 relative">
+            <input id="scorerNameB" type="text" value="ELLOS" maxlength="12"
+              class="w-full bg-transparent text-center font-cinzel font-black text-base sm:text-lg tracking-wider text-stone-900 uppercase focus:outline-none" />
+          </div>
+          <!-- Placa Verde / Roja dinámica -->
+          <div id="scorerBannerB" class="rounded-md py-1.5 px-2 bg-[#b91c1c] border-2 border-black/40 shadow-md flex items-center justify-center gap-2 transition-colors">
+            <span id="scorerPointsB" class="font-cinzel font-black text-xl sm:text-2xl text-stone-950">0</span>
+            <span id="scorerZoneB" class="font-cinzel font-black text-sm sm:text-base tracking-wide text-stone-950 uppercase">MALAS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABLERO CENTRAL DE FÓSFOROS EN DOS COLUMNAS -->
+      <div class="grid grid-cols-2 gap-3 flex-1 my-2 relative z-10">
+        <!-- ZONA DE FÓSFOROS NOSOTROS -->
+        <div id="dropZoneA" class="rounded-xl border-2 border-transparent transition-colors flex flex-col items-center justify-start pt-2 pb-4 px-2 bg-black/15">
+          <div id="matchesGridA" class="flex flex-col items-center gap-2.5 w-full"></div>
+          <div class="mt-auto pt-3 flex items-center gap-2">
+            <button id="btnSubA" class="w-9 h-9 rounded-full bg-black/55 border border-amber-300/40 font-black text-base text-rose-300 active:scale-90 transition">−1</button>
+            <button id="btnAddA" class="px-3.5 h-9 rounded-full btn-gold font-black text-sm active:scale-90 transition">+1</button>
+          </div>
+        </div>
+
+        <!-- ZONA DE FÓSFOROS ELLOS -->
+        <div id="dropZoneB" class="rounded-xl border-2 border-transparent transition-colors flex flex-col items-center justify-start pt-2 pb-4 px-2 bg-black/15">
+          <div id="matchesGridB" class="flex flex-col items-center gap-2.5 w-full"></div>
+          <div class="mt-auto pt-3 flex items-center gap-2">
+            <button id="btnSubB" class="w-9 h-9 rounded-full bg-black/55 border border-amber-300/40 font-black text-base text-rose-300 active:scale-90 transition">−1</button>
+            <button id="btnAddB" class="px-3.5 h-9 rounded-full btn-gold font-black text-sm active:scale-90 transition">+1</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BASE CON FÓSFORO ARRASTRABLE COMO EN LA IMAGEN -->
+      <div class="relative pt-1 pb-2 flex flex-col items-center justify-center z-20">
+        <div class="flex items-center gap-6 text-[11px] font-bold text-amber-200/85 mb-1 pointer-events-none">
+          <span class="drag-hint-anim">↖ Arrastrá el fósforo a Nosotros</span>
+          <span class="drag-hint-anim">o a Ellos ↗</span>
+        </div>
+
+        <!-- Fósforo arrastrable interactivo -->
+        <div id="draggableMatchContainer" class="relative w-16 h-20 flex items-center justify-center cursor-grab active:cursor-grabbing touch-none" title="Arrastrá este fósforo hacia Nosotros o Ellos para sumar 1 punto">
+          <svg id="draggableMatchSvg" viewBox="0 0 36 80" class="w-9 h-20 drop-shadow-[0_6px_8px_rgba(0,0,0,0.85)]">
+            <line x1="18" y1="16" x2="18" y2="74" stroke="#f5d588" stroke-width="6" stroke-linecap="round"/>
+            <ellipse cx="18" cy="13" rx="4.5" ry="7" fill="#dc2626" stroke="#7f1d1d" stroke-width="1.2"/>
+          </svg>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- MODAL PERSONALIZADO -->
+  <!-- MODAL PERSONALIZADO (INCLUYE CONFIGURADOR FIREBASE PARA GITHUB PAGES) -->
   <div id="customModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-[#fbf5e6] text-stone-900 rounded-3xl max-w-md w-full p-6 shadow-2xl border-4 border-amber-600/50">
       <h3 id="modalTitle" class="font-cinzel text-2xl font-black text-stone-900 mb-2">Título</h3>
@@ -551,14 +609,42 @@
   </div>
 
   <!-- ========================================================= -->
-  <!-- SCRIPTS: THREE.JS 3D + FIREBASE + TRUCO + ANOTADOR        -->
+  <!-- SCRIPTS: THREE.JS 3D + FIREBASE MULTIPLAYER + ANOTADOR    -->
   <!-- ========================================================= -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc, onSnapshot, runTransaction, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     const $ = id => document.getElementById(id);
+
+    // =========================================================
+    // CONFIGURACIÓN FIREBASE PARA GITHUB PAGES / HOSTING ESTÁTICO
+    // Pegá acá las credenciales de tu proyecto de Firebase Console
+    // (Configuración del proyecto -> Tus apps -> SDK setup)
+    // =========================================================
+    const DEFAULT_FIREBASE_CONFIG = {
+      apiKey: "AIzaSyAEppjKOAFNBqrXtrVn3PO9lb1lT142vzU",
+      authDomain: "trucojuego-9dea4.firebaseapp.com",
+      projectId: "trucojuego-9dea4",
+      storageBucket: "trucojuego-9dea4.firebasestorage.app",
+      messagingSenderId: "273168802887",
+      appId: "1:273168802887:web:65b8fe50d1cf8c7a507d62",
+      measurementId: "G-SVGX65GTPZ"
+    };
+
+    const LS_KEYS = {
+      FIREBASE_CFG: 'truco3d_firebase_config_v1',
+      ACTIVE_SESSION: 'truco3d_online_session_v1',
+      PLAYER_NAME: 'truco3d_player_name_v1'
+    };
+
+    // Cargar nombre guardado si existe
+    const savedPlayerName = localStorage.getItem(LS_KEYS.PLAYER_NAME);
+    if (savedPlayerName) $('inputPlayerName').value = savedPlayerName;
+    $('inputPlayerName').addEventListener('change', () => {
+      localStorage.setItem(LS_KEYS.PLAYER_NAME, $('inputPlayerName').value.trim() || 'El Gaucho');
+    });
 
     // ---------------------------------------------------------
     // 1. AUDIO SINTETIZADO (WEB AUDIO API)
@@ -609,7 +695,6 @@
 
     // ---------------------------------------------------------
     // 2. GENERADOR DE TEXTURAS HD DE NAIPES ESPAÑOLES (40 CARTAS)
-    //    Para mapear sobre los naipes 3D en Three.js
     // ---------------------------------------------------------
     const SUITS = ['espada', 'basto', 'oro', 'copa'];
     const RANKS = [1, 2, 3, 4, 5, 6, 7, 10, 11, 12];
@@ -646,7 +731,6 @@
         ctx.fillStyle = '#f59e0b';
         ctx.strokeStyle = '#78350f';
         ctx.lineWidth = Math.max(1.5, size * 0.055);
-        // Cáliz
         ctx.beginPath();
         ctx.moveTo(-r * 0.75, -r * 0.8);
         ctx.lineTo(r * 0.75, -r * 0.8);
@@ -654,10 +738,8 @@
         ctx.quadraticCurveTo(-r * 0.65, r * 0.15, -r * 0.75, -r * 0.8);
         ctx.fill();
         ctx.stroke();
-        // Banda roja
         ctx.fillStyle = '#dc2626';
         ctx.fillRect(-r * 0.58, -r * 0.55, r * 1.16, r * 0.28);
-        // Pie
         ctx.fillStyle = '#d97706';
         ctx.fillRect(-r * 0.16, r * 0.2, r * 0.32, r * 0.5);
         ctx.beginPath();
@@ -669,7 +751,6 @@
         ctx.fill();
         ctx.stroke();
       } else if (suit === 'espada') {
-        // Hoja
         ctx.fillStyle = '#cbd5e1';
         ctx.strokeStyle = '#0f172a';
         ctx.lineWidth = Math.max(1.5, size * 0.05);
@@ -682,13 +763,11 @@
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
-        // Guarda dorada
         ctx.fillStyle = '#f59e0b';
         ctx.beginPath();
         ctx.roundRect(-r * 0.65, r * 0.32, r * 1.3, r * 0.18, 4);
         ctx.fill();
         ctx.stroke();
-        // Empuñadura azul
         ctx.fillStyle = '#1d4ed8';
         ctx.fillRect(-r * 0.12, r * 0.5, r * 0.24, r * 0.35);
         ctx.fillStyle = '#f59e0b';
@@ -696,7 +775,6 @@
         ctx.arc(0, r * 0.88, r * 0.18, 0, Math.PI * 2);
         ctx.fill();
       } else {
-        // Basto nudoso
         ctx.fillStyle = '#854d0e';
         ctx.strokeStyle = '#3f1d06';
         ctx.lineWidth = Math.max(1.5, size * 0.055);
@@ -704,7 +782,6 @@
         ctx.roundRect(-r * 0.24, -r * 0.88, r * 0.48, r * 1.76, r * 0.22);
         ctx.fill();
         ctx.stroke();
-        // Brotes verdes
         ctx.fillStyle = '#16a34a';
         ctx.beginPath();
         ctx.ellipse(-r * 0.42, -r * 0.32, r * 0.24, r * 0.12, -0.5, 0, Math.PI * 2);
@@ -727,7 +804,6 @@
       }[suit];
 
       ctx.save();
-      // Túnica real
       ctx.fillStyle = colors[0];
       ctx.strokeStyle = '#1c1917';
       ctx.lineWidth = 4;
@@ -740,18 +816,15 @@
       ctx.fill();
       ctx.stroke();
 
-      // Franja central dorada
       ctx.fillStyle = colors[1];
       ctx.fillRect(cx - 18, cy - 22, 36, 117);
 
-      // Cabeza
       ctx.fillStyle = '#fde68a';
       ctx.beginPath();
       ctx.arc(cx, cy - 48, 24, 0, Math.PI * 2);
       ctx.fill();
       ctx.stroke();
 
-      // Corona o sombrero según figura (10 Sota, 11 Caballo, 12 Rey)
       if (n === 12) {
         ctx.fillStyle = '#f59e0b';
         ctx.beginPath();
@@ -766,14 +839,12 @@
         ctx.fill();
         ctx.stroke();
       } else if (n === 11) {
-        // Silueta de caballo estilizada abajo
         ctx.fillStyle = '#f8fafc';
         ctx.beginPath();
         ctx.roundRect(cx - 64, cy + 25, 128, 52, 18);
         ctx.fill();
         ctx.stroke();
       } else {
-        // Sombrero de paje (Sota)
         ctx.fillStyle = colors[2];
         ctx.beginPath();
         ctx.ellipse(cx, cy - 70, 30, 10, -0.15, 0, Math.PI * 2);
@@ -781,7 +852,6 @@
         ctx.stroke();
       }
 
-      // Emblema del palo en la esquina superior derecha del cuadro
       drawPipOnCanvas(ctx, suit, cx + 48, cy - 72, 42, false);
       ctx.restore();
     }
@@ -795,7 +865,6 @@
       canvas.height = 384;
       const ctx = canvas.getContext('2d');
 
-      // Fondo pergamino marfil
       const bg = ctx.createLinearGradient(0, 0, 256, 384);
       bg.addColorStop(0, '#fffdf7');
       bg.addColorStop(1, '#f3e5c3');
@@ -804,12 +873,10 @@
       ctx.roundRect(0, 0, 256, 384, 22);
       ctx.fill();
 
-      // Marco interior con pintas españolas reales
       ctx.strokeStyle = '#92400e';
       ctx.lineWidth = 4;
       ctx.strokeRect(16, 16, 224, 352);
 
-      // Cortes de pinta (Oros: 0, Copas: 1, Espadas: 2, Bastos: 3)
       const notches = { oro: 0, copa: 1, espada: 2, basto: 3 }[card.s];
       if (notches > 0) {
         ctx.fillStyle = '#f8eed4';
@@ -820,7 +887,6 @@
         }
       }
 
-      // Color del número
       const numColors = { oro: '#b45309', copa: '#b91c1c', espada: '#1e3a8a', basto: '#14532d' };
       ctx.fillStyle = numColors[card.s];
       ctx.font = '900 34px Cinzel, Georgia, serif';
@@ -833,9 +899,7 @@
       ctx.fillText(String(card.n), 0, 0);
       ctx.restore();
 
-      // Ilustración central según carta
       if (card.n === 1) {
-        // As ornamentado con guirnalda
         ctx.strokeStyle = '#15803d';
         ctx.lineWidth = 5;
         ctx.setLineDash([10, 7]);
@@ -847,7 +911,6 @@
       } else if (card.n >= 10) {
         drawFigureOnCanvas(ctx, card.n, card.s, 256, 384);
       } else {
-        // Cartas numéricas 2 al 7
         const pipSize = card.n <= 3 ? 66 : card.n <= 5 ? 56 : 48;
         if (card.n === 2) {
           drawPipOnCanvas(ctx, card.s, 128, 118, pipSize, false);
@@ -902,7 +965,6 @@
       ctx.fillStyle = '#132e57';
       ctx.fillRect(14, 14, 228, 356);
 
-      // Trama geométrica criolla
       ctx.strokeStyle = '#b91c1c';
       ctx.lineWidth = 3;
       for (let y = 24; y < 360; y += 22) {
@@ -915,7 +977,6 @@
       ctx.lineWidth = 5;
       ctx.strokeRect(18, 18, 220, 348);
 
-      // Medallón central
       ctx.fillStyle = '#7f1d1d';
       ctx.beginPath();
       ctx.arc(128, 192, 42, 0, Math.PI * 2);
@@ -933,16 +994,15 @@
     }
 
     // ---------------------------------------------------------
-    // 3. ESCENA 3D REAL CON THREE.JS (MESA, PAÑO, MAZO Y CARTAS)
+    // 3. ESCENA 3D REAL CON THREE.JS
     // ---------------------------------------------------------
     let scene, camera, renderer, raycaster, pointer;
-    let cardMeshes = []; // { mesh, targetPos, targetRot, targetScale, isMyHand, cardIndex, playable, hovered }
+    let cardMeshes = [];
     let last3DCardSignature = null;
     let aiRespondingToCall = false;
     let hoveredCardMesh = null;
     let threeInitialized = false;
 
-    const DEFAULT_CAM_POS = new THREE.Vector3(0, 7.6, 7.2);
     const DEFAULT_CAM_LOOK = new THREE.Vector3(0, 0, 0.5);
     let camSpherical = { radius: 10.4, theta: 0, phi: 0.76 };
     let isDraggingCam = false;
@@ -967,7 +1027,6 @@
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       container.appendChild(renderer.domElement);
 
-      // Iluminación cálida de bodegón argentino
       const ambient = new THREE.AmbientLight('#ffe8c2', 0.62);
       scene.add(ambient);
 
@@ -984,18 +1043,12 @@
       rimLight.position.set(-6, 5, -5);
       scene.add(rimLight);
 
-      // Tablero de madera de la mesa 3D
-      const woodMat = new THREE.MeshStandardMaterial({
-        color: '#42210b',
-        roughness: 0.55,
-        metalness: 0.08
-      });
+      const woodMat = new THREE.MeshStandardMaterial({ color: '#42210b', roughness: 0.55, metalness: 0.08 });
       const tableBase = new THREE.Mesh(new THREE.BoxGeometry(11.6, 0.55, 8.6), woodMat);
       tableBase.position.y = -0.32;
       tableBase.receiveShadow = true;
       scene.add(tableBase);
 
-      // Moldura dorada alrededor del paño
       const goldTrim = new THREE.Mesh(
         new THREE.BoxGeometry(10.5, 0.08, 7.5),
         new THREE.MeshStandardMaterial({ color: '#b47b22', roughness: 0.35, metalness: 0.65 })
@@ -1003,18 +1056,12 @@
       goldTrim.position.y = -0.03;
       scene.add(goldTrim);
 
-      // Paño verde 3D
-      const feltMat = new THREE.MeshStandardMaterial({
-        color: '#0b5c3b',
-        roughness: 0.88,
-        metalness: 0.02
-      });
+      const feltMat = new THREE.MeshStandardMaterial({ color: '#0b5c3b', roughness: 0.88, metalness: 0.02 });
       const feltMesh = new THREE.Mesh(new THREE.BoxGeometry(10.2, 0.08, 7.2), feltMat);
       feltMesh.position.y = 0.0;
       feltMesh.receiveShadow = true;
       scene.add(feltMesh);
 
-      // Mazo físico de cartas en el costado derecho de la mesa
       const deckMat = [
         new THREE.MeshStandardMaterial({ color: '#e5d7b8' }),
         new THREE.MeshStandardMaterial({ color: '#e5d7b8' }),
@@ -1030,7 +1077,6 @@
       deckStack.receiveShadow = true;
       scene.add(deckStack);
 
-      // Mate decorativo sobre la mesa 3D
       const mateGroup = new THREE.Group();
       const mateBody = new THREE.Mesh(
         new THREE.CylinderGeometry(0.32, 0.24, 0.55, 18),
@@ -1056,7 +1102,6 @@
       raycaster = new THREE.Raycaster();
       pointer = new THREE.Vector2();
 
-      // Eventos de mouse y toque para interactuar con cartas 3D y cámara
       const domEl = renderer.domElement;
 
       domEl.addEventListener('pointerdown', (e) => {
@@ -1086,7 +1131,6 @@
         const moveDist = Math.hypot(e.clientX - pointerDownPos.x, e.clientY - pointerDownPos.y);
         isDraggingCam = false;
 
-        // Si fue un toque/clic rápido (sin arrastrar cámara), verificar si tocó una carta jugable
         if (moveDist < 8) {
           const rect = domEl.getBoundingClientRect();
           pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
@@ -1096,9 +1140,7 @@
           const hits = raycaster.intersectObjects(playableMeshes, false);
           if (hits.length > 0) {
             const hitObj = cardMeshes.find(c => c.mesh === hits[0].object);
-            if (hitObj) {
-              actionPlayCard(hitObj.cardIndex);
-            }
+            if (hitObj) actionPlayCard(hitObj.cardIndex);
           }
         }
       });
@@ -1128,14 +1170,13 @@
       const geo = new THREE.BoxGeometry(1.16, 0.025, 1.74);
       const sideMat = new THREE.MeshStandardMaterial({ color: '#efe5ce', roughness: 0.5 });
       const frontMat = new THREE.MeshStandardMaterial({
-        map: faceUp ? getSpanishCardTexture(cardData) : getSpanishBackTexture(),
+        map: faceUp && cardData ? getSpanishCardTexture(cardData) : getSpanishBackTexture(),
         roughness: 0.38
       });
       const backMat = new THREE.MeshStandardMaterial({
         map: getSpanishBackTexture(),
         roughness: 0.42
       });
-      // BoxGeometry faces: +x, -x, +y (top), -y (bottom), +z, -z
       const materials = [sideMat, sideMat, frontMat, backMat, sideMat, sideMat];
       const mesh = new THREE.Mesh(geo, materials);
       mesh.castShadow = true;
@@ -1147,20 +1188,19 @@
       if (!threeInitialized || !matchState) return;
 
       const me = getMyRoleKey();
-      const myHand = me === 'p1' ? matchState.p1Hand : matchState.p2Hand;
-      const oppHand = me === 'p1' ? matchState.p2Hand : matchState.p1Hand;
+      const myHand = myPrivateHand;
+      const oppCount = me === 'p1' ? (matchState.p2HandCount ?? 0) : (matchState.p1HandCount ?? 0);
       const myPlayed = me === 'p1' ? matchState.p1Played : matchState.p2Played;
       const oppPlayed = me === 'p1' ? matchState.p2Played : matchState.p1Played;
       const canPlay = !matchState.handFinished && !matchState.pendingCall && matchState.turn === me;
-      const signature = JSON.stringify([me, myHand, oppHand.length, myPlayed, oppPlayed]);
-      // El estado de turno no cambia las cartas: actualizarlo sin reconstruir las mallas.
+
+      const signature = JSON.stringify([me, myHand, oppCount, myPlayed, oppPlayed]);
       if (signature === last3DCardSignature) {
         cardMeshes.forEach(item => { if (item.isMyHand) item.playable = canPlay; });
         return;
       }
       last3DCardSignature = signature;
 
-      // Limpiar solo cuando cambió realmente la disposición de las cartas.
       cardMeshes.forEach(item => {
         scene.remove(item.mesh);
         if (item.mesh.geometry) item.mesh.geometry.dispose();
@@ -1189,18 +1229,17 @@
         });
       });
 
-      // 2. Cartas del rival (arriba, boca abajo)
-      const oppCount = oppHand.length;
-      oppHand.forEach((card, i) => {
+      // 2. Cartas del rival (solo se renderiza dorso según oppCount, nunca se exponen sus cartas)
+      for (let i = 0; i < oppCount; i++) {
         const offset = i - (oppCount - 1) / 2;
-        const mesh = create3DCardMesh(card, false);
+        const mesh = create3DCardMesh(null, false);
         mesh.position.set(offset * 1.25, 0.72, -2.65);
         mesh.rotation.set(-0.35, offset * 0.08, 0);
         scene.add(mesh);
         cardMeshes.push({ mesh, basePos: mesh.position.clone(), baseRot: mesh.rotation.clone(), playable: false });
-      });
+      }
 
-      // 3. Cartas tiradas del rival en el centro-arriba de la mesa
+      // 3. Cartas tiradas del rival
       oppPlayed.forEach((card, idx) => {
         const mesh = create3DCardMesh(card, true);
         mesh.position.set((idx - 1) * 0.85, 0.08 + idx * 0.03, -0.78);
@@ -1209,7 +1248,7 @@
         cardMeshes.push({ mesh, basePos: mesh.position.clone(), baseRot: mesh.rotation.clone(), playable: false });
       });
 
-      // 4. Cartas tiradas mías en el centro-abajo de la mesa
+      // 4. Cartas tiradas mías
       myPlayed.forEach((card, idx) => {
         const mesh = create3DCardMesh(card, true);
         mesh.position.set((idx - 1) * 0.85, 0.08 + idx * 0.03, 0.78);
@@ -1223,14 +1262,12 @@
       requestAnimationFrame(animateThree);
       if (!threeInitialized || $('viewGame').classList.contains('hidden')) return;
 
-      // Detectar hover sobre cartas propias jugables
       raycaster.setFromCamera(pointer, camera);
       const playableItems = cardMeshes.filter(c => c.playable);
       const hits = raycaster.intersectObjects(playableItems.map(c => c.mesh), false);
       hoveredCardMesh = hits.length > 0 ? hits[0].object : null;
       renderer.domElement.style.cursor = hoveredCardMesh ? 'pointer' : (isDraggingCam ? 'grabbing' : 'grab');
 
-      // Animación suave de elevación 3D al pasar el cursor
       cardMeshes.forEach(item => {
         if (!item.isMyHand) return;
         const isHovered = item.mesh === hoveredCardMesh;
@@ -1244,28 +1281,32 @@
         item.mesh.scale.setScalar(nextScale);
       });
 
-      const __frameStartedAt = performance.now();
       renderer.render(scene, camera);
-      const __frameDuration = performance.now() - __frameStartedAt;
-      if (__frameDuration > 80 && (!animateThree.__lastWarn || __frameStartedAt - animateThree.__lastWarn > 2000)) {
-        animateThree.__lastWarn = __frameStartedAt;
-        console.warn(`[TRUCO PERF] renderer.render tardó ${__frameDuration.toFixed(1)} ms; objetos=${scene.children.length}; cartas=${cardMeshes.length}`);
-      }
     }
 
     // ---------------------------------------------------------
-    // 4. FÓSFOROS DE TIZA SVG PARA MARCADORES Y ANOTADOR
+    // 4. FÓSFOROS REALISTAS SVG (PARA MARCADOR Y ANOTADOR)
     // ---------------------------------------------------------
-    function renderMatchGroupSVG(count, size = 30) {
+    function renderMatchGroupSVG(count, size = 30, subtleGuide = false) {
       const c = Math.max(0, Math.min(5, count));
       let lines = '';
-      if (c >= 1) lines += `<line x1="6" y1="6" x2="30" y2="6" class="matchstick-line"/><circle cx="30" cy="6" r="2.2" class="matchstick-head"/>`;
-      if (c >= 2) lines += `<line x1="30" y1="6" x2="30" y2="30" class="matchstick-line"/><circle cx="30" cy="30" r="2.2" class="matchstick-head"/>`;
-      if (c >= 3) lines += `<line x1="30" y1="30" x2="6" y2="30" class="matchstick-line"/><circle cx="6" cy="30" r="2.2" class="matchstick-head"/>`;
-      if (c >= 4) lines += `<line x1="6" y1="30" x2="6" y2="6" class="matchstick-line"/><circle cx="6" cy="6" r="2.2" class="matchstick-head"/>`;
-      if (c >= 5) lines += `<line x1="6" y1="30" x2="30" y2="6" class="matchstick-line"/><circle cx="30" cy="6" r="2.2" class="matchstick-head"/>`;
-      return `<svg width="${size}" height="${size}" viewBox="0 0 36 36" class="shrink-0">
-        <rect x="6" y="6" width="24" height="24" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" stroke-dasharray="2 2"/>
+      // 1: Izquierda vertical (abajo hacia arriba)
+      if (c >= 1) lines += `<line x1="7" y1="30" x2="7" y2="7" class="match-wood"/><circle cx="7" cy="7" r="2.5" class="match-tip"/>`;
+      // 2: Arriba horizontal (izquierda a derecha)
+      if (c >= 2) lines += `<line x1="7" y1="7" x2="30" y2="7" class="match-wood"/><circle cx="30" cy="7" r="2.5" class="match-tip"/>`;
+      // 3: Derecha vertical (arriba hacia abajo)
+      if (c >= 3) lines += `<line x1="30" y1="7" x2="30" y2="30" class="match-wood"/><circle cx="30" cy="30" r="2.5" class="match-tip"/>`;
+      // 4: Abajo horizontal (derecha a izquierda)
+      if (c >= 4) lines += `<line x1="30" y1="30" x2="7" y2="30" class="match-wood"/><circle cx="7" cy="30" r="2.5" class="match-tip"/>`;
+      // 5: Diagonal (abajo-izq a arriba-der)
+      if (c >= 5) lines += `<line x1="8" y1="29" x2="29" y2="8" class="match-wood"/><circle cx="29" cy="8" r="2.5" class="match-tip"/>`;
+
+      const guide = subtleGuide
+        ? `<rect x="7" y="7" width="23" height="23" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.2" stroke-dasharray="2 2"/>`
+        : '';
+
+      return `<svg width="${size}" height="${size}" viewBox="0 0 37 37" class="shrink-0 overflow-visible">
+        ${guide}
         ${lines}
       </svg>`;
     }
@@ -1275,7 +1316,7 @@
       let html = '';
       for (let g = 0; g < 3; g++) {
         const groupCount = Math.max(0, Math.min(5, halfPoints - g * 5));
-        html += renderMatchGroupSVG(groupCount, 22);
+        html += renderMatchGroupSVG(groupCount, 22, true);
       }
       containerEl.innerHTML = html;
     }
@@ -1325,57 +1366,125 @@
     }
 
     // ---------------------------------------------------------
-    // 6. FIREBASE MULTIJUGADOR ONLINE + FALLBACK BROADCAST
+    // 6. MULTIJUGADOR ONLINE ROBUSTO (FIREBASE + TRANSACCIONES +
+    //    SEPARACIÓN DE CARTAS PRIVADAS + RECONEXIÓN + HEARTBEAT)
     // ---------------------------------------------------------
     let db = null, auth = null, firebaseReady = false;
-    let firebaseInitError = 'Firebase no está configurado para este sitio.';
-    const appId = typeof __app_id !== 'undefined' ? __app_id : 'truco-argentino-3d';
+    let firebaseInitError = '';
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'truco-argentino-3d-prod';
+
+    function resolveFirebaseConfig() {
+      if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+        try { return JSON.parse(__firebase_config); } catch (e) {}
+      }
+      const saved = localStorage.getItem(LS_KEYS.FIREBASE_CFG);
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed && parsed.apiKey && parsed.projectId) return parsed;
+        } catch (e) {}
+      }
+      if (DEFAULT_FIREBASE_CONFIG.apiKey && DEFAULT_FIREBASE_CONFIG.projectId) {
+        return DEFAULT_FIREBASE_CONFIG;
+      }
+      return null;
+    }
+
+    function updateFirebaseStatusBadge(status, text) {
+      const badge = $('firebaseStatusBadge');
+      if (!badge) return;
+      badge.textContent = text;
+      badge.className = status === 'ready'
+        ? 'text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-950/90 border border-emerald-400/50 text-emerald-300'
+        : status === 'loading'
+          ? 'text-xs font-bold px-2.5 py-1 rounded-full bg-black/50 border border-amber-400/30 text-amber-300 animate-pulse'
+          : 'text-xs font-bold px-2.5 py-1 rounded-full bg-rose-950/90 border border-rose-400/50 text-rose-300';
+    }
 
     async function initFirebaseBackend() {
+      updateFirebaseStatusBadge('loading', '⏳ Conectando Firebase...');
+      const cfg = resolveFirebaseConfig();
+      if (!cfg) {
+        firebaseReady = false;
+        firebaseInitError = 'Falta configurar Firebase para GitHub Pages. Tocá ⚙️ para pegar tu firebaseConfig.';
+        updateFirebaseStatusBadge('error', '⚠️ Sin Firebase');
+        return;
+      }
       try {
-        if (typeof __firebase_config !== 'undefined' && __firebase_config) {
-          const app = initializeApp(JSON.parse(__firebase_config));
-          auth = getAuth(app);
-          db = getFirestore(app);
-          if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-            await signInWithCustomToken(auth, __initial_auth_token);
-          } else {
-            await signInAnonymously(auth);
-          }
-          firebaseReady = true;
-          firebaseInitError = '';
+        const app = getApps().length ? getApps()[0] : initializeApp(cfg);
+        auth = getAuth(app);
+        db = getFirestore(app);
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+          await signInWithCustomToken(auth, __initial_auth_token);
         } else {
-          firebaseInitError = 'Falta configurar Firebase. El modo online no está disponible todavía.';
+          await signInAnonymously(auth);
         }
+        firebaseReady = true;
+        firebaseInitError = '';
+        updateFirebaseStatusBadge('ready', '● Online Listo');
+        checkSavedOnlineSession();
       } catch (e) {
         firebaseReady = false;
-        firebaseInitError = e?.message || 'No se pudo conectar con Firebase.';
-        console.error('[TRUCO] Error al iniciar Firebase:', e);
+        firebaseInitError = e?.message || 'Error al conectar con Firebase.';
+        updateFirebaseStatusBadge('error', '✕ Error Firebase');
+        console.error('[TRUCO] Error Firebase:', e);
       }
     }
     initFirebaseBackend();
 
-    const bc = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('truco_3d_sync') : null;
-
-    let gameMode = 'offline';
-    let onlineRole = null;
+    // Estado de partida y manos privadas
+    let gameMode = 'offline'; // 'offline' | 'online'
+    let onlineRole = null;    // 'host' (p1) | 'guest' (p2)
     let onlineRoomCode = null;
     let unsubscribeRoom = null;
+    let unsubscribePrivateHand = null;
+    let heartbeatTimer = null;
+    let opponentMonitorTimer = null;
     let matchState = null;
+
+    // Cartas privadas en memoria (en online, cada jugador solo descarga su subdocumento private_p1 / private_p2)
+    let myPrivateHand = [];
+    let aiPrivateHand = []; // Solo usado en modo offline
     let lastSeenCantoTs = 0;
 
-    function createInitialMatchState(p1Name = 'Vos', p2Name = 'El Paisano (IA)') {
+    function getRoomDocRef(code) {
+      return doc(db, 'artifacts', appId, 'public', 'data', 'truco_rooms', code);
+    }
+
+    function getPrivateHandDocRef(code, roleKey) {
+      return doc(db, 'artifacts', appId, 'public', 'data', 'truco_rooms', code, 'private_hands', roleKey);
+    }
+
+    function getMyRoleKey() { return gameMode === 'offline' ? 'p1' : (onlineRole === 'host' ? 'p1' : 'p2'); }
+    function getOppRoleKey() { return getMyRoleKey() === 'p1' ? 'p2' : 'p1'; }
+
+    function createInitialPublicMatchState(p1Name = 'Vos', p2Name = 'El Paisano (IA)', p1Uid = 'local_p1') {
       return {
-        status: 'playing',
-        p1Name, p2Name,
-        p1Score: 0, p2Score: 0,
+        version: 1,
+        status: 'waiting', // 'waiting' | 'playing' | 'match_over'
+        p1Uid,
+        p2Uid: null,
+        p1Name,
+        p2Name,
+        p1Ready: false,
+        p2Ready: false,
+        p1LastSeen: Date.now(),
+        p2LastSeen: 0,
+        p1Score: 0,
+        p2Score: 0,
         handNumber: 0,
-        mano: 'p1', turn: 'p1',
-        p1Hand: [], p2Hand: [],
-        p1Played: [], p2Played: [],
-        trickIndex: 0, trickWinners: [],
-        trucoLevel: 1, trucoHolder: null,
-        envidoDone: false, envidoChain: [],
+        mano: 'p1',
+        turn: 'p1',
+        p1HandCount: 0,
+        p2HandCount: 0,
+        p1Played: [],
+        p2Played: [],
+        trickIndex: 0,
+        trickWinners: [],
+        trucoLevel: 1,
+        trucoHolder: null,
+        envidoDone: false,
+        envidoChain: [],
         pendingCall: null,
         handFinished: false,
         lastMessage: '¡La mesa está servida!',
@@ -1384,13 +1493,26 @@
       };
     }
 
-    function dealNewHandState(st) {
+    function validateIncomingMatchState(st) {
+      if (!st || typeof st !== 'object') return false;
+      if (!['waiting', 'playing', 'match_over'].includes(st.status)) return false;
+      if (typeof st.version !== 'number') return false;
+      if (!Array.isArray(st.p1Played) || !Array.isArray(st.p2Played)) return false;
+      if (typeof st.p1Score !== 'number' || typeof st.p2Score !== 'number') return false;
+      return true;
+    }
+
+    // Reparte cartas: en online las guarda en subdocumentos privados separados y deja solo el conteo en la sala pública
+    async function dealNewHand(st, persistOnline = false) {
       const deck = shuffleDeck(FULL_DECK);
+      const p1Cards = deck.slice(0, 3);
+      const p2Cards = deck.slice(3, 6);
+
       st.handNumber += 1;
       if (st.handNumber > 1) st.mano = st.mano === 'p1' ? 'p2' : 'p1';
       st.turn = st.mano;
-      st.p1Hand = deck.slice(0, 3);
-      st.p2Hand = deck.slice(3, 6);
+      st.p1HandCount = 3;
+      st.p2HandCount = 3;
       st.p1Played = [];
       st.p2Played = [];
       st.trickIndex = 0;
@@ -1404,101 +1526,261 @@
       const manoName = st.mano === 'p1' ? st.p1Name : st.p2Name;
       st.lastMessage = `Mano ${st.handNumber}: es mano ${manoName}.`;
       st.updatedAt = Date.now();
+
+      if (gameMode === 'offline') {
+        myPrivateHand = p1Cards;
+        aiPrivateHand = p2Cards;
+      } else if (persistOnline && firebaseReady && db && onlineRoomCode) {
+        const myRole = getMyRoleKey();
+        myPrivateHand = myRole === 'p1' ? p1Cards : p2Cards;
+        await Promise.all([
+          setDoc(getPrivateHandDocRef(onlineRoomCode, 'p1'), { cards: p1Cards, ownerUid: st.p1Uid, updatedAt: Date.now() }),
+          setDoc(getPrivateHandDocRef(onlineRoomCode, 'p2'), { cards: p2Cards, ownerUid: st.p2Uid, updatedAt: Date.now() })
+        ]);
+      }
       return st;
     }
 
-    async function pushOnlineState(newState) {
-      matchState = { ...newState, updatedAt: Date.now() };
-      renderGameUI();
+    // Escritura atómica en Firestore con control de versión para evitar que dos jugadores pisen jugadas
+    async function commitOnlineMutation(mutatorFn) {
+      if (gameMode !== 'online' || !firebaseReady || !db || !onlineRoomCode) return false;
+      const roomRef = getRoomDocRef(onlineRoomCode);
+      try {
+        await runTransaction(db, async (tx) => {
+          const snap = await tx.get(roomRef);
+          if (!snap.exists()) throw new Error('La sala ya no existe.');
+          const current = snap.data().state;
+          if (!validateIncomingMatchState(current)) throw new Error('Estado de sala inválido.');
 
-      if (gameMode !== 'online' || !onlineRoomCode) return;
-      if (bc) bc.postMessage({ type: 'ROOM_STATE', code: onlineRoomCode, state: matchState });
+          const next = structuredClone(current);
+          const allowed = await mutatorFn(next);
+          if (allowed === false) return;
 
-      if (firebaseReady && db) {
-        try {
-          const roomRef = doc(db, 'artifacts', appId, 'public', 'data', 'truco_rooms', onlineRoomCode);
-          await setDoc(roomRef, {
-            code: onlineRoomCode,
-            stateJson: JSON.stringify(matchState),
-            updatedAt: Date.now()
-          });
-        } catch (e) {
-          console.error('[TRUCO] No se pudo guardar la sala:', e);
-          openModal('Error de conexión', 'No se pudo guardar la partida online. Revisá la configuración y las reglas de Firebase.');
-        }
-      }
-    }
-
-    function listenOnlineRoom(code) {
-      if (unsubscribeRoom) { unsubscribeRoom(); unsubscribeRoom = null; }
-      if (firebaseReady && db) {
-        const roomRef = doc(db, 'artifacts', appId, 'public', 'data', 'truco_rooms', code);
-        unsubscribeRoom = onSnapshot(roomRef, (snap) => {
-          if (!snap.exists()) return;
-          const data = snap.data();
-          if (data?.stateJson) handleIncomingRoomState(JSON.parse(data.stateJson));
-        }, (error) => {
-          console.error('[TRUCO] Error escuchando la sala:', error);
-          openModal('Conexión interrumpida', 'Se perdió la conexión con la sala. Revisá tu Internet y los permisos de Firestore.');
+          next.version = (current.version || 1) + 1;
+          next.updatedAt = Date.now();
+          tx.update(roomRef, { state: next, updatedAt: next.updatedAt });
         });
+        return true;
+      } catch (e) {
+        console.warn('[TRUCO] Transacción rechazada o conflicto evitado:', e.message);
+        return false;
       }
     }
 
-    if (bc) {
-      bc.onmessage = (ev) => {
-        const msg = ev.data;
-        if (!msg || msg.code !== onlineRoomCode) return;
-        if (msg.type === 'ROOM_STATE' && msg.state) {
-          handleIncomingRoomState(msg.state);
-        } else if (msg.type === 'JOIN_REQUEST' && onlineRole === 'host' && matchState?.status === 'waiting') {
-          matchState.p2Name = msg.guestName || 'Invitado';
-          matchState.status = 'playing';
-          dealNewHandState(matchState);
-          pushOnlineState(matchState);
+    function saveOnlineSessionLocal() {
+      if (gameMode !== 'online' || !onlineRoomCode || !onlineRole) return;
+      localStorage.setItem(LS_KEYS.ACTIVE_SESSION, JSON.stringify({
+        code: onlineRoomCode,
+        role: onlineRole,
+        name: $('inputPlayerName').value.trim() || 'Jugador',
+        ts: Date.now()
+      }));
+    }
+
+    function clearOnlineSessionLocal() {
+      localStorage.removeItem(LS_KEYS.ACTIVE_SESSION);
+    }
+
+    function checkSavedOnlineSession() {
+      const raw = localStorage.getItem(LS_KEYS.ACTIVE_SESSION);
+      if (!raw) {
+        $('reconnectBanner').classList.add('hidden');
+        return;
+      }
+      try {
+        const sess = JSON.parse(raw);
+        // Expirar sesiones de más de 2 horas
+        if (!sess.code || Date.now() - sess.ts > 2 * 60 * 60 * 1000) {
+          clearOnlineSessionLocal();
+          $('reconnectBanner').classList.add('hidden');
+          return;
         }
-      };
+        $('reconnectBannerText').textContent = `Sala ${sess.code} (${sess.role === 'host' ? 'Anfitrión' : 'Invitado'})`;
+        $('reconnectBanner').classList.remove('hidden');
+      } catch (e) {
+        clearOnlineSessionLocal();
+      }
     }
 
-    function handleIncomingRoomState(incoming) {
-      if (!incoming) return;
-      const prevMsg = matchState?.lastMessage;
-      matchState = incoming;
-      if (!$('viewOnlineLobby').classList.contains('hidden') && matchState.status === 'playing') {
-        showView('viewGame');
-        initThreeScene();
-        sfx.playCard();
+    function startPresenceHeartbeat() {
+      stopPresenceHeartbeat();
+      if (gameMode !== 'online' || !onlineRoomCode) return;
+
+      heartbeatTimer = setInterval(async () => {
+        if (gameMode !== 'online' || !onlineRoomCode || !firebaseReady) return;
+        const me = getMyRoleKey();
+        const field = me === 'p1' ? 'state.p1LastSeen' : 'state.p2LastSeen';
+        try {
+          await setDoc(getRoomDocRef(onlineRoomCode), { [field]: Date.now() }, { merge: true });
+        } catch (e) {}
+      }, 6000);
+
+      opponentMonitorTimer = setInterval(() => {
+        if (gameMode !== 'online' || !matchState || matchState.status === 'waiting') return;
+        const opp = getOppRoleKey();
+        const oppLast = opp === 'p1' ? matchState.p1LastSeen : matchState.p2LastSeen;
+        const dot = $('oppConnectionDot');
+        if (!oppLast) return;
+        const diff = Date.now() - oppLast;
+        dot.classList.remove('hidden');
+        if (diff > 22000) {
+          dot.className = 'w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping';
+          $('tableStatusBox').textContent = '⚠️ El rival perdió conexión. Esperando reconexión...';
+        } else {
+          dot.className = 'w-2.5 h-2.5 rounded-full bg-emerald-400';
+        }
+      }, 4000);
+    }
+
+    function stopPresenceHeartbeat() {
+      if (heartbeatTimer) { clearInterval(heartbeatTimer); heartbeatTimer = null; }
+      if (opponentMonitorTimer) { clearInterval(opponentMonitorTimer); opponentMonitorTimer = null; }
+      $('oppConnectionDot').classList.add('hidden');
+    }
+
+    function subscribeToOnlineRoom(code) {
+      if (unsubscribeRoom) { unsubscribeRoom(); unsubscribeRoom = null; }
+      if (unsubscribePrivateHand) { unsubscribePrivateHand(); unsubscribePrivateHand = null; }
+
+      const myRole = getMyRoleKey();
+
+      // 1. Escuchar solo las cartas privadas de MI asiento
+      unsubscribePrivateHand = onSnapshot(getPrivateHandDocRef(code, myRole), (snap) => {
+        if (!snap.exists()) return;
+        const data = snap.data();
+        if (Array.isArray(data.cards)) {
+          myPrivateHand = data.cards;
+          if (!$('viewGame').classList.contains('hidden')) renderGameUI();
+        }
+      });
+
+      // 2. Escuchar estado público de la mesa
+      unsubscribeRoom = onSnapshot(getRoomDocRef(code), async (snap) => {
+        if (!snap.exists()) {
+          openModal('Sala cerrada', 'La sala fue cerrada o eliminada.');
+          cleanupOnlineAndReturnMenu();
+          return;
+        }
+        const incoming = snap.data()?.state;
+        if (!validateIncomingMatchState(incoming)) return;
+
+        // Ignorar snapshots viejos si ya tenemos una versión más nueva localmente
+        if (matchState && incoming.version < matchState.version) return;
+
+        const prevMsg = matchState?.lastMessage;
+        matchState = incoming;
+
+        // Si ambos están listos y soy el anfitrión, inicio la partida automáticamente
+        if (matchState.status === 'waiting' && matchState.p2Uid && matchState.p1Ready && matchState.p2Ready && onlineRole === 'host') {
+          await commitOnlineMutation(async (st) => {
+            if (st.status !== 'waiting' || !st.p1Ready || !st.p2Ready) return false;
+            st.status = 'playing';
+            await dealNewHand(st, true);
+          });
+          return;
+        }
+
+        // Actualizar UI del Lobby de espera si seguimos en waiting
+        if (matchState.status === 'waiting') {
+          updateWaitingLobbyUI();
+          return;
+        }
+
+        // Pasar a la mesa 3D cuando arranca o reconecta
+        if (matchState.status === 'playing' || matchState.status === 'match_over') {
+          if (!$('viewOnlineLobby').classList.contains('hidden')) {
+            showView('viewGame');
+            initThreeScene();
+            if (renderer) renderer.setSize($('threeContainer').clientWidth, $('threeContainer').clientHeight);
+            sfx.playCard();
+          }
+          if (matchState.lastCanto && matchState.lastCanto.ts > lastSeenCantoTs) {
+            lastSeenCantoTs = matchState.lastCanto.ts;
+            triggerCantoBanner(matchState.lastCanto.text);
+            sfx.playCanto();
+          } else if (prevMsg !== matchState.lastMessage) {
+            sfx.playCard();
+          }
+          renderGameUI();
+        }
+      }, (err) => {
+        console.error('[TRUCO] Error snapshot:', err);
+        openModal('Error de red', 'Se interrumpió la conexión con Firestore. Verificá tu Internet.');
+      });
+    }
+
+    function updateWaitingLobbyUI() {
+      if (!matchState) return;
+      $('lobbyCreateJoinSection').classList.add('hidden');
+      $('waitingRoomBox').classList.remove('hidden');
+      $('displayRoomCode').textContent = onlineRoomCode;
+
+      $('lobbyP1Name').textContent = matchState.p1Name || 'Anfitrión';
+      $('lobbyP1ReadyBadge').textContent = matchState.p1Ready ? '✓ LISTO' : 'Esperando...';
+      $('lobbyP1ReadyBadge').className = matchState.p1Ready
+        ? 'px-3 py-1 rounded-full text-xs font-black bg-emerald-500 text-stone-950'
+        : 'px-3 py-1 rounded-full text-xs font-black bg-stone-700 text-stone-300';
+
+      if (matchState.p2Uid) {
+        $('lobbyP2Name').textContent = matchState.p2Name || 'Invitado';
+        $('lobbyP2Name').className = 'font-bold text-sm text-white';
+        $('lobbyP2ReadyBadge').textContent = matchState.p2Ready ? '✓ LISTO' : 'Esperando...';
+        $('lobbyP2ReadyBadge').className = matchState.p2Ready
+          ? 'px-3 py-1 rounded-full text-xs font-black bg-emerald-500 text-stone-950'
+          : 'px-3 py-1 rounded-full text-xs font-black bg-stone-700 text-stone-300';
+      } else {
+        $('lobbyP2Name').textContent = 'Esperando que entre rival...';
+        $('lobbyP2Name').className = 'font-bold text-sm text-stone-400';
+        $('lobbyP2ReadyBadge').textContent = 'Vacío';
+        $('lobbyP2ReadyBadge').className = 'px-3 py-1 rounded-full text-xs font-black bg-stone-800 text-stone-500';
       }
-      if (matchState.lastCanto && matchState.lastCanto.ts > lastSeenCantoTs) {
-        lastSeenCantoTs = matchState.lastCanto.ts;
-        triggerCantoBanner(matchState.lastCanto.text);
-        sfx.playCanto();
-      } else if (prevMsg !== matchState.lastMessage) {
-        sfx.playCard();
+
+      const amIReady = onlineRole === 'host' ? matchState.p1Ready : matchState.p2Ready;
+      $('btnToggleReady').textContent = amIReady ? '✕ Cancelar Listo' : '✓ ¡ESTOY LISTO!';
+      $('btnToggleReady').className = amIReady
+        ? 'flex-1 btn-glass py-3 px-5 rounded-xl font-cinzel font-black text-base text-amber-200'
+        : 'flex-1 btn-gold py-3 px-5 rounded-xl font-cinzel font-black text-base tracking-wide';
+
+      if (!matchState.p2Uid) {
+        $('waitingStatusText').textContent = 'Compartí el código con tu amigo. Podés marcar LISTO mientras llega.';
+      } else if (matchState.p1Ready && matchState.p2Ready) {
+        $('waitingStatusText').textContent = '¡Ambos listos! Repartiendo cartas en la mesa 3D...';
+      } else {
+        $('waitingStatusText').textContent = '¡Rival en sala! Presionen LISTO ambos para comenzar.';
       }
-      renderGameUI();
+    }
+
+    async function cleanupOnlineAndReturnMenu() {
+      stopPresenceHeartbeat();
+      if (unsubscribeRoom) { unsubscribeRoom(); unsubscribeRoom = null; }
+      if (unsubscribePrivateHand) { unsubscribePrivateHand(); unsubscribePrivateHand = null; }
+      onlineRoomCode = null;
+      onlineRole = null;
+      matchState = null;
+      myPrivateHand = [];
+      $('waitingRoomBox').classList.add('hidden');
+      $('lobbyCreateJoinSection').classList.remove('hidden');
+      showView('viewMenu');
     }
 
     // ---------------------------------------------------------
-    // 7. ACCIONES DEL JUEGO & IA RÁPIDA
+    // 7. ACCIONES DEL JUEGO (OFFLINE Y ONLINE CON TRANSACCIONES)
     // ---------------------------------------------------------
-    function scheduleAIResponse(delay = 60) {
-      const scheduledAt = performance.now();
-      setTimeout(() => {
-        const lateBy = performance.now() - scheduledAt - delay;
-        console.info(`[TRUCO PERF] IA ejecutada ${Math.max(0, lateBy).toFixed(1)} ms tarde del temporizador previsto`);
-        aiRespondToCall();
-      }, delay);
-    }
-
-    function getMyRoleKey() { return gameMode === 'offline' ? 'p1' : (onlineRole === 'host' ? 'p1' : 'p2'); }
-    function getOppRoleKey() { return getMyRoleKey() === 'p1' ? 'p2' : 'p1'; }
-
     function triggerCantoBanner(text) {
       const banner = $('cantoBanner');
       banner.querySelector('div').textContent = text;
       banner.classList.remove('hidden');
       clearTimeout(banner._timer);
       banner._timer = setTimeout(() => banner.classList.add('hidden'), 1600);
+    }
+
+    async function persistPrivateHandAfterPlay(roleKey, updatedCards) {
+      if (gameMode === 'online' && firebaseReady && db && onlineRoomCode) {
+        await setDoc(getPrivateHandDocRef(onlineRoomCode, roleKey), {
+          cards: updatedCards,
+          updatedAt: Date.now()
+        }, { merge: true });
+      }
     }
 
     async function actionCallEnvido(subtype) {
@@ -1508,24 +1790,30 @@
       const labels = { envido: '¡ENVIDO!', real: '¡REAL ENVIDO!', falta: '¡FALTA ENVIDO!' };
       const basePts = { envido: 2, real: 3, falta: 0 };
 
-      const st = structuredClone(matchState);
-      st.envidoChain.push(subtype);
-      const accYes = st.envidoChain.reduce((acc, item) => {
-        if (item === 'falta') return Math.max(1, 30 - Math.max(st.p1Score, st.p2Score));
-        return acc + basePts[item];
-      }, 0);
-      const ptsNo = st.envidoChain.length === 1 ? 1 : accYes - basePts[subtype];
+      const applyEnvido = (st) => {
+        if (st.handFinished || st.pendingCall || st.turn !== me || st.envidoDone || st.trickIndex > 0) return false;
+        st.envidoChain.push(subtype);
+        const accYes = st.envidoChain.reduce((acc, item) => {
+          if (item === 'falta') return Math.max(1, 30 - Math.max(st.p1Score, st.p2Score));
+          return acc + basePts[item];
+        }, 0);
+        const ptsNo = st.envidoChain.length === 1 ? 1 : accYes - basePts[subtype];
+        st.pendingCall = { type: 'envido', subtype, from: me, to: opp, ptsIfNo: Math.max(1, ptsNo), ptsIfYes: accYes };
+        st.lastCanto = { text: labels[subtype], ts: Date.now() };
+        st.lastMessage = `${me === 'p1' ? st.p1Name : st.p2Name} cantó ${labels[subtype]}`;
+        return true;
+      };
 
-      st.pendingCall = { type: 'envido', subtype, from: me, to: opp, ptsIfNo: Math.max(1, ptsNo), ptsIfYes: accYes };
-      st.lastCanto = { text: labels[subtype], ts: Date.now() };
-      st.lastMessage = `${me === 'p1' ? st.p1Name : st.p2Name} cantó ${labels[subtype]}`;
-
-      lastSeenCantoTs = st.lastCanto.ts;
-      triggerCantoBanner(labels[subtype]);
-      sfx.playCanto();
-      await pushOnlineState(st);
-
-      if (gameMode === 'offline') scheduleAIResponse(60);
+      if (gameMode === 'offline') {
+        if (!applyEnvido(matchState)) return;
+        lastSeenCantoTs = matchState.lastCanto.ts;
+        triggerCantoBanner(labels[subtype]);
+        sfx.playCanto();
+        renderGameUI();
+        setTimeout(() => aiRespondToCall(), 180);
+      } else {
+        await commitOnlineMutation(applyEnvido);
+      }
     }
 
     async function actionCallTruco() {
@@ -1536,132 +1824,181 @@
       const nextLevel = matchState.trucoLevel + 1;
       const labels = { 2: '¡TRUCO!', 3: '¡QUIERO RETRUCO!', 4: '¡QUIERO VALE CUATRO!' };
 
-      const st = structuredClone(matchState);
-      st.pendingCall = { type: 'truco', nextLevel, from: me, to: opp, ptsIfNo: st.trucoLevel, ptsIfYes: nextLevel };
-      st.lastCanto = { text: labels[nextLevel], ts: Date.now() };
-      st.lastMessage = `${me === 'p1' ? st.p1Name : st.p2Name} cantó ${labels[nextLevel]}`;
+      const applyTruco = (st) => {
+        if (st.handFinished || st.pendingCall || st.turn !== me || st.trucoLevel >= 4) return false;
+        if (st.trucoHolder && st.trucoHolder !== me) return false;
+        st.pendingCall = { type: 'truco', nextLevel, from: me, to: opp, ptsIfNo: st.trucoLevel, ptsIfYes: nextLevel };
+        st.lastCanto = { text: labels[nextLevel], ts: Date.now() };
+        st.lastMessage = `${me === 'p1' ? st.p1Name : st.p2Name} cantó ${labels[nextLevel]}`;
+        return true;
+      };
 
-      lastSeenCantoTs = st.lastCanto.ts;
-      triggerCantoBanner(labels[nextLevel]);
-      sfx.playCanto();
-      await pushOnlineState(st);
-
-      if (gameMode === 'offline') scheduleAIResponse(60);
+      if (gameMode === 'offline') {
+        if (!applyTruco(matchState)) return;
+        lastSeenCantoTs = matchState.lastCanto.ts;
+        triggerCantoBanner(labels[nextLevel]);
+        sfx.playCanto();
+        renderGameUI();
+        setTimeout(() => aiRespondToCall(), 180);
+      } else {
+        await commitOnlineMutation(applyTruco);
+      }
     }
 
     async function actionRespondCall(decision, raiseSubtype = null) {
       if (!matchState || !matchState.pendingCall) return;
-      const me = getMyRoleKey(), call = matchState.pendingCall;
-      if (call.to !== me) return;
+      const me = getMyRoleKey();
+      if (matchState.pendingCall.to !== me) return;
 
-      const st = structuredClone(matchState);
-      const responderName = me === 'p1' ? st.p1Name : st.p2Name;
-
-      if (decision === 'no_quiero') {
-        st.lastCanto = { text: 'NO QUIERO', ts: Date.now() };
-        if (call.type === 'envido') {
-          st[call.from === 'p1' ? 'p1Score' : 'p2Score'] += call.ptsIfNo;
-          st.envidoDone = true;
-          st.pendingCall = null;
-          st.lastMessage = `${responderName} dijo No Quiero (+${call.ptsIfNo} pt).`;
-          checkEndOfMatch(st);
-        } else {
-          st[call.from === 'p1' ? 'p1Score' : 'p2Score'] += call.ptsIfNo;
-          st.pendingCall = null;
-          st.handFinished = true;
-          st.lastMessage = `${responderName} no quiso el truco (+${call.ptsIfNo} pts).`;
-          checkEndOfMatch(st);
-        }
-      } else if (decision === 'quiero') {
-        st.lastCanto = { text: '¡QUIERO!', ts: Date.now() };
-        if (call.type === 'envido') {
-          const e1 = calculateEnvido([...st.p1Hand, ...st.p1Played]);
-          const e2 = calculateEnvido([...st.p2Hand, ...st.p2Played]);
-          const p1Wins = e1 > e2 || (e1 === e2 && st.mano === 'p1');
-          st[p1Wins ? 'p1Score' : 'p2Score'] += call.ptsIfYes;
-          st.envidoDone = true;
-          st.pendingCall = null;
-          st.lastMessage = `¡Quiero! Envido: ${st.p1Name} (${e1}) vs ${st.p2Name} (${e2}). Gana ${p1Wins ? st.p1Name : st.p2Name} (+${call.ptsIfYes} pts).`;
-          checkEndOfMatch(st);
-        } else {
-          st.trucoLevel = call.nextLevel;
-          st.trucoHolder = me;
-          st.pendingCall = null;
-          st.lastMessage = `¡Quiero! El truco vale ${st.trucoLevel} puntos.`;
-        }
-      } else if (decision === 'raise') {
-        if (call.type === 'envido' && raiseSubtype) {
-          const labels = { envido: '¡ENVIDO!', real: '¡REAL ENVIDO!', falta: '¡FALTA ENVIDO!' };
-          const basePts = { envido: 2, real: 3, falta: 0 };
-          st.envidoChain.push(raiseSubtype);
-          const accYes = st.envidoChain.reduce((acc, item) => {
-            if (item === 'falta') return Math.max(1, 30 - Math.max(st.p1Score, st.p2Score));
-            return acc + basePts[item];
-          }, 0);
-          st.pendingCall = { type: 'envido', subtype: raiseSubtype, from: me, to: call.from, ptsIfNo: call.ptsIfYes, ptsIfYes: accYes };
-          st.lastCanto = { text: labels[raiseSubtype], ts: Date.now() };
-          st.lastMessage = `${responderName} redobló con ${labels[raiseSubtype]}`;
-        } else {
-          const nextLvl = call.nextLevel + 1;
-          const labels = { 3: '¡QUIERO RETRUCO!', 4: '¡QUIERO VALE CUATRO!' };
-          st.trucoLevel = call.nextLevel;
-          st.pendingCall = { type: 'truco', nextLevel: nextLvl, from: me, to: call.from, ptsIfNo: call.nextLevel, ptsIfYes: nextLvl };
-          st.lastCanto = { text: labels[nextLvl], ts: Date.now() };
-          st.lastMessage = `${responderName} cantó ${labels[nextLvl]}`;
-        }
+      // En online, si acepto Envido, leo ambas manos privadas para calcular el ganador exacto
+      let onlineEnvidoHands = null;
+      if (gameMode === 'online' && decision === 'quiero' && matchState.pendingCall.type === 'envido') {
+        const [s1, s2] = await Promise.all([
+          getDoc(getPrivateHandDocRef(onlineRoomCode, 'p1')),
+          getDoc(getPrivateHandDocRef(onlineRoomCode, 'p2'))
+        ]);
+        onlineEnvidoHands = {
+          p1: s1.exists() ? s1.data().cards : [],
+          p2: s2.exists() ? s2.data().cards : []
+        };
       }
 
-      lastSeenCantoTs = st.lastCanto.ts;
-      triggerCantoBanner(st.lastCanto.text);
-      sfx.playCanto();
-      await pushOnlineState(st);
+      const applyResponse = (st) => {
+        const call = st.pendingCall;
+        if (!call || call.to !== me) return false;
+        const responderName = me === 'p1' ? st.p1Name : st.p2Name;
 
-      if (gameMode === 'offline' && !st.handFinished && st.status === 'playing') {
-        if (st.pendingCall && st.pendingCall.to === 'p2') scheduleAIResponse(60);
-        else if (!st.pendingCall && st.turn === 'p2') setTimeout(() => aiTakeTurn(), 80);
+        if (decision === 'no_quiero') {
+          st.lastCanto = { text: 'NO QUIERO', ts: Date.now() };
+          if (call.type === 'envido') {
+            st[call.from === 'p1' ? 'p1Score' : 'p2Score'] += call.ptsIfNo;
+            st.envidoDone = true;
+            st.pendingCall = null;
+            st.lastMessage = `${responderName} dijo No Quiero (+${call.ptsIfNo} pt).`;
+            checkEndOfMatch(st);
+          } else {
+            st[call.from === 'p1' ? 'p1Score' : 'p2Score'] += call.ptsIfNo;
+            st.pendingCall = null;
+            st.handFinished = true;
+            st.lastMessage = `${responderName} no quiso el truco (+${call.ptsIfNo} pts).`;
+            checkEndOfMatch(st);
+          }
+        } else if (decision === 'quiero') {
+          st.lastCanto = { text: '¡QUIERO!', ts: Date.now() };
+          if (call.type === 'envido') {
+            const p1Cards = gameMode === 'offline' ? myPrivateHand : onlineEnvidoHands.p1;
+            const p2Cards = gameMode === 'offline' ? aiPrivateHand : onlineEnvidoHands.p2;
+            const e1 = calculateEnvido([...p1Cards, ...st.p1Played]);
+            const e2 = calculateEnvido([...p2Cards, ...st.p2Played]);
+            const p1Wins = e1 > e2 || (e1 === e2 && st.mano === 'p1');
+            st[p1Wins ? 'p1Score' : 'p2Score'] += call.ptsIfYes;
+            st.envidoDone = true;
+            st.pendingCall = null;
+            st.lastMessage = `¡Quiero! Envido: ${st.p1Name} (${e1}) vs ${st.p2Name} (${e2}). Gana ${p1Wins ? st.p1Name : st.p2Name} (+${call.ptsIfYes} pts).`;
+            checkEndOfMatch(st);
+          } else {
+            st.trucoLevel = call.nextLevel;
+            st.trucoHolder = me;
+            st.pendingCall = null;
+            st.lastMessage = `¡Quiero! El truco vale ${st.trucoLevel} puntos.`;
+          }
+        } else if (decision === 'raise') {
+          if (call.type === 'envido' && raiseSubtype) {
+            const labels = { envido: '¡ENVIDO!', real: '¡REAL ENVIDO!', falta: '¡FALTA ENVIDO!' };
+            const basePts = { envido: 2, real: 3, falta: 0 };
+            st.envidoChain.push(raiseSubtype);
+            const accYes = st.envidoChain.reduce((acc, item) => {
+              if (item === 'falta') return Math.max(1, 30 - Math.max(st.p1Score, st.p2Score));
+              return acc + basePts[item];
+            }, 0);
+            st.pendingCall = { type: 'envido', subtype: raiseSubtype, from: me, to: call.from, ptsIfNo: call.ptsIfYes, ptsIfYes: accYes };
+            st.lastCanto = { text: labels[raiseSubtype], ts: Date.now() };
+            st.lastMessage = `${responderName} redobló con ${labels[raiseSubtype]}`;
+          } else {
+            const nextLvl = call.nextLevel + 1;
+            const labels = { 3: '¡QUIERO RETRUCO!', 4: '¡QUIERO VALE CUATRO!' };
+            st.trucoLevel = call.nextLevel;
+            st.pendingCall = { type: 'truco', nextLevel: nextLvl, from: me, to: call.from, ptsIfNo: call.nextLevel, ptsIfYes: nextLvl };
+            st.lastCanto = { text: labels[nextLvl], ts: Date.now() };
+            st.lastMessage = `${responderName} cantó ${labels[nextLvl]}`;
+          }
+        }
+        return true;
+      };
+
+      if (gameMode === 'offline') {
+        if (!applyResponse(matchState)) return;
+        lastSeenCantoTs = matchState.lastCanto.ts;
+        triggerCantoBanner(matchState.lastCanto.text);
+        sfx.playCanto();
+        renderGameUI();
+        if (!matchState.handFinished && matchState.status === 'playing') {
+          if (matchState.pendingCall && matchState.pendingCall.to === 'p2') setTimeout(() => aiRespondToCall(), 180);
+          else if (!matchState.pendingCall && matchState.turn === 'p2') setTimeout(() => aiTakeTurn(), 220);
+        }
+      } else {
+        await commitOnlineMutation(applyResponse);
       }
     }
 
     async function actionPlayCard(cardIndex) {
       const me = getMyRoleKey();
       if (!matchState || matchState.handFinished || matchState.pendingCall || matchState.turn !== me) return;
+      if (cardIndex < 0 || cardIndex >= myPrivateHand.length) return;
 
-      const st = structuredClone(matchState);
-      const handKey = me === 'p1' ? 'p1Hand' : 'p2Hand';
-      const playedKey = me === 'p1' ? 'p1Played' : 'p2Played';
-      if (!Array.isArray(st[handKey]) || !Array.isArray(st[playedKey]) || !Number.isInteger(cardIndex) || cardIndex < 0 || cardIndex >= st[handKey].length) return;
+      const chosen = myPrivateHand[cardIndex];
+      const nextHand = myPrivateHand.filter((_, idx) => idx !== cardIndex);
 
-      const [chosen] = st[handKey].splice(cardIndex, 1);
-      st[playedKey].push(chosen);
-      sfx.playCard();
+      const applyCardPlay = (st) => {
+        if (st.handFinished || st.pendingCall || st.turn !== me) return false;
+        const playedKey = me === 'p1' ? 'p1Played' : 'p2Played';
+        const countKey = me === 'p1' ? 'p1HandCount' : 'p2HandCount';
 
-      if (st.p1Played.length === st.p2Played.length) {
-        const idx = st.p1Played.length - 1;
-        const p1 = getCardPower(st.p1Played[idx]);
-        const p2 = getCardPower(st.p2Played[idx]);
-        let trickWinner = p1 > p2 ? 'p1' : (p2 > p1 ? 'p2' : 'tie');
-        st.trickWinners.push(trickWinner);
-        st.trickIndex = st.p1Played.length;
+        st[playedKey].push(chosen);
+        st[countKey] = nextHand.length;
 
-        const handResult = evaluateHandWinner(st);
-        if (handResult) {
-          st[handResult === 'p1' ? 'p1Score' : 'p2Score'] += st.trucoLevel;
-          st.handFinished = true;
-          st.lastMessage = `¡${handResult === 'p1' ? st.p1Name : st.p2Name} ganó la mano! (+${st.trucoLevel} pts).`;
-          checkEndOfMatch(st);
+        if (st.p1Played.length === st.p2Played.length) {
+          const idx = st.p1Played.length - 1;
+          const p1 = getCardPower(st.p1Played[idx]);
+          const p2 = getCardPower(st.p2Played[idx]);
+          let trickWinner = p1 > p2 ? 'p1' : (p2 > p1 ? 'p2' : 'tie');
+          st.trickWinners.push(trickWinner);
+          st.trickIndex = st.p1Played.length;
+
+          const handResult = evaluateHandWinner(st);
+          if (handResult) {
+            st[handResult === 'p1' ? 'p1Score' : 'p2Score'] += st.trucoLevel;
+            st.handFinished = true;
+            st.lastMessage = `¡${handResult === 'p1' ? st.p1Name : st.p2Name} ganó la mano! (+${st.trucoLevel} pts).`;
+            checkEndOfMatch(st);
+          } else {
+            st.turn = trickWinner === 'tie' ? st.mano : trickWinner;
+            const nextName = st.turn === 'p1' ? st.p1Name : st.p2Name;
+            st.lastMessage = trickWinner === 'tie' ? `¡Baza parda! Juega ${nextName}.` : `Baza para ${nextName}.`;
+          }
         } else {
-          st.turn = trickWinner === 'tie' ? st.mano : trickWinner;
-          const nextName = st.turn === 'p1' ? st.p1Name : st.p2Name;
-          st.lastMessage = trickWinner === 'tie' ? `¡Baza parda! Juega ${nextName}.` : `Baza para ${nextName}.`;
+          st.turn = me === 'p1' ? 'p2' : 'p1';
+          st.lastMessage = `Turno de ${st.turn === 'p1' ? st.p1Name : st.p2Name}...`;
+        }
+        return true;
+      };
+
+      if (gameMode === 'offline') {
+        myPrivateHand = nextHand;
+        applyCardPlay(matchState);
+        sfx.playCard();
+        renderGameUI();
+        if (!matchState.handFinished && matchState.status === 'playing' && matchState.turn === 'p2') {
+          setTimeout(() => aiTakeTurn(), 220);
         }
       } else {
-        st.turn = me === 'p1' ? 'p2' : 'p1';
-        st.lastMessage = `Turno de ${st.turn === 'p1' ? st.p1Name : st.p2Name}...`;
-      }
-
-      await pushOnlineState(st);
-      if (gameMode === 'offline' && !st.handFinished && st.status === 'playing' && st.turn === 'p2') {
-        setTimeout(() => aiTakeTurn(), 80);
+        const ok = await commitOnlineMutation(applyCardPlay);
+        if (ok) {
+          myPrivateHand = nextHand;
+          await persistPrivateHandAfterPlay(me, nextHand);
+          sfx.playCard();
+          renderGameUI();
+        }
       }
     }
 
@@ -1693,47 +2030,92 @@
     async function actionFold() {
       const me = getMyRoleKey(), opp = getOppRoleKey();
       if (!matchState || matchState.handFinished || matchState.pendingCall) return;
-      const st = structuredClone(matchState);
-      let pts = (st.trickIndex === 0 && !st.envidoDone && st.trucoLevel === 1) ? 2 : st.trucoLevel;
-      st[opp === 'p1' ? 'p1Score' : 'p2Score'] += pts;
-      st.handFinished = true;
-      st.lastMessage = `${me === 'p1' ? st.p1Name : st.p2Name} se fue al mazo (+${pts} pts).`;
-      checkEndOfMatch(st);
-      sfx.playCard();
-      await pushOnlineState(st);
+
+      const applyFold = (st) => {
+        if (st.handFinished || st.pendingCall) return false;
+        let pts = (st.trickIndex === 0 && !st.envidoDone && st.trucoLevel === 1) ? 2 : st.trucoLevel;
+        st[opp === 'p1' ? 'p1Score' : 'p2Score'] += pts;
+        st.handFinished = true;
+        st.lastMessage = `${me === 'p1' ? st.p1Name : st.p2Name} se fue al mazo (+${pts} pts).`;
+        checkEndOfMatch(st);
+        return true;
+      };
+
+      if (gameMode === 'offline') {
+        applyFold(matchState);
+        sfx.playCard();
+        renderGameUI();
+      } else {
+        await commitOnlineMutation(applyFold);
+      }
     }
 
+    // IA Offline
     async function aiRespondToCall() {
       if (aiRespondingToCall || gameMode !== 'offline' || !matchState || !matchState.pendingCall || matchState.pendingCall.to !== 'p2') return;
       aiRespondingToCall = true;
       try {
         const call = matchState.pendingCall;
-        const aiAll = [...matchState.p2Hand, ...matchState.p2Played];
+        const aiAll = [...aiPrivateHand, ...matchState.p2Played];
+        const responderName = matchState.p2Name;
+
         if (call.type === 'envido') {
           const aiEnv = calculateEnvido(aiAll);
-          // La IA se anima más a subir el envido, pero evita regalar puntos con cartas flojas.
           if (call.subtype === 'envido' && aiEnv >= 27 && Math.random() < 0.72) {
-            await actionRespondCall('raise', 'real');
-          } else if (call.subtype !== 'falta' && aiEnv >= 30 && Math.random() < 0.38) {
-            await actionRespondCall('raise', 'falta');
-          } else if (aiEnv >= 24 || (aiEnv >= 21 && Math.random() < 0.62)) {
-            await actionRespondCall('quiero');
-          } else if (aiEnv >= 18 && Math.random() < 0.28) {
-            await actionRespondCall('quiero');
+            matchState.envidoChain.push('real');
+            matchState.pendingCall = { type: 'envido', subtype: 'real', from: 'p2', to: 'p1', ptsIfNo: call.ptsIfYes, ptsIfYes: 5 };
+            matchState.lastCanto = { text: '¡REAL ENVIDO!', ts: Date.now() };
+            matchState.lastMessage = `${responderName} redobló con ¡REAL ENVIDO!`;
+          } else if (aiEnv >= 24 || (aiEnv >= 21 && Math.random() < 0.6)) {
+            const e1 = calculateEnvido([...myPrivateHand, ...matchState.p1Played]);
+            const e2 = aiEnv;
+            const p1Wins = e1 > e2 || (e1 === e2 && matchState.mano === 'p1');
+            matchState[p1Wins ? 'p1Score' : 'p2Score'] += call.ptsIfYes;
+            matchState.envidoDone = true;
+            matchState.pendingCall = null;
+            matchState.lastCanto = { text: '¡QUIERO!', ts: Date.now() };
+            matchState.lastMessage = `¡Quiero! Envido: ${matchState.p1Name} (${e1}) vs ${matchState.p2Name} (${e2}). Gana ${p1Wins ? matchState.p1Name : matchState.p2Name} (+${call.ptsIfYes} pts).`;
+            checkEndOfMatch(matchState);
           } else {
-            await actionRespondCall('no_quiero');
+            matchState.p1Score += call.ptsIfNo;
+            matchState.envidoDone = true;
+            matchState.pendingCall = null;
+            matchState.lastCanto = { text: 'NO QUIERO', ts: Date.now() };
+            matchState.lastMessage = `${responderName} dijo No Quiero (+${call.ptsIfNo} pt).`;
+            checkEndOfMatch(matchState);
           }
         } else {
           const avg = aiAll.reduce((a, c) => a + getCardPower(c), 0) / Math.max(1, aiAll.length);
-          // Si tiene cartas fuertes, puede retrucar o cantar vale cuatro.
-          const raiseChance = call.nextLevel === 2 ? 0.72 : 0.48;
-          if (avg >= 9.0 && call.nextLevel < 4 && Math.random() < raiseChance) {
-            await actionRespondCall('raise');
-          } else if (avg >= 6.2 || (avg >= 5.0 && Math.random() < 0.55) || Math.random() < 0.12) {
-            await actionRespondCall('quiero');
+          if (avg >= 9.0 && call.nextLevel < 4 && Math.random() < 0.65) {
+            const nextLvl = call.nextLevel + 1;
+            const lbl = nextLvl === 3 ? '¡QUIERO RETRUCO!' : '¡QUIERO VALE CUATRO!';
+            matchState.trucoLevel = call.nextLevel;
+            matchState.pendingCall = { type: 'truco', nextLevel: nextLvl, from: 'p2', to: 'p1', ptsIfNo: call.nextLevel, ptsIfYes: nextLvl };
+            matchState.lastCanto = { text: lbl, ts: Date.now() };
+            matchState.lastMessage = `${responderName} cantó ${lbl}`;
+          } else if (avg >= 6.0 || Math.random() < 0.35) {
+            matchState.trucoLevel = call.nextLevel;
+            matchState.trucoHolder = 'p2';
+            matchState.pendingCall = null;
+            matchState.lastCanto = { text: '¡QUIERO!', ts: Date.now() };
+            matchState.lastMessage = `¡Quiero! El truco vale ${matchState.trucoLevel} puntos.`;
           } else {
-            await actionRespondCall('no_quiero');
+            matchState.p1Score += call.ptsIfNo;
+            matchState.pendingCall = null;
+            matchState.handFinished = true;
+            matchState.lastCanto = { text: 'NO QUIERO', ts: Date.now() };
+            matchState.lastMessage = `${responderName} no quiso el truco (+${call.ptsIfNo} pts).`;
+            checkEndOfMatch(matchState);
           }
+        }
+
+        lastSeenCantoTs = matchState.lastCanto.ts;
+        triggerCantoBanner(matchState.lastCanto.text);
+        sfx.playCanto();
+        renderGameUI();
+
+        if (!matchState.handFinished && !matchState.pendingCall && matchState.turn === 'p2') {
+          setTimeout(() => aiTakeTurn(), 220);
         }
       } finally {
         aiRespondingToCall = false;
@@ -1741,49 +2123,45 @@
     }
 
     async function aiTakeTurn() {
-      if (!matchState || matchState.handFinished || matchState.pendingCall || matchState.turn !== 'p2') return;
-      const aiCards = matchState.p2Hand;
-      if (!aiCards.length) return;
+      if (gameMode !== 'offline' || !matchState || matchState.handFinished || matchState.pendingCall || matchState.turn !== 'p2') return;
+      if (!aiPrivateHand.length) return;
 
       if (matchState.trickIndex === 0 && !matchState.envidoDone) {
-        const env = calculateEnvido([...aiCards, ...matchState.p2Played]);
-        const callChance = env >= 30 ? 0.92 : env >= 27 ? 0.82 : env >= 24 ? 0.58 : env >= 22 ? 0.30 : 0;
+        const env = calculateEnvido([...aiPrivateHand, ...matchState.p2Played]);
+        const callChance = env >= 30 ? 0.9 : env >= 27 ? 0.78 : env >= 24 ? 0.52 : 0;
         if (callChance > 0 && Math.random() < callChance) {
-          const st = structuredClone(matchState);
           const sub = env >= 32 ? 'falta' : env >= 30 ? 'real' : 'envido';
           const labels = { envido: '¡ENVIDO!', real: '¡REAL ENVIDO!', falta: '¡FALTA ENVIDO!' };
-          const lbl = labels[sub];
-          const ptsIfYes = sub === 'falta' ? Math.max(1, 30 - Math.max(st.p1Score, st.p2Score)) : sub === 'real' ? 3 : 2;
-          st.envidoChain.push(sub);
-          st.pendingCall = { type: 'envido', subtype: sub, from: 'p2', to: 'p1', ptsIfNo: 1, ptsIfYes };
-          st.lastCanto = { text: lbl, ts: Date.now() };
-          st.lastMessage = `${st.p2Name} cantó ${lbl}`;
-          lastSeenCantoTs = st.lastCanto.ts;
-          triggerCantoBanner(lbl);
+          const ptsIfYes = sub === 'falta' ? Math.max(1, 30 - Math.max(matchState.p1Score, matchState.p2Score)) : sub === 'real' ? 3 : 2;
+          matchState.envidoChain.push(sub);
+          matchState.pendingCall = { type: 'envido', subtype: sub, from: 'p2', to: 'p1', ptsIfNo: 1, ptsIfYes };
+          matchState.lastCanto = { text: labels[sub], ts: Date.now() };
+          matchState.lastMessage = `${matchState.p2Name} cantó ${labels[sub]}`;
+          lastSeenCantoTs = matchState.lastCanto.ts;
+          triggerCantoBanner(labels[sub]);
           sfx.playCanto();
-          await pushOnlineState(st);
+          renderGameUI();
           return;
         }
       }
 
-      const avg = aiCards.reduce((a, c) => a + getCardPower(c), 0) / aiCards.length;
+      const avg = aiPrivateHand.reduce((a, c) => a + getCardPower(c), 0) / aiPrivateHand.length;
       const canTruco = matchState.trucoLevel < 4 && (!matchState.trucoHolder || matchState.trucoHolder === 'p2');
-      const trucoChance = avg >= 10.5 ? 0.82 : avg >= 9.0 ? 0.68 : avg >= 7.8 ? 0.43 : avg >= 6.8 ? 0.22 : 0;
+      const trucoChance = avg >= 10.5 ? 0.8 : avg >= 9.0 ? 0.62 : avg >= 7.8 ? 0.38 : 0;
       if (canTruco && trucoChance > 0 && Math.random() < trucoChance) {
-        const st = structuredClone(matchState);
-        const nextLvl = st.trucoLevel + 1;
+        const nextLvl = matchState.trucoLevel + 1;
         const lbl = nextLvl === 2 ? '¡TRUCO!' : nextLvl === 3 ? '¡RETRUCO!' : '¡VALE CUATRO!';
-        st.pendingCall = { type: 'truco', nextLevel: nextLvl, from: 'p2', to: 'p1', ptsIfNo: st.trucoLevel, ptsIfYes: nextLvl };
-        st.lastCanto = { text: lbl, ts: Date.now() };
-        st.lastMessage = `${st.p2Name} cantó ${lbl}`;
-        lastSeenCantoTs = st.lastCanto.ts;
+        matchState.pendingCall = { type: 'truco', nextLevel: nextLvl, from: 'p2', to: 'p1', ptsIfNo: matchState.trucoLevel, ptsIfYes: nextLvl };
+        matchState.lastCanto = { text: lbl, ts: Date.now() };
+        matchState.lastMessage = `${matchState.p2Name} cantó ${lbl}`;
+        lastSeenCantoTs = matchState.lastCanto.ts;
         triggerCantoBanner(lbl);
         sfx.playCanto();
-        await pushOnlineState(st);
+        renderGameUI();
         return;
       }
 
-      const sorted = aiCards.map((c, idx) => ({ c, idx, pow: getCardPower(c) })).sort((a, b) => a.pow - b.pow);
+      const sorted = aiPrivateHand.map((c, idx) => ({ c, idx, pow: getCardPower(c) })).sort((a, b) => a.pow - b.pow);
       let chosenIdx = sorted[sorted.length - 1].idx;
       if (matchState.p1Played.length > matchState.p2Played.length) {
         const oppPow = getCardPower(matchState.p1Played[matchState.p1Played.length - 1]);
@@ -1791,42 +2169,43 @@
         chosenIdx = winners.length ? winners[0].idx : sorted[0].idx;
       }
 
-      const st = structuredClone(matchState);
-      const [card] = st.p2Hand.splice(chosenIdx, 1);
-      st.p2Played.push(card);
+      const [card] = aiPrivateHand.splice(chosenIdx, 1);
+      matchState.p2HandCount = aiPrivateHand.length;
+      matchState.p2Played.push(card);
       sfx.playCard();
 
-      if (st.p1Played.length === st.p2Played.length) {
-        const idx = st.p1Played.length - 1;
-        const p1 = getCardPower(st.p1Played[idx]), p2 = getCardPower(st.p2Played[idx]);
+      if (matchState.p1Played.length === matchState.p2Played.length) {
+        const idx = matchState.p1Played.length - 1;
+        const p1 = getCardPower(matchState.p1Played[idx]), p2 = getCardPower(matchState.p2Played[idx]);
         let trickWinner = p1 > p2 ? 'p1' : (p2 > p1 ? 'p2' : 'tie');
-        st.trickWinners.push(trickWinner);
-        st.trickIndex = st.p1Played.length;
+        matchState.trickWinners.push(trickWinner);
+        matchState.trickIndex = matchState.p1Played.length;
 
-        const handResult = evaluateHandWinner(st);
+        const handResult = evaluateHandWinner(matchState);
         if (handResult) {
-          st[handResult === 'p1' ? 'p1Score' : 'p2Score'] += st.trucoLevel;
-          st.handFinished = true;
-          st.lastMessage = `¡${handResult === 'p1' ? st.p1Name : st.p2Name} ganó la mano! (+${st.trucoLevel} pts).`;
-          checkEndOfMatch(st);
+          matchState[handResult === 'p1' ? 'p1Score' : 'p2Score'] += matchState.trucoLevel;
+          matchState.handFinished = true;
+          matchState.lastMessage = `¡${handResult === 'p1' ? matchState.p1Name : matchState.p2Name} ganó la mano! (+${matchState.trucoLevel} pts).`;
+          checkEndOfMatch(matchState);
         } else {
-          st.turn = trickWinner === 'tie' ? st.mano : trickWinner;
-          st.lastMessage = trickWinner === 'tie' ? `¡Baza parda!` : `Baza para ${st.turn === 'p1' ? st.p1Name : st.p2Name}.`;
+          matchState.turn = trickWinner === 'tie' ? matchState.mano : trickWinner;
+          matchState.lastMessage = trickWinner === 'tie' ? `¡Baza parda!` : `Baza para ${matchState.turn === 'p1' ? matchState.p1Name : matchState.p2Name}.`;
         }
       } else {
-        st.turn = 'p1';
-        st.lastMessage = `Tu turno, ${st.p1Name}.`;
+        matchState.turn = 'p1';
+        matchState.lastMessage = `Tu turno, ${matchState.p1Name}.`;
       }
 
-      await pushOnlineState(st);
-      if (!st.handFinished && st.status === 'playing' && st.turn === 'p2') setTimeout(() => aiTakeTurn(), 80);
+      renderGameUI();
+      if (!matchState.handFinished && matchState.status === 'playing' && matchState.turn === 'p2') {
+        setTimeout(() => aiTakeTurn(), 220);
+      }
     }
 
     // ---------------------------------------------------------
     // 8. ACTUALIZAR HUD + ESCENA 3D
     // ---------------------------------------------------------
     function renderGameUI() {
-      const __renderStartedAt = performance.now();
       if (!matchState) return;
       const me = getMyRoleKey(), opp = getOppRoleKey();
       const myName = me === 'p1' ? matchState.p1Name : matchState.p2Name;
@@ -1854,9 +2233,8 @@
         ? 'Mano terminada'
         : canPlay
           ? 'Tu turno: tocá una carta 3D para jugarla o cantá'
-          : 'Esperando jugada del rival...';
+          : `Esperando jugada de ${oppName}...`;
 
-      // Sincronizar mallas 3D
       sync3DCardsWithMatchState();
 
       // Panel respuesta pendiente
@@ -1921,15 +2299,28 @@
       controls.innerHTML = '';
 
       if (matchState.status === 'match_over') {
+        clearOnlineSessionLocal();
         const bRematch = document.createElement('button');
         bRematch.className = 'btn-gold px-6 py-3 rounded-2xl text-sm font-black';
         bRematch.textContent = myScore >= 30 ? '🏆 ¡Ganaste! Jugar Revancha' : '↻ Jugar Revancha';
         bRematch.onclick = async () => {
-          if (matchState?.status !== 'match_over') return;
-          const fresh = createInitialMatchState(matchState.p1Name, matchState.p2Name);
-          dealNewHandState(fresh);
-          await pushOnlineState(fresh);
-          if (gameMode === 'offline' && fresh.turn === 'p2') setTimeout(() => aiTakeTurn(), 80);
+          if (gameMode === 'offline') {
+            matchState = createInitialPublicMatchState(matchState.p1Name, matchState.p2Name);
+            matchState.status = 'playing';
+            await dealNewHand(matchState, false);
+            renderGameUI();
+            if (matchState.turn === 'p2') setTimeout(() => aiTakeTurn(), 220);
+          } else {
+            await commitOnlineMutation(async (st) => {
+              if (st.status !== 'match_over') return false;
+              st.p1Score = 0;
+              st.p2Score = 0;
+              st.handNumber = 0;
+              st.mano = 'p1';
+              st.status = 'playing';
+              await dealNewHand(st, true);
+            });
+          }
         };
         controls.appendChild(bRematch);
         return;
@@ -1940,11 +2331,16 @@
         bNext.className = 'btn-gold px-6 py-3 rounded-2xl text-sm font-black';
         bNext.textContent = 'Siguiente Mano →';
         bNext.onclick = async () => {
-          if (!matchState?.handFinished || matchState.status === 'match_over') return;
-          const st = structuredClone(matchState);
-          dealNewHandState(st);
-          await pushOnlineState(st);
-          if (gameMode === 'offline' && st.turn === 'p2') setTimeout(() => aiTakeTurn(), 80);
+          if (gameMode === 'offline') {
+            await dealNewHand(matchState, false);
+            renderGameUI();
+            if (matchState.turn === 'p2') setTimeout(() => aiTakeTurn(), 220);
+          } else {
+            await commitOnlineMutation(async (st) => {
+              if (!st.handFinished || st.status === 'match_over') return false;
+              await dealNewHand(st, true);
+            });
+          }
         };
         controls.appendChild(bNext);
         return;
@@ -1974,55 +2370,69 @@
         bFold.onclick = actionFold;
         controls.appendChild(bFold);
       }
-      const __renderDuration = performance.now() - __renderStartedAt;
-      if (__renderDuration > 80) console.warn(`[TRUCO PERF] renderGameUI tardó ${__renderDuration.toFixed(1)} ms`);
     }
 
     // ---------------------------------------------------------
-    // 9. ANOTADOR TRADICIONAL DE FÓSFOROS
+    // 9. ANOTADOR ESTILO CAPTURA (MADERA + BUENAS VERDE / MALAS ROJO +
+    //    ARRASTRE DE FÓSFORO REALISTA)
     // ---------------------------------------------------------
-    const scorer = { target: 30, ptsA: 0, ptsB: 0, history: [], gameOverShown: false };
+    const scorer = {
+      targets: [15, 24, 30],
+      targetIndex: 2, // Arranca en 30 (cicla 15 -> 24 -> 30 como la captura)
+      ptsA: 0,
+      ptsB: 0,
+      gameOverShown: false
+    };
 
-    function renderScorerHalf(containerEl, pointsInHalf) {
-      let html = '';
-      for (let g = 0; g < 3; g++) {
-        const count = Math.max(0, Math.min(5, pointsInHalf - g * 5));
-        html += renderMatchGroupSVG(count, 46);
-      }
-      containerEl.innerHTML = html;
-    }
+    function getScorerTarget() { return scorer.targets[scorer.targetIndex]; }
 
     function updateScorerUI() {
+      const target = getScorerTarget();
+      const half = Math.ceil(target / 2); // 8 para 15, 12 para 24, 15 para 30
       const nameA = $('scorerNameA').value.trim() || 'NOSOTROS';
       const nameB = $('scorerNameB').value.trim() || 'ELLOS';
-      $('scorerPointsA').textContent = scorer.ptsA;
-      $('scorerPointsB').textContent = scorer.ptsB;
-      const badge = $('scorerTargetBadge'); if (badge) badge.textContent = scorer.ptsA + ' · ' + scorer.ptsB; const badgeLbl = $('scorerTargetLbl'); if (badgeLbl) badgeLbl.textContent = 'A ' + scorer.target;
-      $('scorerZoneA').textContent = scorer.ptsA <= 15 ? 'Malas' : 'Buenas';
-      $('scorerZoneB').textContent = scorer.ptsB <= 15 ? 'Malas' : 'Buenas';
 
-      renderScorerHalf($('matchesMalasA'), Math.min(15, scorer.ptsA));
-      renderScorerHalf($('matchesBuenasA'), Math.max(0, scorer.ptsA - 15));
-      renderScorerHalf($('matchesMalasB'), Math.min(15, scorer.ptsB));
-      renderScorerHalf($('matchesBuenasB'), Math.max(0, scorer.ptsB - 15));
+      $('scorerTargetSvgText').textContent = String(target);
 
-      $('buenasContainerA').classList.toggle('hidden', scorer.target === 15);
-      $('buenasContainerB').classList.toggle('hidden', scorer.target === 15);
+      // Equipo A
+      const inBuenasA = scorer.ptsA > half;
+      const displayPtsA = inBuenasA ? (scorer.ptsA - half) : scorer.ptsA;
+      $('scorerPointsA').textContent = displayPtsA;
+      $('scorerZoneA').textContent = inBuenasA ? 'BUENAS' : 'MALAS';
+      $('scorerBannerA').className = inBuenasA
+        ? 'rounded-md py-1.5 px-2 bg-[#16a34a] border-2 border-black/40 shadow-md flex items-center justify-center gap-2 transition-colors'
+        : 'rounded-md py-1.5 px-2 bg-[#b91c1c] border-2 border-black/40 shadow-md flex items-center justify-center gap-2 transition-colors';
 
-      const histEl = $('scorerHistory');
-      histEl.innerHTML = scorer.history.length
-        ? scorer.history.slice(-5).reverse().map(i => `<div>• ${i}</div>`).join('')
-        : `<div class="text-stone-400">Anotador listo. Tocá +1 para sumar fósforos.</div>`;
+      // Equipo B
+      const inBuenasB = scorer.ptsB > half;
+      const displayPtsB = inBuenasB ? (scorer.ptsB - half) : scorer.ptsB;
+      $('scorerPointsB').textContent = displayPtsB;
+      $('scorerZoneB').textContent = inBuenasB ? 'BUENAS' : 'MALAS';
+      $('scorerBannerB').className = inBuenasB
+        ? 'rounded-md py-1.5 px-2 bg-[#16a34a] border-2 border-black/40 shadow-md flex items-center justify-center gap-2 transition-colors'
+        : 'rounded-md py-1.5 px-2 bg-[#b91c1c] border-2 border-black/40 shadow-md flex items-center justify-center gap-2 transition-colors';
 
-      if ((scorer.ptsA >= scorer.target || scorer.ptsB >= scorer.target) && !scorer.gameOverShown) {
+      // Renderizar grupos de hasta 5 fósforos de la mitad actual (Malas o Buenas)
+      const groupsCount = Math.ceil(half / 5);
+      let htmlA = '', htmlB = '';
+      for (let g = 0; g < groupsCount; g++) {
+        const cA = Math.max(0, Math.min(5, displayPtsA - g * 5));
+        const cB = Math.max(0, Math.min(5, displayPtsB - g * 5));
+        htmlA += renderMatchGroupSVG(cA, 64, false);
+        htmlB += renderMatchGroupSVG(cB, 64, false);
+      }
+      $('matchesGridA').innerHTML = htmlA;
+      $('matchesGridB').innerHTML = htmlB;
+
+      if ((scorer.ptsA >= target || scorer.ptsB >= target) && !scorer.gameOverShown) {
         scorer.gameOverShown = true;
-        const winner = scorer.ptsA >= scorer.target ? nameA : nameB;
+        const winner = scorer.ptsA >= target ? nameA : nameB;
         sfx.playWin();
         openModal(
           `🏆 ¡GANÓ ${winner.toUpperCase()}!`,
-          `Resultado final: <strong>${nameA} ${scorer.ptsA}</strong> — <strong>${nameB} ${scorer.ptsB}</strong>.`,
+          `Resultado final a ${target} puntos: <strong>${nameA} ${scorer.ptsA}</strong> — <strong>${nameB} ${scorer.ptsB}</strong>.`,
           [
-            { label: 'Nueva Partida (0 a 0)', gold: true, action: () => { scorer.ptsA = 0; scorer.ptsB = 0; scorer.history = []; scorer.gameOverShown = false; updateScorerUI(); } },
+            { label: 'Nueva Partida (0 a 0)', gold: true, action: () => { scorer.ptsA = 0; scorer.ptsB = 0; scorer.gameOverShown = false; updateScorerUI(); } },
             { label: 'Seguir viendo', gold: false, action: () => {} }
           ]
         );
@@ -2030,25 +2440,81 @@
     }
 
     function changeScorerPoints(team, delta) {
-      const nameA = $('scorerNameA').value.trim() || 'NOSOTROS';
-      const nameB = $('scorerNameB').value.trim() || 'ELLOS';
+      const target = getScorerTarget();
       if (team === 'A') {
-        const next = Math.max(0, Math.min(scorer.target, scorer.ptsA + delta));
+        const next = Math.max(0, Math.min(target, scorer.ptsA + delta));
         if (next === scorer.ptsA) return;
         scorer.ptsA = next;
-        scorer.history.push(`${nameA}: ${delta > 0 ? '+1' : '-1'} (${scorer.ptsA})`);
       } else {
-        const next = Math.max(0, Math.min(scorer.target, scorer.ptsB + delta));
+        const next = Math.max(0, Math.min(target, scorer.ptsB + delta));
         if (next === scorer.ptsB) return;
         scorer.ptsB = next;
-        scorer.history.push(`${nameB}: ${delta > 0 ? '+1' : '-1'} (${scorer.ptsB})`);
       }
       sfx.playChalk();
       updateScorerUI();
     }
 
+    // Mecánica de arrastrar el fósforo inferior hacia Nosotros o Ellos (como la mano de la captura)
+    function initDraggableMatchstick() {
+      const dragEl = $('draggableMatchContainer');
+      const zoneA = $('dropZoneA');
+      const zoneB = $('dropZoneB');
+      let dragging = false;
+      let startX = 0, startY = 0;
+
+      dragEl.addEventListener('pointerdown', (e) => {
+        dragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        dragEl.setPointerCapture(e.pointerId);
+        dragEl.style.transition = 'none';
+      });
+
+      dragEl.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        const angle = Math.max(-35, Math.min(35, dx * 0.25));
+        dragEl.style.transform = `translate(${dx}px, ${dy}px) rotate(${angle}deg) scale(1.15)`;
+
+        const rectA = zoneA.getBoundingClientRect();
+        const rectB = zoneB.getBoundingClientRect();
+        const overA = e.clientX >= rectA.left && e.clientX <= rectA.right && e.clientY >= rectA.top && e.clientY <= rectA.bottom;
+        const overB = e.clientX >= rectB.left && e.clientX <= rectB.right && e.clientY >= rectB.top && e.clientY <= rectB.bottom;
+
+        zoneA.style.borderColor = overA ? '#f5c542' : 'transparent';
+        zoneA.style.backgroundColor = overA ? 'rgba(245, 197, 66, 0.16)' : 'rgba(0,0,0,0.15)';
+        zoneB.style.borderColor = overB ? '#f5c542' : 'transparent';
+        zoneB.style.backgroundColor = overB ? 'rgba(245, 197, 66, 0.16)' : 'rgba(0,0,0,0.15)';
+      });
+
+      const endDrag = (e) => {
+        if (!dragging) return;
+        dragging = false;
+        const rectA = zoneA.getBoundingClientRect();
+        const rectB = zoneB.getBoundingClientRect();
+        const overA = e.clientX >= rectA.left && e.clientX <= rectA.right && e.clientY >= rectA.top && e.clientY <= rectA.bottom;
+        const overB = e.clientX >= rectB.left && e.clientX <= rectB.right && e.clientY >= rectB.top && e.clientY <= rectB.bottom;
+
+        zoneA.style.borderColor = 'transparent';
+        zoneA.style.backgroundColor = 'rgba(0,0,0,0.15)';
+        zoneB.style.borderColor = 'transparent';
+        zoneB.style.backgroundColor = 'rgba(0,0,0,0.15)';
+
+        dragEl.style.transition = 'transform 0.2s cubic-bezier(0.2, 0.9, 0.3, 1.2)';
+        dragEl.style.transform = 'translate(0px, 0px) rotate(0deg) scale(1)';
+
+        if (overA) changeScorerPoints('A', 1);
+        else if (overB) changeScorerPoints('B', 1);
+      };
+
+      dragEl.addEventListener('pointerup', endDrag);
+      dragEl.addEventListener('pointercancel', endDrag);
+    }
+    initDraggableMatchstick();
+
     // ---------------------------------------------------------
-    // 10. NAVEGACIÓN Y EVENTOS
+    // 10. NAVEGACIÓN, EVENTOS MULTIJUGADOR Y MODALES
     // ---------------------------------------------------------
     function showView(viewId) {
       ['viewMenu', 'viewOnlineLobby', 'viewGame', 'viewScorer'].forEach(id => {
@@ -2076,101 +2542,250 @@
       const ic = sfx.enabled ? '🔊' : '🔇';
       $('menuSoundIcon').textContent = ic;
       $('gameSoundIcon').textContent = ic;
+      $('scorerSoundIcon').textContent = ic;
       if (sfx.enabled) sfx.playChalk();
     }
     $('btnMenuSound').onclick = toggleSoundAll;
     $('btnGameSound').onclick = toggleSoundAll;
+    $('btnScorerSound').onclick = toggleSoundAll;
 
-    function goToMainMenu() {
-      if (unsubscribeRoom) { unsubscribeRoom(); unsubscribeRoom = null; }
-      onlineRoomCode = null;
-      onlineRole = null;
-      $('waitingRoomBox').classList.add('hidden');
-      showView('viewMenu');
-    }
-    $('btnLobbyBack').onclick = goToMainMenu;
-    $('btnGameBackMenu').onclick = goToMainMenu;
-    $('btnScorerBack').onclick = goToMainMenu;
+    $('btnLobbyBack').onclick = () => cleanupOnlineAndReturnMenu();
+    $('btnScorerBack').onclick = () => showView('viewMenu');
 
-    // Partida Rápida (Offline 3D vs IA)
-    $('btnStartOffline').onclick = () => {
+    // Confirmación al abandonar partida activa
+    $('btnGameBackMenu').onclick = () => {
+      if (matchState && matchState.status === 'playing') {
+        openModal(
+          '¿Salir de la partida?',
+          gameMode === 'online'
+            ? 'Si salís ahora, podés reconectarte más tarde usando el mismo código mientras la sala siga abierta.'
+            : 'Se perderá el progreso de esta partida contra la IA.',
+          [
+            { label: 'Seguir jugando', gold: true, action: () => {} },
+            { label: 'Salir al Menú', gold: false, action: () => cleanupOnlineAndReturnMenu() }
+          ]
+        );
+      } else {
+        cleanupOnlineAndReturnMenu();
+      }
+    };
+
+    // Partida Rápida Offline
+    $('btnStartOffline').onclick = async () => {
       gameMode = 'offline';
       onlineRole = 'host';
       onlineRoomCode = null;
-      matchState = createInitialMatchState('Vos', 'El Paisano (IA)');
-      dealNewHandState(matchState);
+      matchState = createInitialPublicMatchState('Vos', 'El Paisano (IA)');
+      matchState.status = 'playing';
+      await dealNewHand(matchState, false);
       showView('viewGame');
       initThreeScene();
       if (renderer) renderer.setSize($('threeContainer').clientWidth, $('threeContainer').clientHeight);
       sfx.playCard();
       renderGameUI();
-      if (matchState.turn === 'p2') setTimeout(() => aiTakeTurn(), 80);
+      if (matchState.turn === 'p2') setTimeout(() => aiTakeTurn(), 220);
     };
 
-    // Multijugador Online
-    $('btnOpenOnlineLobby').onclick = () => { sfx.playChalk(); showView('viewOnlineLobby'); };
+    // Lobby Online
+    $('btnOpenOnlineLobby').onclick = () => {
+      sfx.playChalk();
+      checkSavedOnlineSession();
+      showView('viewOnlineLobby');
+    };
 
+    // Modal para pegar credenciales de Firebase desde la interfaz (ideal para GitHub Pages)
+    $('btnConfigFirebase').onclick = () => {
+      const currentRaw = localStorage.getItem(LS_KEYS.FIREBASE_CFG) || '';
+      openModal(
+        'Configurar Firebase (GitHub Pages)',
+        `<p class="text-xs mb-2">Pegá el objeto JSON de <strong>firebaseConfig</strong> de tu proyecto de Firebase (con Authentication Anónimo y Cloud Firestore activados):</p>
+         <textarea id="firebaseCfgTextarea" rows="6" placeholder='{"apiKey":"...","authDomain":"...","projectId":"...","appId":"..."}'
+           class="w-full p-2.5 rounded-xl bg-stone-100 border border-stone-400 font-mono text-xs text-stone-900 focus:outline-none">${currentRaw}</textarea>`,
+        [
+          { label: 'Cancelar', gold: false, action: () => {} },
+          {
+            label: 'Guardar y Conectar',
+            gold: true,
+            action: () => {
+              const txt = $('firebaseCfgTextarea').value.trim();
+              try {
+                const parsed = JSON.parse(txt);
+                if (!parsed.apiKey || !parsed.projectId) throw new Error('Faltan apiKey o projectId');
+                localStorage.setItem(LS_KEYS.FIREBASE_CFG, JSON.stringify(parsed));
+                location.reload();
+              } catch (e) {
+                setTimeout(() => openModal('JSON inválido', 'Asegurate de pegar un JSON válido con apiKey y projectId.'), 100);
+              }
+            }
+          }
+        ]
+      );
+    };
+
+    // Crear Sala con código único garantizado mediante runTransaction
     $('btnCreateRoom').onclick = async () => {
       if (!firebaseReady || !db || !auth?.currentUser) {
-        openModal('Multijugador no configurado', `${firebaseInitError || 'Firebase no está disponible.'}<br><br>El modo online necesita Firebase Authentication (inicio anónimo activado) y Cloud Firestore configurados. BroadcastChannel solo conecta pestañas del mismo navegador; no sirve para jugar por Internet.`);
+        openModal('Firebase no disponible', firebaseInitError || 'Configurá Firebase tocando el botón ⚙️ arriba a la derecha.');
         return;
       }
       const name = $('inputPlayerName').value.trim() || 'Jugador 1';
+      localStorage.setItem(LS_KEYS.PLAYER_NAME, name);
+      const myUid = auth.currentUser.uid;
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
+      let createdCode = null;
+      for (let attempt = 0; attempt < 6; attempt++) {
+        let candidate = '';
+        for (let i = 0; i < 5; i++) candidate += chars[Math.floor(Math.random() * chars.length)];
+        const roomRef = getRoomDocRef(candidate);
+
+        try {
+          await runTransaction(db, async (tx) => {
+            const snap = await tx.get(roomRef);
+            // Si existe y fue actualizada hace menos de 2 horas, probar otro código
+            if (snap.exists() && (Date.now() - (snap.data().updatedAt || 0) < 2 * 60 * 60 * 1000)) {
+              throw new Error('CODE_TAKEN');
+            }
+            const initialState = createInitialPublicMatchState(name, 'Invitado', myUid);
+            tx.set(roomRef, { code: candidate, state: initialState, updatedAt: Date.now() });
+          });
+          createdCode = candidate;
+          break;
+        } catch (e) {
+          if (e.message !== 'CODE_TAKEN') {
+            openModal('Error al crear sala', 'Revisá las reglas de Firestore y tu conexión a Internet.');
+            return;
+          }
+        }
+      }
+
+      if (!createdCode) {
+        openModal('Reintentá', 'No se pudo generar un código libre. Intentá nuevamente.');
+        return;
+      }
+
       gameMode = 'online';
       onlineRole = 'host';
-      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-      let code = '';
-      for (let i = 0; i < 5; i++) code += chars[Math.floor(Math.random() * chars.length)];
-      onlineRoomCode = code;
-
-      matchState = createInitialMatchState(name, 'Invitado');
-      matchState.status = 'waiting';
-      $('displayRoomCode').textContent = code;
-      $('waitingRoomBox').classList.remove('hidden');
+      onlineRoomCode = createdCode;
+      saveOnlineSessionLocal();
+      startPresenceHeartbeat();
+      subscribeToOnlineRoom(createdCode);
       sfx.playCanto();
-
-      listenOnlineRoom(code);
-      await pushOnlineState(matchState);
     };
 
-    $('btnJoinRoom').onclick = async () => {
-      const name = $('inputPlayerName').value.trim() || 'Jugador 2';
-      const code = $('inputRoomCode').value.trim().toUpperCase();
+    // Unirse a Sala con protección atómica contra terceros y soporte de reconexión
+    async function joinOrReconnectRoom(code) {
       if (!/^[A-Z0-9]{5}$/.test(code)) {
         openModal('Código inválido', 'Ingresá un código válido de exactamente 5 caracteres.');
         return;
       }
       if (!firebaseReady || !db || !auth?.currentUser) {
-        openModal('Multijugador no configurado', `${firebaseInitError || 'Firebase no está disponible.'}<br><br>El modo online necesita Firebase Authentication (inicio anónimo activado) y Cloud Firestore configurados. BroadcastChannel solo conecta pestañas del mismo navegador; no sirve para jugar por Internet.`);
+        openModal('Firebase no disponible', firebaseInitError || 'Configurá Firebase tocando el botón ⚙️.');
         return;
       }
-      gameMode = 'online';
-      onlineRole = 'guest';
-      onlineRoomCode = code;
-      listenOnlineRoom(code);
+
+      const name = $('inputPlayerName').value.trim() || 'Jugador 2';
+      localStorage.setItem(LS_KEYS.PLAYER_NAME, name);
+      const myUid = auth.currentUser.uid;
+      const roomRef = getRoomDocRef(code);
 
       try {
-        const roomRef = doc(db, 'artifacts', appId, 'public', 'data', 'truco_rooms', code);
-        const snap = await getDoc(roomRef);
-        if (!snap.exists() || !snap.data().stateJson) {
-          openModal('Sala no encontrada', 'No existe una sala con ese código. Revisá los 5 caracteres o pedile al anfitrión que cree una nueva.');
-          return;
-        }
-        const st = JSON.parse(snap.data().stateJson);
-        if (st.status !== 'waiting' || st.p2Name !== 'Invitado') {
-          openModal('Sala ocupada', 'Esta sala ya comenzó o tiene dos jugadores. Pedile al anfitrión que cree otra sala.');
-          return;
-        }
-        st.p2Name = name;
-        st.status = 'playing';
-        dealNewHandState(st);
-        await pushOnlineState(st);
-        showView('viewGame');
-        initThreeScene();
+        let assignedRole = null;
+        await runTransaction(db, async (tx) => {
+          const snap = await tx.get(roomRef);
+          if (!snap.exists() || !snap.data().state) {
+            throw new Error('ROOM_NOT_FOUND');
+          }
+          const st = snap.data().state;
+
+          // Caso 1: Reconexión de un jugador que ya pertenecía a esta sala
+          if (st.p1Uid === myUid) {
+            assignedRole = 'host';
+            st.p1LastSeen = Date.now();
+            st.version = (st.version || 1) + 1;
+            tx.update(roomRef, { state: st, updatedAt: Date.now() });
+            return;
+          }
+          if (st.p2Uid === myUid) {
+            assignedRole = 'guest';
+            st.p2LastSeen = Date.now();
+            st.version = (st.version || 1) + 1;
+            tx.update(roomRef, { state: st, updatedAt: Date.now() });
+            return;
+          }
+
+          // Caso 2: Nuevo invitado entrando a sala abierta (bloquea 3er jugador)
+          if (st.status !== 'waiting' || st.p2Uid) {
+            throw new Error('ROOM_FULL');
+          }
+
+          assignedRole = 'guest';
+          st.p2Uid = myUid;
+          st.p2Name = name;
+          st.p2Ready = false;
+          st.p2LastSeen = Date.now();
+          st.version = (st.version || 1) + 1;
+          tx.update(roomRef, { state: st, updatedAt: Date.now() });
+        });
+
+        gameMode = 'online';
+        onlineRole = assignedRole;
+        onlineRoomCode = code;
+        saveOnlineSessionLocal();
+        startPresenceHeartbeat();
+        subscribeToOnlineRoom(code);
+        sfx.playCanto();
       } catch (e) {
-        console.error('[TRUCO] Error al entrar a la sala:', e);
-        openModal('No se pudo entrar', 'No se pudo conectar con esa sala. Revisá Internet y las reglas de Firestore.');
+        if (e.message === 'ROOM_NOT_FOUND') {
+          clearOnlineSessionLocal();
+          openModal('Sala no encontrada', 'No existe una sala con ese código. Pedile al anfitrión que cree una nueva.');
+        } else if (e.message === 'ROOM_FULL') {
+          openModal('Sala llena (2/2)', 'Esta sala ya tiene dos jugadores adentro. No se permite un tercer jugador.');
+        } else {
+          console.error('[TRUCO] Error al entrar:', e);
+          openModal('Error al entrar', 'No se pudo conectar con la sala. Revisá Internet y Firestore.');
+        }
       }
+    }
+
+    $('btnJoinRoom').onclick = () => {
+      const code = $('inputRoomCode').value.trim().toUpperCase();
+      joinOrReconnectRoom(code);
+    };
+
+    $('btnReconnectRoom').onclick = () => {
+      const raw = localStorage.getItem(LS_KEYS.ACTIVE_SESSION);
+      if (!raw) return;
+      try {
+        const sess = JSON.parse(raw);
+        if (sess.name) $('inputPlayerName').value = sess.name;
+        joinOrReconnectRoom(sess.code);
+      } catch (e) {}
+    };
+
+    $('btnDiscardReconnect').onclick = () => {
+      clearOnlineSessionLocal();
+      $('reconnectBanner').classList.add('hidden');
+    };
+
+    // Botón ¡ESTOY LISTO! en el Lobby
+    $('btnToggleReady').onclick = async () => {
+      if (gameMode !== 'online' || !onlineRoomCode) return;
+      const me = getMyRoleKey();
+      await commitOnlineMutation((st) => {
+        if (st.status !== 'waiting') return false;
+        if (me === 'p1') st.p1Ready = !st.p1Ready;
+        else st.p2Ready = !st.p2Ready;
+      });
+      sfx.playChalk();
+    };
+
+    $('btnLeaveRoomLobby').onclick = async () => {
+      clearOnlineSessionLocal();
+      if (gameMode === 'online' && onlineRoomCode && onlineRole === 'host' && firebaseReady) {
+        try { await deleteDoc(getRoomDocRef(onlineRoomCode)); } catch (e) {}
+      }
+      cleanupOnlineAndReturnMenu();
     };
 
     $('btnCopyCode').onclick = () => {
@@ -2206,30 +2821,21 @@
     }
     $('btnMenuRules').onclick = showRulesModal;
     $('btnGameRules').onclick = showRulesModal;
+    $('btnScorerRules').onclick = showRulesModal;
 
-    // Anotador
+    // Eventos del Anotador
     $('btnOpenScorer').onclick = () => { sfx.playChalk(); showView('viewScorer'); updateScorerUI(); };
     $('btnAddA').onclick = () => changeScorerPoints('A', 1);
     $('btnSubA').onclick = () => changeScorerPoints('A', -1);
     $('btnAddB').onclick = () => changeScorerPoints('B', 1);
     $('btnSubB').onclick = () => changeScorerPoints('B', -1);
 
-    $('btnTarget15').onclick = () => {
-      scorer.target = 15;
-      scorer.gameOverShown = scorer.ptsA >= 15 || scorer.ptsB >= 15;
-      scorer.ptsA = Math.min(15, scorer.ptsA);
-      scorer.ptsB = Math.min(15, scorer.ptsB);
-      $('btnTarget15').className = 'px-3 py-1 rounded-lg text-xs font-bold bg-amber-400 text-stone-950 transition';
-      $('btnTarget30').className = 'px-3 py-1 rounded-lg text-xs font-bold text-stone-300 transition';
-      sfx.playChalk();
-      updateScorerUI();
-    };
-
-    $('btnTarget30').onclick = () => {
-      scorer.target = 30;
-      scorer.gameOverShown = scorer.ptsA >= 30 || scorer.ptsB >= 30;
-      $('btnTarget30').className = 'px-3 py-1 rounded-lg text-xs font-bold bg-amber-400 text-stone-950 transition';
-      $('btnTarget15').className = 'px-3 py-1 rounded-lg text-xs font-bold text-stone-300 transition';
+    $('btnCycleTarget').onclick = () => {
+      scorer.targetIndex = (scorer.targetIndex + 1) % scorer.targets.length;
+      const newTarget = getScorerTarget();
+      scorer.ptsA = Math.min(newTarget, scorer.ptsA);
+      scorer.ptsB = Math.min(newTarget, scorer.ptsB);
+      scorer.gameOverShown = scorer.ptsA >= newTarget || scorer.ptsB >= newTarget;
       sfx.playChalk();
       updateScorerUI();
     };
@@ -2240,7 +2846,7 @@
         'Se borrarán todos los fósforos de Nosotros y Ellos.',
         [
           { label: 'Cancelar', gold: false, action: () => {} },
-          { label: 'Sí, reiniciar', gold: true, action: () => { scorer.ptsA = 0; scorer.ptsB = 0; scorer.history = []; scorer.gameOverShown = false; sfx.playChalk(); updateScorerUI(); } }
+          { label: 'Sí, reiniciar', gold: true, action: () => { scorer.ptsA = 0; scorer.ptsB = 0; scorer.gameOverShown = false; sfx.playChalk(); updateScorerUI(); } }
         ]
       );
     };
