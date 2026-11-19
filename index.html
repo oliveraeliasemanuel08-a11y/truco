@@ -150,6 +150,27 @@
       height: 100%;
       touch-action: none;
     }
+
+    /* ---------- AJUSTES SOLO PARA MÓVIL (body.device-mobile) ---------- */
+    body.device-mobile .criollo-plaque-btn { font-size: 16px; padding: 12px 14px; }
+    body.device-mobile .font-cinzel { letter-spacing: 0.5px; }
+    body.device-mobile #viewGame .chalkboard { padding: 6px 8px; border-width: 3px; }
+    body.device-mobile #viewGame .font-chalk { font-size: 15px; }
+    body.device-mobile #viewGame .text-xs,
+    body.device-mobile #viewGame .text-\[10px\],
+    body.device-mobile #viewGame .text-\[11px\] { font-size: 10px; }
+    body.device-mobile #tableStatusBox { font-size: 11px; padding: 6px 10px; }
+    body.device-mobile #mySeatStatus { font-size: 10px; }
+    body.device-mobile #gameControls { gap: 6px; }
+    body.device-mobile #gameControls button { padding: 8px 10px; font-size: 12px; }
+    body.device-mobile #viewGame .btn-glass { padding: 6px 8px; font-size: 11px; }
+    body.device-mobile #viewScorer #scorerBoardArea { padding: 8px; }
+    body.device-mobile #viewScorer .grid-cols-2 { gap: 6px; }
+    body.device-mobile #viewScorer button { font-size: 12px; }
+    body.device-mobile #viewScorer svg { max-width: 100%; height: auto; }
+    body.device-mobile #viewOnlineLobby { padding: 10px; }
+    body.device-mobile #viewOnlineLobby h2 { font-size: 22px; }
+    body.device-mobile #viewOnlineLobby .grid { grid-template-columns: 1fr; }
   </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -233,6 +254,9 @@
             </button>
             <button id="btnMenuRules" class="w-10 h-10 rounded-full bg-black/55 border border-[#d4af5a]/70 flex items-center justify-center text-amber-200 font-cinzel font-black text-base hover:scale-105 transition shadow-lg" title="Jerarquía de cartas">
               ?
+            </button>
+            <button id="btnMenuDevice" class="w-10 h-10 rounded-full bg-black/55 border border-[#d4af5a]/70 flex items-center justify-center text-amber-200 text-base hover:scale-105 transition shadow-lg" title="Cambiar dispositivo (PC / Móvil)">
+              💻
             </button>
           </div>
 
@@ -1017,7 +1041,7 @@
       scene.background = new THREE.Color('#0c0704');
       scene.fog = new THREE.FogExp2('#0c0704', 0.032);
 
-      camera = new THREE.PerspectiveCamera(42, container.clientWidth / container.clientHeight, 0.1, 100);
+      camera = new THREE.PerspectiveCamera(document.body.classList.contains('device-mobile') ? 58 : 42, container.clientWidth / container.clientHeight, 0.1, 100);
       updateCameraFromSpherical();
 
       renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -2873,6 +2897,41 @@
         ]
       );
     };
+
+    // ---------------------------------------------------------
+    // DISPOSITIVO: PC (sin cambios) o Móvil (ajustes de tamaño y cámara)
+    // ---------------------------------------------------------
+    const DEVICE_KEY = 'truco3d_device_v1';
+    function getSavedDevice() { try { return localStorage.getItem(DEVICE_KEY); } catch (e) { return null; } }
+    function saveDevice(d) { try { localStorage.setItem(DEVICE_KEY, d); } catch (e) {} }
+
+    function applyDevice(d) {
+      const mobile = d === 'mobile';
+      document.body.classList.toggle('device-mobile', mobile);
+      camSpherical.radius = mobile ? 12.6 : 10.4;
+      if (camera) {
+        camera.fov = mobile ? 58 : 42;
+        camera.aspect = $('threeContainer').clientWidth / Math.max(1, $('threeContainer').clientHeight);
+        camera.updateProjectionMatrix();
+        updateCameraFromSpherical();
+      }
+    }
+
+    function openDeviceChooser(force) {
+      openModal(
+        '¿Dónde estás jugando?',
+        'Elegí tu dispositivo para que el juego se vea bien. Podés cambiarlo después con el botón 💻 del menú.',
+        [
+          { label: '💻 PC', gold: false, action: () => { saveDevice('pc'); applyDevice('pc'); } },
+          { label: '📱 Móvil', gold: true, action: () => { saveDevice('mobile'); applyDevice('mobile'); } }
+        ]
+      );
+    }
+
+    $('btnMenuDevice').onclick = () => openDeviceChooser(true);
+    const initialDevice = getSavedDevice();
+    if (initialDevice === 'pc' || initialDevice === 'mobile') applyDevice(initialDevice);
+    else openDeviceChooser(false);
 
     showView('viewMenu');
   </script>
